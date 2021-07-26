@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/frontpage">
+
+    <fragment
+        android:id="@+id/frontpage"
+        android:name="com.example.todo.fragments.FrontPage"
+        android:label="fragment_frontpage"
+        tools:layout="@layout/fragment_frontpage" >
+        <action
+            android:id="@+id/action_frontpage_to_mydayFragment"
+            app:destination="@id/mydayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mydayFragment"
+        android:name="com.example.todo.fragments.MydayFragment"
+        android:label="fragment_myday"
+        tools:layout="@layout/fragment_myday" />
+</navigation>

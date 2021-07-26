@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryVariant"
+    tools:context=".fragments.MydayFragment">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar2"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="?attr/colorPrimaryVariant"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="Sunday, 25 July"
+            app:collapsedTitleTextAppearance="@style/collapsed_text"
+            app:expandedTitleTextAppearance="@style/expanded_text">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="start"
+                    android:src="@drawable/ic_arrow_left"
+                    app:tint="?attr/colorOnPrimary" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_cog"
+                    app:tint="?attr/colorOnPrimary" />
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"/>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_plus"
+        android:contentDescription="@string/todo"
+        android:focusable="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/blue"
+        app:tint="?attr/colorPrimaryVariant"
+        tools:targetApi="lollipop"
+        app:elevation="2dp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

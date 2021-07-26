@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="expanded_text">
+        <item name="fontFamily">@font/segoe_bold</item>
+        <item name="fontWeight">700</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="collapsed_text">
+        <item name="fontFamily">@font/segoe_bold</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+</resources>
