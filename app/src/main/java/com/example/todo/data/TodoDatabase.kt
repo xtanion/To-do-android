@@ -11,18 +11,18 @@ abstract class TodoDatabase: RoomDatabase() {
 
     abstract fun todoDao(): TodoDao
 
-    companion object{
+    companion object {
 
         @Volatile
-        private var INSTANCE : TodoDatabase? = null
+        private var INSTANCE: TodoDatabase? = null
 
         fun getInstance(context: Context): TodoDatabase {
-            synchronized(this){
-                var instance = INSTANCE
+            synchronized(this) {
+                val tempInstance = INSTANCE
 
                 //check if db is null, then create the database
-                if(instance==null){
-                    instance = Room.databaseBuilder(
+                if (tempInstance == null) {
+                    val instance = Room.databaseBuilder(
                         context.applicationContext,
                         TodoDatabase::class.java,
                         "todo_database"
@@ -30,8 +30,11 @@ abstract class TodoDatabase: RoomDatabase() {
                         .build()
 
                     INSTANCE = instance
+                    return instance
                 }
-                return instance
+                else {
+                    return tempInstance
+                }
             }
         }
     }
