@@ -23,7 +23,7 @@
             android:id="@+id/action_mydayFragment_to_addFragment"
             app:destination="@id/addFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/addFragment"
         android:name="com.example.todo.fragments.AddFragment"
         android:label="fragment_add"
@@ -31,5 +31,5 @@
         <action
             android:id="@+id/action_addFragment_to_mydayFragment"
             app:destination="@id/mydayFragment" />
-    </fragment>
+    </dialog>
 </navigation>

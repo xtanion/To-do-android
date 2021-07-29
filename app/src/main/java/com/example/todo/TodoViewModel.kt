@@ -14,6 +14,10 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     private var readAllData = MutableLiveData<List<TodoEntity>>()
     private lateinit var todoDao: TodoDao
 
+    fun listData():LiveData<List<TodoEntity>>{
+        return readAllData
+    }
+
     init {
         todoDao = TodoDatabase.getInstance(application).todoDao()
     }

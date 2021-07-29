@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo.R
 import com.example.todo.TodoRVAdapter
@@ -41,6 +43,16 @@ class MydayFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
+
+
+        mViewModel.listData().observe(viewLifecycleOwner, Observer {
+            adapter.NotifyChanges(it)
+        })
+
+        binding.floatingActionButton.setOnClickListener {
+            val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
 
     }
 

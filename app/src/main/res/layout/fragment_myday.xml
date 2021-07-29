@@ -11,13 +11,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar2"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="120dp"
         android:background="?attr/colorPrimaryVariant"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:title="Sunday, 25 July"
             app:collapsedTitleTextAppearance="@style/collapsed_text"
@@ -30,8 +30,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="start"
                     android:src="@drawable/ic_arrow_left"
                     app:tint="?attr/colorOnPrimary" />
@@ -51,15 +50,14 @@
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -72,7 +70,7 @@
         android:focusable="true"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="?attr/colorPrimary"
         app:tint="?attr/colorPrimaryVariant"
         tools:targetApi="lollipop"
         app:elevation="2dp"/>

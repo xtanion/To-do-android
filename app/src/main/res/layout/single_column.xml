@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="65dp"
+    android:layout_marginBottom="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorPrimaryVariant">
     <com.google.android.material.checkbox.MaterialCheckBox
@@ -15,6 +16,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="Build a todo list app"
+        android:maxLines="1"
+        android:maxWidth="400dp"
         android:textAppearance="@style/column_text"
         />
 
@@ -41,5 +44,12 @@
         android:src="@drawable/ic_alarm_clock"
         app:tint="?attr/colorOnSecondary"
         android:visibility="visible"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="?attr/colorSecondaryVariant"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
