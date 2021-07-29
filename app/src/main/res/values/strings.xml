@@ -9,4 +9,7 @@
     <string name="important">Important</string>
     <string name="create_group">Create Group</string>
     <string name="list_your_ideas">List your Ideas</string>
+    <string name="what_todo">What would you like to do?</string>
+    <string name="set_reminder">Set Reminder</string>
+    <string name="repeat">Repeat</string>
 </resources>

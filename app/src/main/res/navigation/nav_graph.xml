@@ -18,5 +18,18 @@
         android:id="@+id/mydayFragment"
         android:name="com.example.todo.fragments.MydayFragment"
         android:label="fragment_myday"
-        tools:layout="@layout/fragment_myday" />
+        tools:layout="@layout/fragment_myday" >
+        <action
+            android:id="@+id/action_mydayFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.todo.fragments.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_mydayFragment"
+            app:destination="@id/mydayFragment" />
+    </fragment>
 </navigation>

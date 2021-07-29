@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/rounded_top_corners"
+    android:background="?attr/cardBackgroundColor"
+    tools:context=".fragments.AddFragment">
+    <EditText
+        android:id="@+id/todo_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/what_todo"
+        android:background="@null"
+        android:textAppearance="@style/column_text"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:id="@+id/set_alarm_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_reminder"
+        android:textColor="?attr/colorOnSecondary"
+        android:fontFamily="@font/segoe_ui"
+        android:drawablePadding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/todo_input"
+        app:drawableLeftCompat="@drawable/ic_calendar"
+        app:drawableTint="?attr/colorOnSecondary"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="center_vertical" />
+    <TextView
+        android:id="@+id/repeat_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repeat"
+        android:textColor="?attr/colorOnSecondary"
+        android:fontFamily="@font/segoe_ui"
+        android:drawablePadding="10dp"
+        app:layout_constraintStart_toEndOf="@id/set_alarm_icon"
+        app:layout_constraintTop_toBottomOf="@id/todo_input"
+        app:drawableLeftCompat="@drawable/ic_sync"
+        app:drawableTint="?attr/colorOnSecondary"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="center_vertical" />
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/todo_input"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:tint="?attr/colorSecondary" />
+</androidx.constraintlayout.widget.ConstraintLayout>
