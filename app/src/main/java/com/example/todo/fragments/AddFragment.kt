@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat.getColor
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.R
 import com.example.todo.TodoViewModel
 import com.example.todo.data.TodoEntity
@@ -43,6 +44,7 @@ class AddFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var starred:Boolean = false
         val star_button = binding?.starIcon
+
         binding?.addToDbButton?.setOnClickListener {
             val input_todo:String = binding!!.todoInput.text.toString()
             val todo_arg = TodoEntity(0,input_todo,starred)

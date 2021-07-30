@@ -29,6 +29,7 @@
                 app:layout_collapseMode="pin">
 
                 <ImageView
+                    android:id="@+id/navigate_back"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_gravity="start"
@@ -36,6 +37,7 @@
                     app:tint="?attr/colorOnPrimary" />
 
                 <ImageView
+                    android:id="@+id/gear_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -43,6 +45,15 @@
                     android:layout_marginRight="16dp"
                     android:src="@drawable/ic_cog"
                     app:tint="?attr/colorOnPrimary" />
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:progressTint="?attr/colorPrimary"
+                    android:backgroundTint="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end"
+                    android:visibility="visible"/>
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

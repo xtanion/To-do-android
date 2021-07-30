@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
@@ -67,5 +68,12 @@ class TodoRVAdapter: RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>() {
     fun NotifyChanges(DataList:List<TodoEntity>){
         this.DataList = DataList
         notifyDataSetChanged()
+    }
+    fun ColumnAdded(Data: TodoEntity){
+        val mutableDataList:MutableList<TodoEntity> = DataList.toMutableList()
+        mutableDataList.add(0,Data)
+        this.DataList = mutableDataList.toList()
+//        DataList.toMutableList().add(0,Data)
+        notifyItemInserted(0)
     }
 }

@@ -17,6 +17,9 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     fun listData():LiveData<List<TodoEntity>>{
         return readAllData
     }
+    fun sizeof():String{
+        return readAllData.value?.size.toString()
+    }
 
     init {
         todoDao = TodoDatabase.getInstance(application).todoDao()
