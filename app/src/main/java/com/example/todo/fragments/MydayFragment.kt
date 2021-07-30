@@ -62,7 +62,7 @@ class MydayFragment : Fragment() {
 
         // TEST CODE
         binding.gearIcon.setOnClickListener {
-            val temp = TodoEntity(0,"Test Case",false)
+            val temp = TodoEntity(0,"Test Case",false,false)
             adapter.ColumnAdded(temp)
         }
         //TEST CODE

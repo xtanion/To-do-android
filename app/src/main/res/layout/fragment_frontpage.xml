@@ -72,7 +72,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Day"
+            android:text="All Tasks"
             android:fontFamily="@font/segoe_ui"
             android:textSize="15sp"
             android:textColor="?attr/colorOnPrimary"

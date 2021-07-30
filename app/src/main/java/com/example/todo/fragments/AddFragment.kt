@@ -47,7 +47,7 @@ class AddFragment : BottomSheetDialogFragment() {
 
         binding?.addToDbButton?.setOnClickListener {
             val input_todo:String = binding!!.todoInput.text.toString()
-            val todo_arg = TodoEntity(0,input_todo,starred)
+            val todo_arg = TodoEntity(0,input_todo,starred,false)
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)

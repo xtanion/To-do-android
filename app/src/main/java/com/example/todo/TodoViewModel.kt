@@ -18,6 +18,7 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         return readAllData
     }
     fun sizeof():String{
+        readToDo()
         return readAllData.value?.size.toString()
     }
 

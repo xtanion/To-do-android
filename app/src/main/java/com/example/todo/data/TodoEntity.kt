@@ -13,5 +13,6 @@ data class TodoEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
-    val important: Boolean
+    val important: Boolean,
+    val completed: Boolean
 ):Parcelable
