@@ -3,11 +3,17 @@ package com.example.todo.fragments
 import android.app.Application
 import android.content.Context
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat.getColor
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -33,6 +39,7 @@ class AddFragment : BottomSheetDialogFragment() {
         return view
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var starred:Boolean = false
         val star_button = binding?.starIcon
@@ -40,18 +47,32 @@ class AddFragment : BottomSheetDialogFragment() {
             val input_todo:String = binding!!.todoInput.text.toString()
             val todo_arg = TodoEntity(0,input_todo,starred)
 
-            mViewModel.addToDo(todo_arg)
-
-            //val action = AddFragmentDirections.actionAddFragmentToMydayFragment()
-            //Navigation.findNavController(view).navigate(action)
-
+            if (input_todo!=""){
+                mViewModel.addToDo(todo_arg)
+                dismiss()
+            }
         }
 
         star_button?.setOnClickListener {
-            starred = true
-            star_button.setTextColor(ContextCompat.getColor(requireContext(),R.color.peach))
+            val drawable = star_button.compoundDrawables
+            if(starred==false) {
+                starred = true
+                star_button.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+                drawable[0].setTint(ContextCompat.getColor(requireContext(),R.color.blue))
+            }
+            else{
+                starred = false
+                star_button.setTextColor(ContextCompat.getColor(requireContext(),R.color.muted_black))
+                drawable[0].setTint(ContextCompat.getColor(requireContext(),R.color.muted_black))
+            }
         }
 
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }

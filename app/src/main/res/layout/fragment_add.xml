@@ -3,12 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
+    android:paddingBottom="30dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/rounded_top_corners"
     android:background="?attr/cardBackgroundColor"
     tools:context=".fragments.AddFragment"
     android:fitsSystemWindows="true">
+    <View
+        android:layout_width="100dp"
+        android:layout_height="2dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="2dp"/>
     <EditText
         android:id="@+id/todo_input"
         android:layout_width="match_parent"
@@ -19,7 +27,8 @@
         android:textAppearance="@style/column_text"
         android:textColor="?attr/colorOnPrimary"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:keyboardNavigationCluster="true"/>
 
     <TextView
         android:id="@+id/set_alarm_icon"
@@ -57,6 +66,7 @@
         android:id="@+id/star_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:text="@string/important"
         android:textColor="?attr/colorOnSecondary"
         android:fontFamily="@font/segoe_ui"
@@ -69,15 +79,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:gravity="center_vertical" />
+
     <ImageView
         android:id="@+id/add_to_db_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/todo_input"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
+        android:rotation="40"
+        android:src="@drawable/ic_send_svgrepo_com"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/todo_input"
         app:tint="?attr/colorSecondary" />
 </androidx.constraintlayout.widget.ConstraintLayout>
