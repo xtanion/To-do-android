@@ -55,7 +55,6 @@ class MydayFragment : Fragment() {
 
 
         mViewModel.listData().observe(viewLifecycleOwner, Observer {
-            //Toast.makeText(context,"Dataset changed ${it.toString()}",Toast.LENGTH_LONG).show()
             binding.progressBar.isVisible = true
             adapter.NotifyChanges(it)
             binding.progressBar.isVisible = false

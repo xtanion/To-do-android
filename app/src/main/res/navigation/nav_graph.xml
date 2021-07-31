@@ -34,7 +34,7 @@
     </dialog>
     <fragment
         android:id="@+id/addGroupFragment"
-        android:name="com.example.todo.AddGroupFragment"
+        android:name="com.example.todo.fragments.AddGroupFragment"
         android:label="fragment_add_group"
         tools:layout="@layout/fragment_add_group" />
 </navigation>
