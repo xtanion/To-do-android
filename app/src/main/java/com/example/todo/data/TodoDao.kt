@@ -1,5 +1,6 @@
 package com.example.todo.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 
@@ -10,8 +11,11 @@ interface TodoDao {
     suspend fun addTodo(todo: TodoEntity)
 
     @Query("SELECT * FROM todo_table ORDER BY id DESC")
-    suspend fun readAllData():List<TodoEntity>
+    fun readAllData():LiveData<List<TodoEntity>> //change back to List<TodoEntity> if doesn't work
 
     @Update
     suspend fun updateEntity(todo: TodoEntity)
+
+    @Delete
+    suspend fun deleteEntity(todo: TodoEntity)
 }

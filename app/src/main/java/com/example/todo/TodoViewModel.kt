@@ -8,41 +8,55 @@ import androidx.lifecycle.MutableLiveData
 import com.example.todo.data.TodoDao
 import com.example.todo.data.TodoDatabase
 import com.example.todo.data.TodoEntity
+import com.example.todo.data.TodoRepository
 import kotlinx.coroutines.launch
 
 class TodoViewModel(application: Application):AndroidViewModel(application) {
-    private var readAllData = MutableLiveData<List<TodoEntity>>()
+    private val repository: TodoRepository
     private lateinit var todoDao: TodoDao
-
-    fun listData():LiveData<List<TodoEntity>>{
-        return readAllData
-    }
-    fun sizeof():String{
-        readToDo()
-        return readAllData.value?.size.toString()
-    }
 
     init {
         todoDao = TodoDatabase.getInstance(application).todoDao()
+        repository = TodoRepository(todoDao)
+        repository.readData()
+        //readAllData = repository.readAllData
     }
 
-    fun readToDo(){
-        viewModelScope.launch() {
-            val data:List<TodoEntity> = todoDao.readAllData()
-            readAllData.value = data
-        }
+    fun listData():LiveData<List<TodoEntity>>{
+        return repository.readAllData
     }
+
+//    fun readToDo(){
+//        viewModelScope.launch() {
+//            repository.readData()
+//            val data:LiveData<List<TodoEntity>> = repository.readAllData
+//            readAllData.value = data.value
+//
+//        }
+//    }
 
     fun addToDo(todo:TodoEntity){
         viewModelScope.launch(){
-            todoDao.addTodo(todo)
+            repository.addTodo(todo)
+        }
+
+    }
+
+    fun updateTodo(todo:TodoEntity){
+        viewModelScope.launch(){
+            repository.updateTodo(todo)
         }
     }
 
-    fun updateUser(todo:TodoEntity){
-        viewModelScope.launch(){
-            todoDao.updateEntity(todo)
+    fun removeTodo(todo: TodoEntity){
+        viewModelScope.launch {
+            repository.deleteTodo(todo)
         }
     }
+
+//    fun sizeof():String{
+//        readToDo()
+//        return readAllData.value?.size.toString()
+//    }
 
 }
