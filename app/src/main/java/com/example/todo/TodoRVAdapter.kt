@@ -1,5 +1,6 @@
 package com.example.todo
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
@@ -14,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
@@ -65,9 +67,34 @@ class TodoRVAdapter: RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>() {
         return DataList.size
     }
 
+    class TodoDiffCallback(var oldList:List<TodoEntity>,var newList: List<TodoEntity>):DiffUtil.Callback(){
+        override fun getOldListSize(): Int {
+            return oldList.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newList.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return (oldList.get(oldItemPosition).id == newList.get(newItemPosition).id)
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return (oldList.get(oldItemPosition).equals(newList.get(newItemPosition)))
+        }
+
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun NotifyChanges(DataList:List<TodoEntity>){
+        val oldList = this.DataList
+        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
+            TodoDiffCallback(oldList,DataList)
+        )
         this.DataList = DataList
-        notifyDataSetChanged()
+        //notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
     fun ColumnAdded(Data: TodoEntity){
         val mutableDataList:MutableList<TodoEntity> = DataList.toMutableList()

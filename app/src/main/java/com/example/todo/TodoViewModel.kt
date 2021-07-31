@@ -26,15 +26,6 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         return repository.readAllData
     }
 
-//    fun readToDo(){
-//        viewModelScope.launch() {
-//            repository.readData()
-//            val data:LiveData<List<TodoEntity>> = repository.readAllData
-//            readAllData.value = data.value
-//
-//        }
-//    }
-
     fun addToDo(todo:TodoEntity){
         viewModelScope.launch(){
             repository.addTodo(todo)

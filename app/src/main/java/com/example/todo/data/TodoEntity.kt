@@ -16,3 +16,20 @@ data class TodoEntity(
     val important: Boolean,
     val completed: Boolean
 ):Parcelable
+{
+    fun equals(other: TodoEntity?): Boolean {
+        if(id != other?.id){
+            return false
+        }
+        if (title != other.title){
+            return false
+        }
+        if (important != other.important){
+            return false
+        }
+        if (completed != other.completed){
+            return false
+        }
+        return true
+    }
+}

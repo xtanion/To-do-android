@@ -32,4 +32,9 @@
             android:id="@+id/action_addFragment_to_mydayFragment"
             app:destination="@id/mydayFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/addGroupFragment"
+        android:name="com.example.todo.AddGroupFragment"
+        android:label="fragment_add_group"
+        tools:layout="@layout/fragment_add_group" />
 </navigation>

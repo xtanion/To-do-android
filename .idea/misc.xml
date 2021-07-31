@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/ic_tick_icon_80.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30641025641025643" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.30641025641025643" />
+        <entry key="app/src/main/res/layout/fragment_add_group.xml" value="0.30641025641025643" />
         <entry key="app/src/main/res/layout/fragment_frontpage.xml" value="0.30641025641025643" />
         <entry key="app/src/main/res/layout/fragment_myday.xml" value="0.30641025641025643" />
         <entry key="app/src/main/res/layout/single_column.xml" value="0.305982905982906" />
