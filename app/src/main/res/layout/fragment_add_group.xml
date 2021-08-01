@@ -5,10 +5,7 @@
     android:layout_height="wrap_content"
     tools:context=".fragments.AddGroupFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/what_todo"/>
+
 
 
 

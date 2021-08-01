@@ -23,7 +23,7 @@ import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
 
 
-class MydayFragment : Fragment() {
+class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
     var _binding:FragmentMydayBinding? = null
     val binding get() = _binding!!
@@ -44,7 +44,7 @@ class MydayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val recyclerView = binding.recyclerView
-        val adapter = TodoRVAdapter()
+        val adapter = TodoRVAdapter(this)
 
         //mViewModel.readToDo()
         //adapter.NotifyChanges(mViewModel.listData().value!!)
@@ -79,6 +79,10 @@ class MydayFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCheckboxClick(position: Int) {
+        Toast.makeText(context,"${position.toString()}",Toast.LENGTH_SHORT).show()
     }
 
 }

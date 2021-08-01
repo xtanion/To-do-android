@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.Paint
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.data.TodoEntity
@@ -22,14 +22,21 @@ import com.example.todo.databinding.FragmentMydayBinding
 import com.example.todo.databinding.SingleColumnBinding
 import com.example.todo.fragments.MydayFragment
 
-class TodoRVAdapter: RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>() {
+class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>(){
 
     private var DataList = emptyList<TodoEntity>()
     var _binding : SingleColumnBinding? = null
     val binding get() =  _binding!!
     private lateinit var context:Context
 
-    class TodoViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
+    inner class TodoViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
+        init {
+            itemView.setOnClickListener {
+                val position: Int = adapterPosition
+                rvInterface.onCheckboxClick(position)
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         _binding = SingleColumnBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -42,7 +49,13 @@ class TodoRVAdapter: RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>() {
         val currentItem = DataList[position]
         val star_icon: ImageView = binding.starIconColumn
 
-        binding.checkboxColumn.text = currentItem.title
+        binding.checkboxTextColumn.text = currentItem.title
+
+        if(currentItem.completed){
+            binding.checkboxColumn.isChecked = true
+            binding.checkboxTextColumn.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        }
+
         if (currentItem.important==true){
             binding.starIconColumn.imageTintList = (ColorStateList.valueOf(ContextCompat.getColor(context,R.color.blue)))
         }
@@ -60,6 +73,8 @@ class TodoRVAdapter: RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>() {
                 binding.starIconColumn.imageTintList = (ColorStateList.valueOf(ContextCompat.getColor(context,R.color.blue)))
             }
         }
+
+
 
     }
 
@@ -103,4 +118,10 @@ class TodoRVAdapter: RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>() {
 //        DataList.toMutableList().add(0,Data)
         notifyItemInserted(0)
     }
+
+    interface RVInterface{
+        fun onCheckboxClick(position: Int)
+    }
+
+
 }

@@ -48,12 +48,13 @@
                 <ProgressBar
                     android:id="@+id/progressBar"
                     style="?android:attr/progressBarStyle"
-                    android:progressTint="?attr/colorPrimary"
-                    android:backgroundTint="@null"
+                    android:indeterminate="true"
+                    android:indeterminateTint="?attr/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_gravity="end"
-                    android:visibility="visible"/>
+                    android:visibility="visible"
+                    tools:ignore="UnusedAttribute" />
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -12,4 +12,5 @@
     <string name="what_todo">What would you like to do?</string>
     <string name="set_reminder">Set Reminder</string>
     <string name="repeat">Repeat</string>
+    <string name="create_a_todo_list_app">Create a ToDo list App</string>
 </resources>

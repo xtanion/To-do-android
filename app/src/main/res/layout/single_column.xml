@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="65dp"
     android:layout_marginBottom="5dp"
@@ -15,11 +16,35 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Build a todo list app"
-        android:maxLines="1"
-        android:maxWidth="400dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
         android:textAppearance="@style/column_text"
         />
+    <TextView
+        android:id="@+id/checkbox_text_column"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_a_todo_list_app"
+        android:textAppearance="@style/column_text"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintStart_toEndOf="@id/checkbox_column"
+        app:layout_constraintTop_toTopOf="@id/checkbox_column"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_column" />
+    <TextView
+        android:id="@+id/checkbox_additional_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sun, 18 Jul"
+        android:textColor="?attr/colorSecondaryVariant"
+        android:fontFamily="@font/sf_pro_text"
+        android:textSize="10sp"
+        android:drawablePadding="5dp"
+        app:drawableLeftCompat="@drawable/ic_date"
+        app:layout_constraintStart_toEndOf="@id/checkbox_column"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_text_column"
+        android:visibility="gone"
+        app:drawableTint="?attr/colorSecondaryVariant"
+        tools:ignore="SmallSp" />
 
     <ImageView
         android:id="@+id/star_icon_column"
