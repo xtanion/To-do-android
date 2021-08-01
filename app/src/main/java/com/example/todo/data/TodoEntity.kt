@@ -14,7 +14,7 @@ data class TodoEntity(
     val id: Int,
     val title: String,
     val important: Boolean,
-    val completed: Boolean
+    var completed: Boolean
 ):Parcelable
 {
     fun equals(other: TodoEntity?): Boolean {

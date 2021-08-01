@@ -13,4 +13,5 @@
     <string name="set_reminder">Set Reminder</string>
     <string name="repeat">Repeat</string>
     <string name="create_a_todo_list_app">Create a ToDo list App</string>
+    <string name="name_this_group">Name this group</string>
 </resources>

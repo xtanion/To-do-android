@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_frontpage_to_mydayFragment"
             app:destination="@id/mydayFragment" />
+        <action
+            android:id="@+id/action_frontpage_to_addGroupFragment"
+            app:destination="@id/addGroupFragment" />
     </fragment>
     <fragment
         android:id="@+id/mydayFragment"
@@ -22,6 +25,9 @@
         <action
             android:id="@+id/action_mydayFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_mydayFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <dialog
         android:id="@+id/addFragment"
@@ -36,5 +42,18 @@
         android:id="@+id/addGroupFragment"
         android:name="com.example.todo.fragments.AddGroupFragment"
         android:label="fragment_add_group"
-        tools:layout="@layout/fragment_add_group" />
+        tools:layout="@layout/fragment_add_group" >
+        <action
+            android:id="@+id/action_addGroupFragment_to_frontpage"
+            app:destination="@id/frontpage" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.todo.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_detailsFragment_to_mydayFragment"
+            app:destination="@id/mydayFragment" />
+    </fragment>
 </navigation>

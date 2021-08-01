@@ -83,6 +83,15 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
     override fun onCheckboxClick(position: Int) {
         Toast.makeText(context,"${position.toString()}",Toast.LENGTH_SHORT).show()
+        val columnData = mViewModel.listData().value?.get(position)
+        if (columnData?.completed == true){
+            val newData = TodoEntity(columnData.id,columnData.title,columnData.important,false)
+            mViewModel.updateTodo(newData)
+        }else{
+            val newData = TodoEntity(columnData?.id!!,columnData.title,columnData.important,true)
+            mViewModel.updateTodo(newData)
+        }
+        //mViewModel.listData().value?.get(position)?.completed = true
     }
 
 }

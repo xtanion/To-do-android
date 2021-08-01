@@ -21,6 +21,7 @@ import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
 import com.example.todo.databinding.SingleColumnBinding
 import com.example.todo.fragments.MydayFragment
+import kotlinx.android.synthetic.main.single_column.view.*
 
 class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>(){
 
@@ -31,7 +32,7 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
 
     inner class TodoViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener {
+            itemView.checkbox_column.setOnClickListener {
                 val position: Int = adapterPosition
                 rvInterface.onCheckboxClick(position)
             }
