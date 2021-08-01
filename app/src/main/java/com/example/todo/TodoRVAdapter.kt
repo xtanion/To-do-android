@@ -36,6 +36,10 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
                 val position: Int = adapterPosition
                 rvInterface.onCheckboxClick(position)
             }
+            itemView.star_icon_column.setOnClickListener{
+                val position: Int = adapterPosition
+                rvInterface.onStarClick(position)
+            }
         }
     }
 
@@ -55,24 +59,12 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
         if(currentItem.completed){
             binding.checkboxColumn.isChecked = true
             binding.checkboxTextColumn.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        }else{
+            binding.checkboxColumn.isChecked = false
         }
 
         if (currentItem.important==true){
             binding.starIconColumn.imageTintList = (ColorStateList.valueOf(ContextCompat.getColor(context,R.color.blue)))
-        }
-
-        //set onclick listener on text and checkbox
-        binding.starIconColumn.setOnClickListener {
-            var star:Boolean = false
-            if(currentItem.important==true){
-                star = false
-                binding.starIconColumn.imageTintList = null
-
-            }
-            else{
-                star = true
-                binding.starIconColumn.imageTintList = (ColorStateList.valueOf(ContextCompat.getColor(context,R.color.blue)))
-            }
         }
 
 
@@ -122,6 +114,7 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
 
     interface RVInterface{
         fun onCheckboxClick(position: Int)
+        fun onStarClick(position: Int)
     }
 
 

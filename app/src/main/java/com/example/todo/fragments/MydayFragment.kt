@@ -66,13 +66,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             Navigation.findNavController(view).navigate(action)
         }
 
-        // TEST CODE
-        binding.gearIcon.setOnClickListener {
-            val temp = TodoEntity(0,"Test Case",false,false)
-            adapter.ColumnAdded(temp)
-        }
-        //TEST CODE
-
     }
 
 
@@ -82,16 +75,28 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     }
 
     override fun onCheckboxClick(position: Int) {
-        Toast.makeText(context,"${position.toString()}",Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context,"${position.toString()}",Toast.LENGTH_SHORT).show()
         val columnData = mViewModel.listData().value?.get(position)
         if (columnData?.completed == true){
             val newData = TodoEntity(columnData.id,columnData.title,columnData.important,false)
             mViewModel.updateTodo(newData)
+
         }else{
             val newData = TodoEntity(columnData?.id!!,columnData.title,columnData.important,true)
             mViewModel.updateTodo(newData)
         }
-        //mViewModel.listData().value?.get(position)?.completed = true
+    }
+
+    override fun onStarClick(position: Int) {
+        val columnData = mViewModel.listData().value?.get(position)
+        if (columnData?.important == true){
+            val newData = TodoEntity(columnData.id,columnData.title,false,columnData.completed)
+            mViewModel.updateTodo(newData)
+
+        }else{
+            val newData = TodoEntity(columnData?.id!!,columnData.title,true,columnData.completed)
+            mViewModel.updateTodo(newData)
+        }
     }
 
 }

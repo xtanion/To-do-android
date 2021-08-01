@@ -97,12 +97,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:rotation="40"
+        android:rotation="15"
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_send_svgrepo_com"
         app:layout_constraintTop_toTopOf="@id/todo_input"
         app:layout_constraintBottom_toBottomOf="@id/todo_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="?attr/colorPrimary" />
+        app:tint="@color/deep_blue" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ data class TodoEntity(
         if(id != other?.id){
             return false
         }
-        if (title != other.title){
+        if (title != other?.title){
             return false
         }
         if (important != other.important){

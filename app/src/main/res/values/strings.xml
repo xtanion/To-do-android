@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">ToDo</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todo">TODO</string>
-    <string name="today">Today</string>
     <string name="habits">Habits</string>
     <string name="planned">Planned</string>
     <string name="important">Important</string>
-    <string name="create_group">Create Group</string>
     <string name="list_your_ideas">List your Ideas</string>
     <string name="what_todo">What would you like to do?</string>
     <string name="set_reminder">Set Reminder</string>
