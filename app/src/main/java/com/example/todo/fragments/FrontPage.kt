@@ -35,7 +35,7 @@ class FrontPage : Fragment() {
             Navigation.findNavController(it).navigate(action)
         }
 
-        //binding.mydayCount.text = mViewModel.sizeof()
+        //binding.mydayCount.text = mViewModel.listData().value?.size.toString()
     }
 
     override fun onDestroyView() {

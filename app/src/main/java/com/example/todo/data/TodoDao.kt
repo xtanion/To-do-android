@@ -18,4 +18,7 @@ interface TodoDao {
 
     @Delete
     suspend fun deleteEntity(todo: TodoEntity)
+
+    @Query("SELECT * FROM todo_table WHERE important = 1 ORDER BY completed ASC,id DESC")
+    fun readImportant():LiveData<List<TodoEntity>>
 }

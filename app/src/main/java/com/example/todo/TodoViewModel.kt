@@ -44,7 +44,6 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
             repository.deleteTodo(todo)
         }
     }
-
 //    fun sizeof():String{
 //        readToDo()
 //        return readAllData.value?.size.toString()
