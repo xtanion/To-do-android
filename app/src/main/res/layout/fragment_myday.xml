@@ -11,15 +11,17 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar2"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="130dp"
         android:background="?attr/colorPrimaryVariant"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/expandable_top_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="Sunday, 25 July"
+            app:title="All Tasks"
+            app:expandedTitleMarginBottom="40dp"
             app:collapsedTitleTextAppearance="@style/collapsed_text"
             app:expandedTitleTextAppearance="@style/expanded_text">
 
@@ -56,6 +58,23 @@
                     android:visibility="visible"
                     tools:ignore="UnusedAttribute" />
             </com.google.android.material.appbar.MaterialToolbar>
+            <TextView
+                android:id="@+id/date_time_expanded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monday, Aug 2"
+                style="@style/collapsed_text"
+                android:textColor="?attr/colorSecondaryVariant"
+                android:textSize="16sp"
+                android:layout_gravity="bottom"
+                android:paddingBottom="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                app:layout_collapseMode="parallax"
+                android:drawableLeft="@drawable/ic_date"
+                android:drawableTint="?attr/colorSecondaryVariant"
+                android:drawablePadding="10dp"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -64,12 +83,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/completed_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/completed"
+                style="@style/subtitle_text"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:textColor="?attr/colorSecondary"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

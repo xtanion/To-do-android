@@ -19,7 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_add_group.xml" value="0.30641025641025643" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.3145299145299145" />
         <entry key="app/src/main/res/layout/fragment_frontpage.xml" value="0.30641025641025643" />
-        <entry key="app/src/main/res/layout/fragment_myday.xml" value="0.30641025641025643" />
+        <entry key="app/src/main/res/layout/fragment_myday.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_column.xml" value="0.305982905982906" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.31561181434599156" />

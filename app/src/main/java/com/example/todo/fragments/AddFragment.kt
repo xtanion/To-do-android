@@ -1,5 +1,6 @@
 package com.example.todo.fragments
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.graphics.Color
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat.getColor
@@ -47,12 +49,15 @@ class AddFragment : BottomSheetDialogFragment() {
         var starred:Boolean = false
         val star_button = binding?.starIcon
 
+        //view.showKeyboard()
+
         binding?.addToDbButton?.setOnClickListener {
             val input_todo:String = binding!!.todoInput.text.toString()
             val todo_arg = TodoEntity(0,input_todo,starred,false)
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)
+                view.hideKeyboard()
                 dismiss()
             }
         }
@@ -76,6 +81,17 @@ class AddFragment : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    @SuppressLint("ServiceCast")
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    @SuppressLint("ServiceCast")
+    fun View.showKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0)
     }
 
 

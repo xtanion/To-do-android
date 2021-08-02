@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 class TodoRepository(private val todoDao: TodoDao) {
     lateinit var readAllData:LiveData<List<TodoEntity>>
     lateinit var readImportant: LiveData<List<TodoEntity>>
+    lateinit var readCompleted: LiveData<List<TodoEntity>>
 
     suspend fun addTodo(todo: TodoEntity){
         todoDao.addTodo(todo)
@@ -12,6 +13,10 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     fun readData(){
          readAllData = todoDao.readAllData()
+    }
+
+    fun readCompletedData(){
+        readCompleted = todoDao.readCompleted()
     }
 
     suspend fun updateTodo(todo: TodoEntity){
@@ -22,7 +27,7 @@ class TodoRepository(private val todoDao: TodoDao) {
         todoDao.deleteEntity(todo)
     }
 
-    fun readImportant(){
+    fun readImportantData(){
         readImportant = todoDao.readImportant()
     }
 }

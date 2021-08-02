@@ -31,11 +31,16 @@ class FrontPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.mydayCard.setOnClickListener {
-            val action = FrontPageDirections.actionFrontpageToMydayFragment()
+            val action = FrontPageDirections.actionFrontpageToMydayFragment("All tasks")
             Navigation.findNavController(it).navigate(action)
         }
 
-        //binding.mydayCount.text = mViewModel.listData().value?.size.toString()
+        binding.importantsCard.setOnClickListener {
+            val action = FrontPageDirections.actionFrontpageToMydayFragment("Important")
+            Navigation.findNavController(it).navigate(action)
+        }
+
+        binding.mydayCount.text = mViewModel.listData().value?.size.toString()
     }
 
     override fun onDestroyView() {

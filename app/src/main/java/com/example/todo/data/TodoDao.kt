@@ -10,8 +10,11 @@ interface TodoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addTodo(todo: TodoEntity)
 
-    @Query("SELECT * FROM todo_table ORDER BY completed ASC,important DESC,id DESC")
+    @Query("SELECT * FROM todo_table WHERE completed = 0 ORDER BY important DESC,id DESC")
     fun readAllData():LiveData<List<TodoEntity>> //change back to List<TodoEntity> if doesn't work
+
+    @Query("SELECT * FROM todo_table WHERE completed = 1 ORDER BY important DESC,id DESC")
+    fun readCompleted():LiveData<List<TodoEntity>>
 
     @Update
     suspend fun updateEntity(todo: TodoEntity)
