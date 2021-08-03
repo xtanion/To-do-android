@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Paint
+import android.opengl.Visibility
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.data.TodoEntity
@@ -64,7 +66,9 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
         }
 
         if (currentItem.important==true){
-            binding.starIconColumn.imageTintList = (ColorStateList.valueOf(ContextCompat.getColor(context,R.color.blue)))
+            binding.starIconColumn.isVisible = true
+            //binding.checkboxColumn.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context,R.color.red))
+            binding.starIconColumn.imageTintList = (ColorStateList.valueOf(ContextCompat.getColor(context,R.color.red)))
         }
 
 

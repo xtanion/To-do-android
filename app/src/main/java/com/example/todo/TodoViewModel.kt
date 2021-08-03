@@ -19,11 +19,16 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         todoDao = TodoDatabase.getInstance(application).todoDao()
         repository = TodoRepository(todoDao)
         repository.readData()
+        repository.readCompletedData()
         //readAllData = repository.readAllData
     }
 
     fun listData():LiveData<List<TodoEntity>>{
         return repository.readAllData
+    }
+
+    fun listCompleted():LiveData<List<TodoEntity>>{
+        return repository.readCompleted
     }
 
     fun addToDo(todo:TodoEntity){

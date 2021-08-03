@@ -9,15 +9,25 @@
     <color name="green">#80cbc4</color>
 
     <color name="peach">#ffab91</color>
+    <color name="red">#E03737</color>
 
     <color name="blue">#64b5f6</color>
     <color name="light_blue">#90caf9</color>
     <color name="deep_blue">#007CFF</color>
 
     <color name="not_white">#eceff1</color>
-    <color name="muted_white">#e0e0e0</color>
+    <color name="muted_white">#E5E9F0</color>
     <color name="not_black">#000a12</color>
     <color name="muted_black">#212121</color>
     <color name="gray">#424242</color>
     <color name="light_gray">#616161</color>
+
+<!--    Nord theme-->
+    <color name="bluish">#5E81AC</color>
+    <color name="bluish_light">#81A1C1</color>
+    <color name="bluish_gray">#1F232B</color>
+    <color name="frost_green">#88C0D0</color>
+    <color name="frost_mint">#8FBCBB</color>
+    <color name="snow_white">#D0D1D4</color>
+    <color name="snow_gray">#767779</color>
 </resources>

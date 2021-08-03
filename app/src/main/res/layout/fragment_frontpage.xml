@@ -238,7 +238,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:src="@drawable/ic_invention"
-            app:tint="?attr/colorOnSecondary" />
+            app:tint="?attr/colorSecondaryVariant" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
             android:layout_marginLeft="50dp"
             android:fontFamily="@font/segoe_ui"
             android:text="@string/list_your_ideas"
-            android:textColor="?attr/colorOnSecondary"
+            android:textColor="?attr/colorSecondaryVariant"
             android:textSize="15sp" />
 
         <ImageView
@@ -258,7 +258,7 @@
             android:layout_margin="10dp"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_plus"
-            app:tint="?attr/colorOnSecondary" />
+            app:tint="?attr/colorSecondaryVariant" />
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

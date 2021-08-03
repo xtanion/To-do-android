@@ -2,16 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.ToDo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimary">@color/bluish_light</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/muted_white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/purple</item>
-        <item name="colorSecondaryVariant">@color/gray</item>
-        <item name="colorOnSecondary">@color/light_gray</item>
+        <item name="colorSecondary">@color/frost_green</item>
+        <item name="colorSecondaryVariant">@color/snow_gray</item>
+        <item name="colorOnSecondary">@color/snow_white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customized theme. -->
-        <item name="cardBackgroundColor">#0F1010</item>
+        <!-- Customized theme. #0F1010 -->
+        <item name="cardBackgroundColor">@color/bluish_gray</item>
     </style>
 </resources>

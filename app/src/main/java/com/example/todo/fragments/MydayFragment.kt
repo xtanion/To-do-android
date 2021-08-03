@@ -48,26 +48,46 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val recyclerView = binding.recyclerView
-        val adapter = TodoRVAdapter(this)
+        val recyclerViewIncomp = binding.recyclerViewIncomplete
+        val recyclerViewComp = binding.recyclerViewComplete
+
+        val adapter_incomp = TodoRVAdapter(this)
+        val adapter_comp = TodoRVAdapter(this)
 
         //mViewModel.readToDo()
         //adapter.NotifyChanges(mViewModel.listData().value!!)
 
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(false)
+        recyclerViewIncomp.adapter = adapter_incomp
+        recyclerViewComp.adapter = adapter_comp
 
+        recyclerViewIncomp.layoutManager = LinearLayoutManager(context)
+        recyclerViewComp.layoutManager = LinearLayoutManager(context)
+
+        recyclerViewIncomp.setHasFixedSize(false)
+        recyclerViewComp.setHasFixedSize(false)
 
         mViewModel.listData().observe(viewLifecycleOwner, Observer {
             binding.progressBar.isVisible = true
-            adapter.NotifyChanges(it)
+            adapter_incomp.NotifyChanges(it)
             binding.progressBar.isVisible = false
 
         })
 
+        mViewModel.listCompleted().observe(viewLifecycleOwner, Observer {
+            adapter_comp.NotifyChanges(it)
+        })
+
+        binding.completedText.setOnClickListener{
+            val completed_recycler = binding.recyclerViewComplete
+            completed_recycler.isVisible = !completed_recycler.isVisible
+        }
+
         binding.floatingActionButton.setOnClickListener {
             val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+        binding.navigateBack.setOnClickListener {
+            val action = MydayFragmentDirections.actionMydayFragmentToFrontpage()
             Navigation.findNavController(view).navigate(action)
         }
 
