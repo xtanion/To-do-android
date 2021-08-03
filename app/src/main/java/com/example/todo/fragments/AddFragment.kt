@@ -3,6 +3,7 @@ package com.example.todo.fragments
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
@@ -10,6 +11,7 @@ import android.graphics.PorterDuffColorFilter
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +50,6 @@ class AddFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var starred:Boolean = false
         val star_button = binding?.starIcon
-
         //view.showKeyboard()
 
         binding?.addToDbButton?.setOnClickListener {
@@ -62,18 +63,16 @@ class AddFragment : BottomSheetDialogFragment() {
             }
         }
 
-        star_button?.setOnClickListener {
-            val drawable = star_button.compoundDrawables
-            if(starred==false) {
-                starred = true
-                star_button.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
-                drawable[0].setTint(ContextCompat.getColor(requireContext(),R.color.blue))
+        star_button?.setOnCheckedChangeListener { button, b ->
+            starred = button.isChecked()
+            if (button.isChecked){
+                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+                button.buttonTintList = ContextCompat.getColorStateList(requireContext(),R.color.red)
+            }else{
+                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.snow_white))
+                button.buttonTintList = ContextCompat.getColorStateList(requireContext(),R.color.snow_white)
             }
-            else{
-                starred = false
-                star_button.setTextColor(ContextCompat.getColor(requireContext(),R.color.muted_black))
-                drawable[0].setTint(ContextCompat.getColor(requireContext(),R.color.muted_black))
-            }
+
         }
 
     }

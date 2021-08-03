@@ -3,12 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/cb_exclamation.xml" value="0.3236286919831224" />
         <entry key="app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.3236286919831224" />
         <entry key="app/src/main/res/drawable/ic_iconmonstr_checkbox_checked_thin.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/drawable/ic_rectangle_2.xml" value="0.31561181434599156" />
+        <entry key="app/src/main/res/drawable/ic_send_svgrepo_com.xml" value="0.3236286919831224" />
         <entry key="app/src/main/res/drawable/ic_star.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/drawable/ic_tick_icon.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/drawable/ic_tick_icon_108.xml" value="0.31561181434599156" />

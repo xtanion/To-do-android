@@ -72,21 +72,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
+
+    <CheckBox
         android:id="@+id/star_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/important"
+        android:fontFamily="@font/segoe_ui"
+        android:textColor="?attr/colorOnSecondary"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:drawablePadding="8dp"
-        android:fontFamily="@font/segoe_ui"
-        android:gravity="center_vertical"
-        android:inputType="text"
-        android:text="@string/important"
-        android:textColor="?attr/colorOnSecondary"
-        app:drawableLeftCompat="@drawable/ic_star"
-        app:drawableTint="?attr/colorOnSecondary"
+        android:button="@drawable/ic_exclamation_mark"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:buttonTint="?attr/colorOnSecondary"
         app:layout_constraintBottom_toTopOf="@id/todo_input"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -94,16 +94,13 @@
         android:id="@+id/add_to_db_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:rotation="15"
-        android:layout_marginBottom="8dp"
+        android:rotation="40"
         android:src="@drawable/ic_send_svgrepo_com"
         app:layout_constraintTop_toTopOf="@id/todo_input"
         app:layout_constraintBottom_toBottomOf="@id/todo_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/deep_blue" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

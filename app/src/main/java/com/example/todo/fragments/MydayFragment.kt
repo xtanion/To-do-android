@@ -48,22 +48,19 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        // FIrst RV
         val recyclerViewIncomp = binding.recyclerViewIncomplete
-        val recyclerViewComp = binding.recyclerViewComplete
-
         val adapter_incomp = TodoRVAdapter(this)
-        val adapter_comp = TodoRVAdapter(this)
-
-        //mViewModel.readToDo()
-        //adapter.NotifyChanges(mViewModel.listData().value!!)
 
         recyclerViewIncomp.adapter = adapter_incomp
-        recyclerViewComp.adapter = adapter_comp
-
         recyclerViewIncomp.layoutManager = LinearLayoutManager(context)
-        recyclerViewComp.layoutManager = LinearLayoutManager(context)
-
         recyclerViewIncomp.setHasFixedSize(false)
+
+        // Second RV
+        val recyclerViewComp = binding.recyclerViewComplete
+        val adapter_comp = TodoRVAdapter(this)
+        recyclerViewComp.adapter = adapter_comp
+        recyclerViewComp.layoutManager = LinearLayoutManager(context)
         recyclerViewComp.setHasFixedSize(false)
 
         mViewModel.listData().observe(viewLifecycleOwner, Observer {

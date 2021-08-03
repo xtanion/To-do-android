@@ -11,6 +11,8 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
@@ -55,6 +57,9 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val currentItem = DataList[position]
         val star_icon: ImageView = binding.starIconColumn
+
+        val animation: Animation = AnimationUtils.loadAnimation(holder.itemView.context,android.R.anim.slide_in_left)
+        holder.itemView.startAnimation(animation)
 
         binding.checkboxTextColumn.text = currentItem.title
 
