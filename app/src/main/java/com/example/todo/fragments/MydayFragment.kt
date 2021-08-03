@@ -18,9 +18,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.R
+import com.example.todo.SwipeGesture
 import com.example.todo.TodoRVAdapter
 import com.example.todo.TodoViewModel
 import com.example.todo.data.TodoEntity
@@ -52,9 +54,23 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         val recyclerViewIncomp = binding.recyclerViewIncomplete
         val adapter_incomp = TodoRVAdapter(this)
 
+        //SWIPE GESTURE
+        val swipeGesture = object :SwipeGesture(){
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                when(direction){
+                    ItemTouchHelper.LEFT->{
+                        val data = mViewModel.listData().value?.get(viewHolder.adapterPosition)
+                        mViewModel.removeTodo(data!!)
+                    }
+                }
+            }
+        }
+
         recyclerViewIncomp.adapter = adapter_incomp
         recyclerViewIncomp.layoutManager = LinearLayoutManager(context)
         recyclerViewIncomp.setHasFixedSize(false)
+        ItemTouchHelper(swipeGesture).attachToRecyclerView(recyclerViewIncomp)
 
         // Second RV
         val recyclerViewComp = binding.recyclerViewComplete
@@ -88,6 +104,8 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             Navigation.findNavController(view).navigate(action)
         }
 
+        //swipe gestures *BETA maybe*
+
     }
 
 
@@ -120,6 +138,5 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             mViewModel.updateTodo(newData)
         }
     }
-
 
 }
