@@ -61,6 +61,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         app:layout_constraintTop_toBottomOf="@id/top_toolbar"
         app:cardElevation="0dp">
         <ImageView
@@ -209,7 +211,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         app:layout_constraintTop_toBottomOf="@id/habit_card"
-        android:background="?attr/colorSecondaryVariant"
+        android:background="?attr/cardBackgroundColor"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="20dp"/>

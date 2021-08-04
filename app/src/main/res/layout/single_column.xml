@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="65dp"
-    android:layout_marginBottom="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorPrimaryVariant"
     android:clipToPadding="true">
@@ -80,6 +79,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:background="?attr/colorSecondaryVariant"/>
+        android:background="?attr/cardBackgroundColor"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="?attr/cardBackgroundColor"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

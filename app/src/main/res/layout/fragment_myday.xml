@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Monday, Aug 2"
-                style="@style/collapsed_text"
+                android:fontFamily="@font/sf_pro_display"
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textSize="16sp"
                 android:layout_gravity="bottom"
@@ -93,7 +93,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layoutAnimation="@anim/layout_anim"/>
+                android:layoutAnimation="@anim/layout_anim"
+                android:overScrollMode="never"/>
 
             <ImageView
                 android:id="@+id/completed_icon"
@@ -115,11 +116,14 @@
                 android:fontFamily="@font/segoe_ui"
                 android:textSize="15sp"
                 android:layout_marginEnd="16dp"
-                android:padding="10dp"
+                android:paddingStart="10dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/recycler_view_incomplete"
                 app:layout_constraintStart_toEndOf="@id/completed_icon"
-                android:layout_marginRight="16dp" />
+                android:layout_marginRight="16dp"
+                android:paddingLeft="10dp" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_complete"
                 android:layout_width="match_parent"
@@ -128,7 +132,8 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintTop_toBottomOf="@id/completed_text"
                 android:visibility="gone"
-                android:layoutAnimation="@anim/layout_anim"/>
+                android:layoutAnimation="@anim/layout_anim"
+                android:overScrollMode="never"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
