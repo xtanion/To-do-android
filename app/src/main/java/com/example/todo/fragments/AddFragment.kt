@@ -52,7 +52,7 @@ class AddFragment : BottomSheetDialogFragment() {
         val star_button = binding?.starIcon
         //view.showKeyboard()
 
-        binding?.addToDbButton?.setOnClickListener {
+        binding?.addToDbLottie?.setOnClickListener {
             val input_todo:String = binding!!.todoInput.text.toString()
             val todo_arg = TodoEntity(0,input_todo,starred,false)
 

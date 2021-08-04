@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Adapter
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
@@ -40,7 +41,8 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
         init {
             itemView.checkbox_column.setOnClickListener {
                 val position: Int = adapterPosition
-                rvInterface.onCheckboxClick(position)
+                val data:TodoEntity = DataList[position]
+                rvInterface.onCheckboxClick(data)
             }
             itemView.star_icon_column.setOnClickListener{
                 val position: Int = adapterPosition
@@ -81,10 +83,6 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
                 binding.starIconColumn.imageTintList =
                     (ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
             }
-
-
-
-
     }
 
     override fun getItemCount(): Int {
@@ -120,16 +118,10 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
         //notifyDataSetChanged()
         diffResult.dispatchUpdatesTo(this)
     }
-    fun ColumnAdded(Data: TodoEntity){
-        val mutableDataList:MutableList<TodoEntity> = DataList.toMutableList()
-        mutableDataList.add(0,Data)
-        this.DataList = mutableDataList.toList()
-//        DataList.toMutableList().add(0,Data)
-        notifyItemInserted(0)
-    }
+
 
     interface RVInterface{
-        fun onCheckboxClick(position: Int)
+        fun onCheckboxClick(data:TodoEntity)
         fun onStarClick(position: Int)
     }
 

@@ -63,16 +63,28 @@
         android:visibility="visible"/>
     <ImageView
         android:id="@+id/alarm_icon_column"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         app:layout_constraintEnd_toStartOf="@id/star_icon_column"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginRight="16dp"
         android:src="@drawable/ic_alarm_clock"
         app:tint="?attr/colorOnSecondary"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/repeat_icon_column"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintEnd_toStartOf="@id/alarm_icon_column"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_sync"
+        app:tint="?attr/colorOnSecondary"
+        android:visibility="gone"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"

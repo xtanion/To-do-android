@@ -24,4 +24,7 @@ interface TodoDao {
 
     @Query("SELECT * FROM todo_table WHERE important = 1 ORDER BY completed ASC,id DESC")
     fun readImportant():LiveData<List<TodoEntity>>
+
+    @Query("SELECT * FROM todo_table WHERE title LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String):LiveData<List<TodoEntity>>
 }

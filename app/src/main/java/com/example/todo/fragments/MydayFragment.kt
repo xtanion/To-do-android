@@ -93,6 +93,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             }
         }
 
+        //First RV
         recyclerViewIncomp.adapter = adapter_incomp
         recyclerViewIncomp.layoutManager = LinearLayoutManager(context)
         recyclerViewIncomp.setHasFixedSize(false)
@@ -155,8 +156,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
         }
 
-        //swipe gestures *BETA maybe*
-
     }
 
 
@@ -165,15 +164,16 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         _binding = null
     }
 
-    override fun onCheckboxClick(position: Int) {
-        //Toast.makeText(context,"${position.toString()}",Toast.LENGTH_SHORT).show()
-        val columnData = mViewModel.listData().value?.get(position)
-        if (columnData?.completed == true){
-            val newData = TodoEntity(columnData.id,columnData.title,columnData.important,false)
+    override fun onCheckboxClick(data:TodoEntity) {
+        //val columnData = mViewModel.listData().value?.get(position)
+        if (data?.completed == false){
+            //Toast.makeText(context,position.toString(),Toast.LENGTH_SHORT).show()
+            val newData = TodoEntity(data.id,data.title,data.important,true)
             mViewModel.updateTodo(newData)
 
-        }else{
-            val newData = TodoEntity(columnData?.id!!,columnData.title,columnData.important,true)
+        }
+        else{
+            val newData = TodoEntity(data.id,data.title,data.important,false)
             mViewModel.updateTodo(newData)
         }
     }
