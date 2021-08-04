@@ -1,6 +1,7 @@
 package com.example.todo
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
@@ -33,6 +34,7 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
     var _binding : SingleColumnBinding? = null
     val binding get() =  _binding!!
     private lateinit var context:Context
+    private var lastPosition: Int = -1
 
     inner class TodoViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         init {
@@ -53,28 +55,33 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
         return TodoViewHolder(binding.root)
     }
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val currentItem = DataList[position]
         val star_icon: ImageView = binding.starIconColumn
 
-        val animation: Animation = AnimationUtils.loadAnimation(holder.itemView.context,android.R.anim.slide_in_left)
-        holder.itemView.startAnimation(animation)
+        if (holder.adapterPosition>lastPosition) {
+            val animation: Animation =
+                AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fall_down)
+            holder.itemView.startAnimation(animation)}
 
-        binding.checkboxTextColumn.text = currentItem.title
+            binding.checkboxTextColumn.text = currentItem.title
 
-        if(currentItem.completed){
-            binding.checkboxColumn.isChecked = true
-            binding.checkboxTextColumn.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-        }else{
-            binding.checkboxColumn.isChecked = false
-        }
+            if (currentItem.completed) {
+                binding.checkboxColumn.isChecked = true
+                binding.checkboxTextColumn.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                binding.checkboxColumn.isChecked = false
+            }
 
-        if (currentItem.important==true){
-            binding.starIconColumn.isVisible = true
-            //binding.checkboxColumn.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context,R.color.red))
-            binding.starIconColumn.imageTintList = (ColorStateList.valueOf(ContextCompat.getColor(context,R.color.red)))
-        }
+            if (currentItem.important == true) {
+                binding.starIconColumn.isVisible = true
+                //binding.checkboxColumn.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context,R.color.red))
+                binding.starIconColumn.imageTintList =
+                    (ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
+            }
+
 
 
 

@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_frontpage" >
         <action
             android:id="@+id/action_frontpage_to_mydayFragment"
-            app:destination="@id/mydayFragment" />
+            app:destination="@id/mydayFragment"
+            app:enterAnim="@anim/fragment_slide_in_left"
+            app:exitAnim="@anim/fragment_slide_in_right" />
         <action
             android:id="@+id/action_frontpage_to_addGroupFragment"
             app:destination="@id/addGroupFragment" />
@@ -30,7 +32,9 @@
             app:destination="@id/detailsFragment" />
         <action
             android:id="@+id/action_mydayFragment_to_frontpage"
-            app:destination="@id/frontpage" />
+            app:destination="@id/frontpage"
+            app:enterAnim="@anim/fragment_slide_out_right"
+            app:exitAnim="@anim/fragment_slide_out_left" />
         <argument
             android:name="groupName"
             app:argType="string"

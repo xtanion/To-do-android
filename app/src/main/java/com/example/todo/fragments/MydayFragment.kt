@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -35,6 +37,8 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     val binding get() = _binding!!
     private val mViewModel: TodoViewModel by activityViewModels()
     val args: MydayFragmentArgs by navArgs()
+    private val rotateAnim: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty) }
+    private val rotateAnimAnti: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty_anti) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +54,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        // FIrst RV
+        // First RV
         val recyclerViewIncomp = binding.recyclerViewIncomplete
         val adapter_incomp = TodoRVAdapter(this)
 
@@ -92,7 +96,15 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
         binding.completedText.setOnClickListener{
             val completed_recycler = binding.recyclerViewComplete
-            completed_recycler.isVisible = !completed_recycler.isVisible
+            if (completed_recycler.isVisible){
+                binding.completedIcon.animation = rotateAnimAnti
+                completed_recycler.isVisible = false
+            }
+            else{
+                binding.completedIcon.animation = rotateAnim
+                completed_recycler.isVisible = true
+            }
+            //completed_recycler.isVisible = !completed_recycler.isVisible
         }
 
         binding.floatingActionButton.setOnClickListener {
