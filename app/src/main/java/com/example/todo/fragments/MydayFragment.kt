@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.GeneratedAdapter
@@ -51,6 +52,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     // Getting Date-Time
     @RequiresApi(Build.VERSION_CODES.O)
     val dateToday = LocalDateTime.now()
+    val date_time = dateToday.toString()
     @RequiresApi(Build.VERSION_CODES.O)
     val day = LocalDate.now().dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US)
 
@@ -126,10 +128,25 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             adapter_incomp.NotifyChanges(it)
             binding.progressBar.isVisible = false
 
+            if (it.size==0){
+                binding.noResultLottie.isVisible = true
+            }else{
+                binding.noResultLottie.visibility = View.GONE
+            }
+
         })
 
         mViewModel.listCompleted().observe(viewLifecycleOwner, Observer {
             adapter_comp.NotifyChanges(it)
+            val size = mViewModel.listCompleted().value?.size
+            binding.completedText.text = "Completed  ${size}"
+            if (it.size==0){
+                binding.completedIcon.isVisible = false
+                binding.completedText.isVisible = false
+            }else{
+                binding.completedIcon.isVisible = true
+                binding.completedText.isVisible = true
+            }
         })
 
         binding.completedText.setOnClickListener{
@@ -156,6 +173,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
         }
 
+
     }
 
 
@@ -166,28 +184,31 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
     override fun onCheckboxClick(data:TodoEntity) {
         //val columnData = mViewModel.listData().value?.get(position)
-        if (data?.completed == false){
-            //Toast.makeText(context,position.toString(),Toast.LENGTH_SHORT).show()
-            val newData = TodoEntity(data.id,data.title,data.important,true)
+        if (!data.completed){
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupName,date_time)
             mViewModel.updateTodo(newData)
 
         }
         else{
-            val newData = TodoEntity(data.id,data.title,data.important,false)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupName,date_time)
             mViewModel.updateTodo(newData)
         }
     }
 
-    override fun onStarClick(position: Int) {
-        val columnData = mViewModel.listData().value?.get(position)
-        if (columnData?.important == true){
-            val newData = TodoEntity(columnData.id,columnData.title,false,columnData.completed)
+    override fun onStarClick(data: TodoEntity) {
+        if (data.important){
+            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupName,date_time)
             mViewModel.updateTodo(newData)
 
         }else{
-            val newData = TodoEntity(columnData?.id!!,columnData.title,true,columnData.completed)
+            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupName,date_time)
             mViewModel.updateTodo(newData)
         }
+    }
+
+    override fun onViewClick(data: TodoEntity) {
+        val action = MydayFragmentDirections.actionMydayFragmentToDetailsFragment(data)
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
 }

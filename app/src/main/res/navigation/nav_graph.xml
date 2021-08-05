@@ -29,7 +29,9 @@
             app:destination="@id/addFragment" />
         <action
             android:id="@+id/action_mydayFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/fragment_slide_in_left"
+            app:exitAnim="@anim/fragment_slide_in_right" />
         <action
             android:id="@+id/action_mydayFragment_to_frontpage"
             app:destination="@id/frontpage"
@@ -65,6 +67,13 @@
         tools:layout="@layout/fragment_details" >
         <action
             android:id="@+id/action_detailsFragment_to_mydayFragment"
-            app:destination="@id/mydayFragment" />
+            app:destination="@id/mydayFragment"
+            app:popUpTo="@id/mydayFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="dataEntity"
+            app:argType="com.example.todo.data.TodoEntity"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

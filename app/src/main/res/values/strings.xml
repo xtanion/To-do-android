@@ -12,4 +12,5 @@
     <string name="create_a_todo_list_app">Create a ToDo list App</string>
     <string name="name_this_group">Name this group</string>
     <string name="completed">Completed</string>
+    <string name="description">An Android app that can create to-do and notifies the user when needed, Supports gnome applications as well</string>
 </resources>

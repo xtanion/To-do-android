@@ -8,6 +8,7 @@
     tools:context=".DetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/material_topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
@@ -24,6 +25,14 @@
                 android:src="@drawable/ic_arrow_left"
                 app:tint="?attr/colorOnPrimary" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All Tasks"
+                android:textSize="17sp"
+                android:fontFamily="@font/sf_pro_display"
+                android:textColor="?attr/colorOnPrimary"/>
+
             <ImageView
                 android:id="@+id/gear_icon"
                 android:layout_width="wrap_content"
@@ -35,6 +44,135 @@
                 app:tint="?attr/colorOnPrimary" />
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:id="@+id/datetime_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Updated: 12:01:21 12/12/12 IST"
+        android:textSize="10sp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/material_topbar"
+        android:layout_marginRight="20dp" />
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/detailed_item_title"
+        app:layout_constraintBottom_toBottomOf="@id/detailed_item_title"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp" />
+    <EditText
+        android:id="@+id/detailed_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_a_todo_list_app"
+        android:textAppearance="@style/expanded_text"
+        android:background="@null"
+        android:textSize="25sp"
+        android:maxWidth="300dp"
+        android:hint="Title"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@id/checkbox"
+        app:layout_constraintTop_toBottomOf="@id/datetime_details"
+        android:layout_marginLeft="20dp"
+        android:textCursorDrawable="@color/deep_blue"/>
+    <ImageView
+        android:id="@+id/important_sign"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_exclamation_mark"
+        app:tint="?attr/colorOnSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/detailed_item_title"
+        app:layout_constraintBottom_toBottomOf="@id/detailed_item_title"
+        android:layout_margin="20dp"/>
+    <EditText
+        android:id="@+id/detailed_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:textSize="16sp"
+        android:hint="Description"
+        android:fontFamily="@font/sf_pro_display"
+        android:textColor="?attr/colorSecondaryVariant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailed_item_title"
+        android:layout_margin="20dp"
+        android:textCursorDrawable="@color/deep_blue"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="?attr/colorPrimaryVariant"
+        android:paddingBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/gallery_icon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_gallery"
+                app:tint="?attr/colorSecondaryVariant"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/link_icon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_paperclip"
+                app:tint="?attr/colorSecondaryVariant"
+                android:layout_marginLeft="50dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/gallery_icon"/>
+            <ImageView
+                android:id="@+id/con"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_vertical|start"
+                android:layout_margin="20dp"
+                android:src="@drawable/ic_list"
+                app:tint="?attr/colorSecondaryVariant"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/link_icon"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/update_tick_button"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end|center_vertical"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:layout_marginEnd="10dp"
+                app:lottie_rawRes="@raw/checkmark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="10dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

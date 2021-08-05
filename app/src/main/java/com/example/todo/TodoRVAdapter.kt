@@ -46,7 +46,13 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
             }
             itemView.star_icon_column.setOnClickListener{
                 val position: Int = adapterPosition
-                rvInterface.onStarClick(position)
+                val data: TodoEntity = DataList[position]
+                rvInterface.onStarClick(data)
+            }
+            itemView.setOnClickListener{
+                val position: Int = adapterPosition
+                val data: TodoEntity = DataList[position]
+                rvInterface.onViewClick(data)
             }
         }
     }
@@ -79,7 +85,6 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
 
             if (currentItem.important == true) {
                 binding.starIconColumn.isVisible = true
-                //binding.checkboxColumn.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context,R.color.red))
                 binding.starIconColumn.imageTintList =
                     (ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
             }
@@ -122,7 +127,8 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
 
     interface RVInterface{
         fun onCheckboxClick(data:TodoEntity)
-        fun onStarClick(position: Int)
+        fun onStarClick(data: TodoEntity)
+        fun onViewClick(data: TodoEntity)
     }
 
 

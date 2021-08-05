@@ -29,11 +29,14 @@ import com.example.todo.TodoViewModel
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentAddBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.time.LocalDateTime
 
 class AddFragment : BottomSheetDialogFragment() {
     var _binding:FragmentAddBinding? = null
     val binding get() = _binding
     private lateinit var mViewModel: TodoViewModel
+    @RequiresApi(Build.VERSION_CODES.O)
+    val dateToday = LocalDateTime.now()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +57,7 @@ class AddFragment : BottomSheetDialogFragment() {
 
         binding?.addToDbLottie?.setOnClickListener {
             val input_todo:String = binding!!.todoInput.text.toString()
-            val todo_arg = TodoEntity(0,input_todo,starred,false)
+            val todo_arg = TodoEntity(0,input_todo,null,starred,false,null,dateToday.toString())
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)
