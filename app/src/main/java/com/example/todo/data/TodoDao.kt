@@ -11,7 +11,7 @@ interface TodoDao {
     suspend fun addTodo(todo: TodoEntity)
 
     @Query("SELECT * FROM todo_table WHERE completed = 0 ORDER BY important DESC,id DESC")
-    fun readAllData():LiveData<List<TodoEntity>> //change back to List<TodoEntity> if doesn't work
+    fun readAllData():LiveData<List<TodoEntity>>
 
     @Query("SELECT * FROM todo_table WHERE completed = 1 ORDER BY important DESC,id DESC")
     fun readCompleted():LiveData<List<TodoEntity>>
@@ -25,7 +25,7 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table WHERE important = 1 ORDER BY completed ASC,id DESC")
     fun readImportant():LiveData<List<TodoEntity>>
 
-    @Query("SELECT * FROM todo_table WHERE title LIKE :searchQuery")
+    @Query("SELECT * FROM todo_table WHERE title LIKE :searchQuery and completed = 0")
     fun searchDatabase(searchQuery: String):LiveData<List<TodoEntity>>
 
 }

@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.ToDo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/bluish_light</item>
+        <item name="colorPrimary">@color/ui_green</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">#F3F3F3</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/frost_green</item>
+        <item name="colorSecondary">@color/deep_blue</item>
         <item name="colorSecondaryVariant">@color/snow_gray</item>
         <item name="colorOnSecondary">@color/snow_white</item>
         <!-- Status bar color. -->

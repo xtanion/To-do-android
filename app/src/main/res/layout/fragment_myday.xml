@@ -31,14 +31,6 @@
                 app:layout_collapseMode="pin">
 
                 <ImageView
-                    android:id="@+id/navigate_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_gravity="start"
-                    android:src="@drawable/ic_arrow_left"
-                    app:tint="?attr/colorOnPrimary" />
-
-                <ImageView
                     android:id="@+id/gear_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,11 +39,12 @@
                     android:layout_marginRight="16dp"
                     android:src="@drawable/ic_cog"
                     app:tint="?attr/colorOnPrimary" />
+
                 <ProgressBar
                     android:id="@+id/progressBar"
                     style="?android:attr/progressBarStyle"
                     android:indeterminate="true"
-                    android:indeterminateTint="?attr/colorPrimary"
+                    android:indeterminateTint="@color/deep_blue"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_gravity="end"
@@ -113,13 +106,13 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="@string/completed"
-                android:fontFamily="@font/segoe_ui"
+                android:fontFamily="@font/sf_pro_text"
                 android:textSize="15sp"
                 android:layout_marginEnd="16dp"
                 android:paddingStart="10dp"
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="?attr/colorOnSecondary"
                 app:layout_constraintTop_toBottomOf="@id/no_result_lottie"
                 app:layout_constraintStart_toEndOf="@id/completed_icon"
                 android:layout_marginRight="16dp"
@@ -157,14 +150,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:src="@drawable/ic_plus"
+        android:src="@drawable/ic_add_icon"
         android:contentDescription="@string/todo"
         android:focusable="true"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:backgroundTint="?attr/colorPrimary"
-        app:tint="?attr/colorPrimaryVariant"
+        android:backgroundTint="@color/ui_grey"
+        app:tint="@color/deeper_blue"
         tools:targetApi="lollipop"
-        app:elevation="2dp"/>
+        app:elevation="2dp"
+        android:visibility="invisible"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

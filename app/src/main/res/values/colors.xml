@@ -8,6 +8,12 @@
 
     <color name="green">#80cbc4</color>
     <color name="greeeennnn">#00D170</color>
+    <color name="ui_green">#61DEA4</color>
+    <color name="ui_yellow">#FFE761</color>
+    <color name="ui_grey">#EBEFF5</color>
+    <color name="ui_purple">#B678FF</color>
+    <color name="ui_red">#F45E6D</color>
+    <color name="ui_black">#252A31</color>
 
     <color name="peach">#ffab91</color>
     <color name="red">#E03737</color>
@@ -15,6 +21,7 @@
     <color name="blue">#64b5f6</color>
     <color name="light_blue">#90caf9</color>
     <color name="deep_blue">#007CFF</color>
+    <color name="deeper_blue">#006CFF</color>
 
     <color name="not_white">#eceff1</color>
     <color name="muted_white">#E5E9F0</color>

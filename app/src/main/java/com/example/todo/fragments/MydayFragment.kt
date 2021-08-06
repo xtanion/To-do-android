@@ -27,12 +27,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo.R
-import com.example.todo.SwipeGesture
-import com.example.todo.TodoRVAdapter
-import com.example.todo.TodoViewModel
+import com.example.todo.*
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -81,6 +80,8 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         val recyclerViewIncomp = binding.recyclerViewIncomplete
         val adapter_incomp = TodoRVAdapter(this)
         binding.dateTimeExpanded.text = dayToShow
+        activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.VISIBLE
+        activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)?.visibility = View.VISIBLE
 
         //SWIPE GESTURE for rv1
         val swipeGesture = object :SwipeGesture(){
@@ -166,12 +167,13 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
             Navigation.findNavController(view).navigate(action)
         }
-        binding.navigateBack.setOnClickListener {
-            val action = MydayFragmentDirections.actionMydayFragmentToFrontpage()
 
-            Navigation.findNavController(view).navigate(action)
+        activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)
+            ?.setOnClickListener {
+                val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
+                Navigation.findNavController(view).navigate(action)
+            }
 
-        }
 
 
     }
@@ -185,23 +187,23 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     override fun onCheckboxClick(data:TodoEntity) {
         //val columnData = mViewModel.listData().value?.get(position)
         if (!data.completed){
-            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupName,date_time)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupId,date_time)
             mViewModel.updateTodo(newData)
 
         }
         else{
-            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupName,date_time)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupId,date_time)
             mViewModel.updateTodo(newData)
         }
     }
 
     override fun onStarClick(data: TodoEntity) {
         if (data.important){
-            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupName,date_time)
+            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupId,date_time)
             mViewModel.updateTodo(newData)
 
         }else{
-            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupName,date_time)
+            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupId,date_time)
             mViewModel.updateTodo(newData)
         }
     }

@@ -13,4 +13,6 @@
     <string name="name_this_group">Name this group</string>
     <string name="completed">Completed</string>
     <string name="description">An Android app that can create to-do and notifies the user when needed, Supports gnome applications as well</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

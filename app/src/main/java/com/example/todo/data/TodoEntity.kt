@@ -17,7 +17,7 @@ data class TodoEntity(
     val description: String?,
     val important: Boolean,
     val completed: Boolean,
-    val groupName: String?,
+    val groupId: Int?,
     val dateTime: String
 ):Parcelable
 {
@@ -37,7 +37,7 @@ data class TodoEntity(
         if (completed != other.completed){
             return false
         }
-        if (groupName != other.groupName){
+        if (groupId != other.groupId){
             return false
         }
         return true

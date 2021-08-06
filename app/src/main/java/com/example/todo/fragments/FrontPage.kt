@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.todo.R
@@ -16,7 +17,7 @@ class FrontPage : Fragment() {
 
     var _binding:FragmentFrontpageBinding? = null
     val binding get() = _binding!!
-    private lateinit var mViewModel:TodoViewModel
+    private val mViewModel:TodoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +26,7 @@ class FrontPage : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentFrontpageBinding.inflate(layoutInflater,container,false)
         val view = binding.root
-        mViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
+        //mViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
         return view
     }
 

@@ -15,6 +15,9 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentDetailsBinding
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DetailsFragment : Fragment() {
 
@@ -38,6 +41,9 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val entity = args.dataEntity!!
 
+        activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.GONE
+        activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)?.visibility = View.GONE
+
         binding.detailedItemTitle.setText( args.dataEntity?.title.toString())
         binding.detailedDescription.setText(args.dataEntity?.description)
         binding.datetimeDetails.setText("Last Updated: ${entity.dateTime}")
@@ -57,7 +63,7 @@ class DetailsFragment : Fragment() {
             val check: Boolean = binding.checkbox.isChecked
             //Add more later on (links,images,importance,etc)
 
-            val updatedUnit:TodoEntity = TodoEntity(entity!!.id,title,description,importance,check,entity.groupName,entity.dateTime)
+            val updatedUnit:TodoEntity = TodoEntity(entity!!.id,title,description,importance,check,entity.groupId,entity.dateTime)
             mViewModel.updateTodo(updatedUnit)
             Toast.makeText(context,updatedUnit.toString(),Toast.LENGTH_SHORT).show()
             val action = DetailsFragmentDirections.actionDetailsFragmentToMydayFragment()

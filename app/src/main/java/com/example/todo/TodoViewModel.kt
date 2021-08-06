@@ -20,7 +20,6 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         repository = TodoRepository(todoDao)
         repository.readData()
         repository.readCompletedData()
-        //readAllData = repository.readAllData
     }
 
     fun listData():LiveData<List<TodoEntity>>{
@@ -28,6 +27,7 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     }
 
     fun listCompleted():LiveData<List<TodoEntity>>{
+        //repository.readCompletedData()
         return repository.readCompleted
     }
 

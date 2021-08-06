@@ -29,6 +29,7 @@ import com.example.todo.TodoViewModel
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentAddBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.fragment_details.*
 import java.time.LocalDateTime
 
 class AddFragment : BottomSheetDialogFragment() {
@@ -61,6 +62,7 @@ class AddFragment : BottomSheetDialogFragment() {
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)
+                Toast.makeText(context,todo_arg.toString(),Toast.LENGTH_SHORT).show()
                 view.hideKeyboard()
                 dismiss()
             }
