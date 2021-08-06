@@ -1,4 +1,4 @@
-package com.example.todo
+package com.example.todo.fragments
 
 import android.content.res.ColorStateList
 import android.os.Build
@@ -13,10 +13,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.example.todo.R
+import com.example.todo.TodoViewModel
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentDetailsBinding
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DetailsFragment : Fragment() {
@@ -50,7 +51,8 @@ class DetailsFragment : Fragment() {
 
         if(args.dataEntity?.important == true){
             binding.importantSign.imageTintList = (ColorStateList.valueOf(ContextCompat.getColor(
-                requireContext(), R.color.red)))
+                requireContext(), R.color.red
+            )))
         }
         if(args.dataEntity?.completed==true){
             binding.checkbox.isChecked = true
