@@ -74,7 +74,7 @@
         android:layout_marginRight="16dp"
         android:src="@drawable/ic_alarm_modern"
         app:tint="?attr/colorOnSecondary"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
     <ImageView
         android:id="@+id/repeat_icon_column"
         android:layout_width="15dp"

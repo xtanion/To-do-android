@@ -22,6 +22,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.GeneratedAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -133,6 +134,13 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             adapter_incomp.NotifyChanges(it)
             binding.progressBar.visibility = View.GONE
 
+            //val size = it.size
+//            val newEntity: TodoEntity = it[0]
+//            mViewModel.fireBaseAdd(newEntity)
+            if(it.isNotEmpty()) {
+                val newEntity: TodoEntity = it[0]
+                mViewModel.fireBaseAdd(newEntity)
+            }
             if (it.size==0){
                 binding.noResultLottie.isVisible = true
             }else{
@@ -143,8 +151,14 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 
         mViewModel.listCompleted().observe(viewLifecycleOwner, Observer {
             adapter_comp.NotifyChanges(it)
-            val size = mViewModel.listCompleted().value?.size
+//            val size = mViewModel.listCompleted().value?.size
+            val size = it.size
             binding.completedText.text = "Completed  ${size}"
+
+            if(it.isNotEmpty()) {
+                val newEntity: TodoEntity = it[0]
+                mViewModel.fireBaseAdd(newEntity)
+            }
             if (it.size==0){
                 binding.completedIcon.isVisible = false
                 binding.completedText.isVisible = false
@@ -164,7 +178,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                 binding.completedIcon.animation = rotateAnim
                 completed_recycler.isVisible = true
             }
-            //completed_recycler.isVisible = !completed_recycler.isVisible
         }
 
         binding.floatingActionButton.setOnClickListener {
@@ -177,7 +190,22 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                 val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
                 Navigation.findNavController(view).navigate(action)
             }
+        // Sync and Iterate through all items Asynchronously
+        lifecycleScope.launchWhenResumed {
+            val dataIncomplete = mViewModel.listData().value
+            val dataComplete = mViewModel.listCompleted().value
 
+            if (dataComplete != null) {
+                for (items in dataComplete) {
+                    mViewModel.fireBaseAdd(items)
+                }
+            }
+            if (dataIncomplete != null) {
+                for (items in dataIncomplete){
+                    mViewModel.fireBaseAdd(items)
+                }
+            }
+        }
     }
 
 

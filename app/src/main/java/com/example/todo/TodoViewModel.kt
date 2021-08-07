@@ -10,6 +10,7 @@ import com.example.todo.data.TodoDatabase
 import com.example.todo.data.TodoEntity
 import com.example.todo.data.TodoRepository
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.launch
 
 class TodoViewModel(application: Application):AndroidViewModel(application) {
@@ -55,6 +56,14 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     fun mAuthMethod(): FirebaseAuth {
         mAuth = FirebaseAuth.getInstance()
         return mAuth
+    }
+
+    fun fireBaseAdd(entity:TodoEntity){
+        val rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val uid = mAuthMethod().uid
+        val reference = rootNode.getReference("posts/${uid}/${entity.id}/")
+
+        reference.setValue(entity)
     }
 
 }
