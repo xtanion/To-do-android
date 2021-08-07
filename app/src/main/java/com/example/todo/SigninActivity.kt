@@ -33,10 +33,9 @@ class SigninActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         mAuth = FirebaseAuth.getInstance()
-        sign_in_button.setOnClickListener {
+        sign_in_google.setOnClickListener {
             signIn()
             //Toast.makeText(baseContext,"Signed IN successfully",Toast.LENGTH_SHORT).show()
-
         }
     }
 

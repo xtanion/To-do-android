@@ -27,11 +27,13 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.todo.*
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -44,7 +46,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     var _binding:FragmentMydayBinding? = null
     val binding get() = _binding!!
     private val mViewModel: TodoViewModel by activityViewModels()
-    val args: MydayFragmentArgs by navArgs()
+    private lateinit var mAuth: FirebaseAuth
     private val rotateAnim: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty) }
     private val rotateAnimAnti: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty_anti) }
 
@@ -75,6 +77,16 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        //Auth
+        mAuth = FirebaseAuth.getInstance()
+        val user = mAuth.currentUser
+
+        Glide.with(view)
+            .load(user?.photoUrl)
+            .placeholder(R.drawable.ic_cog)
+            .fitCenter()
+            .into(binding.gearIcon)
 
         // First RV
         val recyclerViewIncomp = binding.recyclerViewIncomplete
