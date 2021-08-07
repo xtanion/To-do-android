@@ -9,11 +9,13 @@ import com.example.todo.data.TodoDao
 import com.example.todo.data.TodoDatabase
 import com.example.todo.data.TodoEntity
 import com.example.todo.data.TodoRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class TodoViewModel(application: Application):AndroidViewModel(application) {
     private val repository: TodoRepository
     private lateinit var todoDao: TodoDao
+    private lateinit var mAuth: FirebaseAuth
 
     init {
         todoDao = TodoDatabase.getInstance(application).todoDao()
@@ -49,9 +51,10 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
             repository.deleteTodo(todo)
         }
     }
-//    fun sizeof():String{
-//        readToDo()
-//        return readAllData.value?.size.toString()
-//    }
+
+    fun mAuthMethod(): FirebaseAuth {
+        mAuth = FirebaseAuth.getInstance()
+        return mAuth
+    }
 
 }

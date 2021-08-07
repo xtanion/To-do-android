@@ -33,7 +33,7 @@
         android:textColor="?attr/colorPrimaryVariant"
         android:textAllCaps="false"
         app:cornerRadius="10dp"
-        app:icon="@drawable/ic_activities"
+        app:icon="@drawable/ic_google_icon"
         app:iconTint="@null"
         app:iconGravity="textStart"
         app:backgroundTint="?attr/colorOnPrimary"/>

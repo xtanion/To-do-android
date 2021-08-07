@@ -6,20 +6,6 @@
     app:startDestination="@id/mydayFragment">
 
     <fragment
-        android:id="@+id/frontpage"
-        android:name="com.example.todo.fragments.FrontPage"
-        android:label="fragment_frontpage"
-        tools:layout="@layout/fragment_frontpage" >
-        <action
-            android:id="@+id/action_frontpage_to_mydayFragment"
-            app:destination="@id/mydayFragment"
-            app:enterAnim="@anim/fragment_slide_in_left"
-            app:exitAnim="@anim/fragment_slide_in_right" />
-        <action
-            android:id="@+id/action_frontpage_to_addGroupFragment"
-            app:destination="@id/addGroupFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/mydayFragment"
         android:name="com.example.todo.fragments.MydayFragment"
         android:label="fragment_myday"
@@ -32,15 +18,14 @@
             app:destination="@id/detailsFragment"
             app:enterAnim="@anim/fragment_slide_in_left"
             app:exitAnim="@anim/fragment_slide_in_right" />
-        <action
-            android:id="@+id/action_mydayFragment_to_frontpage"
-            app:destination="@id/frontpage"
-            app:enterAnim="@anim/fragment_slide_out_right"
-            app:exitAnim="@anim/fragment_slide_out_left" />
+
         <argument
             android:name="groupName"
             app:argType="string"
             android:defaultValue="All Tasks" />
+        <action
+            android:id="@+id/action_mydayFragment_to_addGroupFragment"
+            app:destination="@id/addGroupFragment" />
     </fragment>
     <dialog
         android:id="@+id/addFragment"
@@ -57,8 +42,8 @@
         android:label="fragment_add_group"
         tools:layout="@layout/fragment_add_group" >
         <action
-            android:id="@+id/action_addGroupFragment_to_frontpage"
-            app:destination="@id/frontpage" />
+            android:id="@+id/action_addGroupFragment_to_mydayFragment"
+            app:destination="@id/mydayFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"

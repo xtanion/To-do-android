@@ -50,6 +50,7 @@
                     android:layout_gravity="end"
                     android:visibility="visible"
                     tools:ignore="UnusedAttribute" />
+
             </com.google.android.material.appbar.MaterialToolbar>
             <TextView
                 android:id="@+id/date_time_expanded"

@@ -46,7 +46,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     var _binding:FragmentMydayBinding? = null
     val binding get() = _binding!!
     private val mViewModel: TodoViewModel by activityViewModels()
-    private lateinit var mAuth: FirebaseAuth
     private val rotateAnim: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty) }
     private val rotateAnimAnti: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty_anti) }
 
@@ -79,14 +78,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //Auth
-        mAuth = FirebaseAuth.getInstance()
-        val user = mAuth.currentUser
-
-        Glide.with(view)
-            .load(user?.photoUrl)
-            .placeholder(R.drawable.ic_cog)
-            .fitCenter()
-            .into(binding.gearIcon)
+        val user = mViewModel.mAuthMethod()
 
         // First RV
         val recyclerViewIncomp = binding.recyclerViewIncomplete
@@ -139,7 +131,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         mViewModel.listData().observe(viewLifecycleOwner, Observer {
             binding.progressBar.isVisible = true
             adapter_incomp.NotifyChanges(it)
-            binding.progressBar.isVisible = false
+            binding.progressBar.visibility = View.GONE
 
             if (it.size==0){
                 binding.noResultLottie.isVisible = true
@@ -185,8 +177,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                 val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
                 Navigation.findNavController(view).navigate(action)
             }
-
-
 
     }
 
