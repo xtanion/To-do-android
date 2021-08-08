@@ -62,7 +62,6 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         val rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
         val uid = mAuthMethod().uid
         val reference = rootNode.getReference("posts/${uid}/${entity.id}/")
-
         reference.setValue(entity)
     }
 

@@ -65,7 +65,7 @@ class DetailsFragment : Fragment() {
             val check: Boolean = binding.checkbox.isChecked
             //Add more later on (links,images,importance,etc)
 
-            val updatedUnit:TodoEntity = TodoEntity(entity!!.id,title,description,importance,check,entity.groupId,entity.dateTime)
+            val updatedUnit:TodoEntity = TodoEntity(entity!!.id,title,description,importance,check,entity.groupId,entity.dateTime,null)
             mViewModel.updateTodo(updatedUnit)
             Toast.makeText(context,updatedUnit.toString(),Toast.LENGTH_SHORT).show()
             val action = DetailsFragmentDirections.actionDetailsFragmentToMydayFragment()

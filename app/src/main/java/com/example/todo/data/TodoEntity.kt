@@ -3,7 +3,9 @@ package com.example.todo.data
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import java.time.LocalDateTime
 
 
@@ -18,7 +20,8 @@ data class TodoEntity(
     val important: Boolean,
     val completed: Boolean,
     val groupId: Int?,
-    val dateTime: String
+    val dateTime: String,
+    val nestedTodo: List<nestedTodo?>?
 ):Parcelable
 {
     fun equals(other: TodoEntity?): Boolean {
