@@ -30,11 +30,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.todo.*
+import com.example.todo.data.TodoConverter
 import com.example.todo.data.TodoEntity
+import com.example.todo.data.nestedTodo
 import com.example.todo.databinding.FragmentMydayBinding
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.FirebaseDatabase
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -206,6 +213,36 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                 }
             }
         }
+
+        binding.gearIcon.setOnClickListener {
+            val rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
+            val uid = mViewModel.mAuthMethod().uid
+            val reference = rootNode.getReference("posts/${uid}/")
+            val gson:Gson = Gson()
+
+            reference.get().addOnSuccessListener{
+                if (it.exists()){
+                    var entity:TodoEntity? = null
+
+                    for(ds:DataSnapshot in it.children){
+                        val id = ds.child("id").getValue(Int::class.java)
+                        val title = ds.child("title").getValue(String::class.java)
+                        val description = ds.child("description").getValue(String::class.java)
+                        val important: Boolean? = ds.child("important").getValue(Boolean::class.java)
+                        val completed: Boolean? = ds.child("completed").getValue(Boolean::class.java)
+                        val groupId: Int? = ds.child("groupId").getValue(Int::class.java)
+                        val dateTime: String? = ds.child("dateTime").getValue(String::class.java)
+                        val sNestedTodo: String? = ds.child("nestedTodo").getValue(String::class.java)
+
+                        val listType: Type = object : TypeToken<List<nestedTodo>?>() {}.type
+                        val nestedTodo:List<nestedTodo>? =  gson.fromJson(sNestedTodo, listType)
+
+                        entity = TodoEntity(id!!,title!!,description,important!!,completed!!,groupId,dateTime!!,nestedTodo)
+                    }
+                    Toast.makeText(context,entity.toString(),Toast.LENGTH_LONG).show()
+                }
+            }
+            }
     }
 
 
@@ -242,5 +279,12 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         val action = MydayFragmentDirections.actionMydayFragmentToDetailsFragment(data)
         Navigation.findNavController(requireView()).navigate(action)
     }
+    data class firebaseEntity(
+        val id: Int,
+        val title: String,
+        val important: Boolean,
+        val completed: Boolean,
+        val dateTime: String
+    )
 
 }
