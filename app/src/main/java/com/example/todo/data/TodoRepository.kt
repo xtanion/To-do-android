@@ -1,16 +1,25 @@
 package com.example.todo.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.todo.data.relations.GroupWithTodos
 
 class TodoRepository(private val todoDao: TodoDao) {
     lateinit var readAllData:LiveData<List<TodoEntity>>
     lateinit var readImportant: LiveData<List<TodoEntity>>
     lateinit var readCompleted: LiveData<List<TodoEntity>>
+    lateinit var readGroup: LiveData<List<GroupEntity>>
+    lateinit var readGroupWithTodo: LiveData<List<GroupWithTodos>>
 
+    // Add DATA
+    suspend fun addGroup(group:GroupEntity){
+        todoDao.addGroup(group)
+    }
     suspend fun addTodo(todo: TodoEntity){
         todoDao.addTodo(todo)
     }
 
+    //Read DATA
     fun readData(){
          readAllData = todoDao.readAllData()
     }
@@ -19,6 +28,16 @@ class TodoRepository(private val todoDao: TodoDao) {
         readCompleted = todoDao.readCompleted()
     }
 
+    fun readAllGroup(){
+        readGroup = todoDao.readAllGroups()
+        Log.d("GROUPDATA_REPO",todoDao.readAllGroups().value.toString())
+    }
+
+    fun readGroupWithTodos(){
+        readGroupWithTodo =  todoDao.getGroupWithTodos()
+    }
+
+    // Update & Delete DATA
     suspend fun updateTodo(todo: TodoEntity){
         todoDao.updateEntity(todo)
     }
@@ -30,4 +49,5 @@ class TodoRepository(private val todoDao: TodoDao) {
     fun readImportantData(){
         readImportant = todoDao.readImportant()
     }
+
 }

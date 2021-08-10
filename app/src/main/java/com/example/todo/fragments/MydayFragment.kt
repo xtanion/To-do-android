@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.isGone
@@ -30,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.todo.*
+import com.example.todo.data.GroupEntity
 import com.example.todo.data.TodoConverter
 import com.example.todo.data.TodoEntity
 import com.example.todo.data.nestedTodo
@@ -41,6 +43,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_details.*
 import java.lang.reflect.Type
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -94,6 +98,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         binding.dateTimeExpanded.text = dayToShow
         activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.VISIBLE
         activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)?.visibility = View.VISIBLE
+        val listSwitcher:ImageView = activity?.findViewById(R.id.list_switcher)!!
 
         //SWIPE GESTURE for rv1
         val swipeGesture = object :SwipeGesture(){
@@ -141,9 +146,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             adapter_incomp.NotifyChanges(it)
             binding.progressBar.visibility = View.GONE
 
-            //val size = it.size
-//            val newEntity: TodoEntity = it[0]
-//            mViewModel.fireBaseAdd(newEntity)
             if(it.isNotEmpty()) {
                 val newEntity: TodoEntity = it[0]
                 mViewModel.fireBaseAdd(newEntity)
@@ -199,6 +201,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             }
         // Sync and Iterate through all items Asynchronously
         lifecycleScope.launchWhenResumed {
+            binding.progressBar.visibility = View.VISIBLE
             val dataIncomplete = mViewModel.listData().value
             val dataComplete = mViewModel.listCompleted().value
 
@@ -212,37 +215,35 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                     mViewModel.fireBaseAdd(items)
                 }
             }
+            mViewModel.getFirebaseData()
+            binding.progressBar.visibility = View.GONE
         }
 
         binding.gearIcon.setOnClickListener {
-            val rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
-            val uid = mViewModel.mAuthMethod().uid
-            val reference = rootNode.getReference("posts/${uid}/")
-            val gson:Gson = Gson()
+            val data = mViewModel.fireDataReturn()
+            Toast.makeText(context,data.toString(),Toast.LENGTH_LONG).show()
+        }
 
-            reference.get().addOnSuccessListener{
-                if (it.exists()){
-                    var entity:TodoEntity? = null
+        val listGroup = listOf<GroupEntity>(
+            GroupEntity(0,"all","ffffff") ,
+            GroupEntity(0,"tasks","ffffff") ,
+            GroupEntity(0,"star","fooofff") ,
+            GroupEntity(0,"complete","mmmffff")
+        )
 
-                    for(ds:DataSnapshot in it.children){
-                        val id = ds.child("id").getValue(Int::class.java)
-                        val title = ds.child("title").getValue(String::class.java)
-                        val description = ds.child("description").getValue(String::class.java)
-                        val important: Boolean? = ds.child("important").getValue(Boolean::class.java)
-                        val completed: Boolean? = ds.child("completed").getValue(Boolean::class.java)
-                        val groupId: Int? = ds.child("groupId").getValue(Int::class.java)
-                        val dateTime: String? = ds.child("dateTime").getValue(String::class.java)
-                        val sNestedTodo: String? = ds.child("nestedTodo").getValue(String::class.java)
+        for(items in listGroup) {
+            mViewModel.addGroup(items)
+        }
 
-                        val listType: Type = object : TypeToken<List<nestedTodo>?>() {}.type
-                        val nestedTodo:List<nestedTodo>? =  gson.fromJson(sNestedTodo, listType)
+        mViewModel.listGroupWithTodos().observe(viewLifecycleOwner, Observer {
+            val data = it
+            Log.d("OBSERVER",data.toString())
+        })
 
-                        entity = TodoEntity(id!!,title!!,description,important!!,completed!!,groupId,dateTime!!,nestedTodo)
-                    }
-                    Toast.makeText(context,entity.toString(),Toast.LENGTH_LONG).show()
-                }
-            }
-            }
+//        listSwitcher.setOnClickListener {
+//            val data = mViewModel.listAllGroup()
+//            Toast.makeText(context,data.value.toString(),Toast.LENGTH_LONG).show()
+//        }
     }
 
 
@@ -254,23 +255,23 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     override fun onCheckboxClick(data:TodoEntity) {
         //val columnData = mViewModel.listData().value?.get(position)
         if (!data.completed){
-            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupId,date_time,data.nestedTodo)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupName,date_time,data.nestedTodo)
             mViewModel.updateTodo(newData)
 
         }
         else{
-            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupId,date_time,data.nestedTodo)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupName,date_time,data.nestedTodo)
             mViewModel.updateTodo(newData)
         }
     }
 
     override fun onStarClick(data: TodoEntity) {
         if (data.important){
-            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupId,date_time,data.nestedTodo)
+            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupName,date_time,data.nestedTodo)
             mViewModel.updateTodo(newData)
 
         }else{
-            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupId,date_time,data.nestedTodo)
+            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupName,date_time,data.nestedTodo)
             mViewModel.updateTodo(newData)
         }
     }
@@ -279,12 +280,5 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         val action = MydayFragmentDirections.actionMydayFragmentToDetailsFragment(data)
         Navigation.findNavController(requireView()).navigate(action)
     }
-    data class firebaseEntity(
-        val id: Int,
-        val title: String,
-        val important: Boolean,
-        val completed: Boolean,
-        val dateTime: String
-    )
 
 }

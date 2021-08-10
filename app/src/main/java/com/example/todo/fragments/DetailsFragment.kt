@@ -65,11 +65,15 @@ class DetailsFragment : Fragment() {
             val check: Boolean = binding.checkbox.isChecked
             //Add more later on (links,images,importance,etc)
 
-            val updatedUnit:TodoEntity = TodoEntity(entity!!.id,title,description,importance,check,entity.groupId,entity.dateTime,entity.nestedTodo)
+            val updatedUnit:TodoEntity = TodoEntity(entity!!.id,title,description,importance,check,entity.groupName,entity.dateTime,entity.nestedTodo)
             mViewModel.updateTodo(updatedUnit)
             Toast.makeText(context,updatedUnit.toString(),Toast.LENGTH_SHORT).show()
             val action = DetailsFragmentDirections.actionDetailsFragmentToMydayFragment()
             Navigation.findNavController(view).navigate(action)
+        }
+
+        binding.navigateBack.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
         }
     }
 

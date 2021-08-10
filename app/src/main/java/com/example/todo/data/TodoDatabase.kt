@@ -7,7 +7,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import java.security.AccessControlContext
 
-@Database(entities = [TodoEntity::class],version = 1)
+@Database(
+    entities = [TodoEntity::class,GroupEntity::class],version = 1)
 @TypeConverters(TodoConverter::class)
 abstract class TodoDatabase: RoomDatabase() {
 
