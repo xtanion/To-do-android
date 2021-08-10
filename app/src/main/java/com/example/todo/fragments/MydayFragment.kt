@@ -224,26 +224,15 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             Toast.makeText(context,data.toString(),Toast.LENGTH_LONG).show()
         }
 
-        val listGroup = listOf<GroupEntity>(
-            GroupEntity(0,"all","ffffff") ,
-            GroupEntity(0,"tasks","ffffff") ,
-            GroupEntity(0,"star","fooofff") ,
-            GroupEntity(0,"complete","mmmffff")
-        )
-
-        for(items in listGroup) {
-            mViewModel.addGroup(items)
-        }
-
         mViewModel.listGroupWithTodos().observe(viewLifecycleOwner, Observer {
             val data = it
             Log.d("OBSERVER",data.toString())
         })
 
-//        listSwitcher.setOnClickListener {
-//            val data = mViewModel.listAllGroup()
-//            Toast.makeText(context,data.value.toString(),Toast.LENGTH_LONG).show()
-//        }
+        listSwitcher.setOnClickListener {
+            val action = MydayFragmentDirections.actionMydayFragmentToAddGroupFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
     }
 
 

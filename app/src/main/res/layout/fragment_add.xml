@@ -18,7 +18,8 @@
         android:background="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/repeat_icon" />
+        app:layout_constraintBottom_toTopOf="@id/repeat_icon"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/todo_input"
@@ -28,7 +29,7 @@
         android:layout_marginRight="50dp"
         android:background="@null"
         android:hint="@string/what_todo"
-        android:fontFamily="@font/sf_pro_display"
+        android:fontFamily="@font/sf_pro_text"
         android:inputType="text"
         android:keyboardNavigationCluster="true"
         android:maxLines="1"

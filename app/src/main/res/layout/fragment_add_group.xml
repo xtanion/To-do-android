@@ -6,8 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AddGroupFragment"
     style="@style/rounded_top_corners"
-    android:background="?attr/cardBackgroundColor"
-    android:paddingBottom="10dp">
+    android:background="?attr/cardBackgroundColor">
     <View
         android:id="@+id/view_seperator"
         android:layout_width="100dp"
@@ -24,24 +23,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/view_seperator"/>
-    <View
-        android:id="@+id/line_separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/colorSecondaryVariant"
-        app:layout_constraintTop_toBottomOf="@id/group_recyclerview"/>
-    <TextView
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_group_navbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create New Group"
-        android:fontFamily="@font/sf_pro_text"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="15dp"
-        android:drawableStart="@drawable/ic_add_icon"
-        android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/ic_add_icon"
-        app:layout_constraintTop_toBottomOf="@id/line_separator"
-        android:padding="15dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?attr/cardBackgroundColor"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/group_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="50dp"
+            android:background="@null"
+            android:hint="@string/create_new_group"
+            android:fontFamily="@font/sf_pro_text"
+            android:textSize="15sp"
+            android:inputType="text"
+            android:keyboardNavigationCluster="true"
+            android:drawableStart="@drawable/ic_add_icon"
+            android:drawablePadding="10dp"
+            android:maxLines="1"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:drawableLeft="@drawable/ic_add_icon"
+            android:textColorHint="?attr/colorOnPrimary" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/add_group_lottie"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:lottie_rawRes="@raw/send_lottie"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_gravity="end|center_vertical"
+            android:visibility="invisible"/>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
