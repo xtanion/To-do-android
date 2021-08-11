@@ -60,6 +60,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     private val mViewModel: TodoViewModel by activityViewModels()
     private val rotateAnim: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty) }
     private val rotateAnimAnti: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty_anti) }
+    private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
 
     // Getting Date-Time
     @RequiresApi(Build.VERSION_CODES.O)
@@ -189,13 +190,15 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             }
         }
 
-        binding.floatingActionButton.setOnClickListener {
-            val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
-            Navigation.findNavController(view).navigate(action)
-        }
+//        binding.floatingActionButton.setOnClickListener {
+//            binding.floatingActionButton.startAnimation(buttonPress)
+//            val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
+//            Navigation.findNavController(view).navigate(action)
+//        }
 
-        activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)
-            ?.setOnClickListener {
+        val fab = activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)
+        fab?.setOnClickListener {
+                it.startAnimation(buttonPress)
                 val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
                 Navigation.findNavController(view).navigate(action)
             }
@@ -224,12 +227,9 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             Toast.makeText(context,data.toString(),Toast.LENGTH_LONG).show()
         }
 
-        mViewModel.listGroupWithTodos().observe(viewLifecycleOwner, Observer {
-            val data = it
-            Log.d("OBSERVER",data.toString())
-        })
 
         listSwitcher.setOnClickListener {
+            it.startAnimation(buttonPress)
             val action = MydayFragmentDirections.actionMydayFragmentToAddGroupFragment()
             Navigation.findNavController(view).navigate(action)
         }

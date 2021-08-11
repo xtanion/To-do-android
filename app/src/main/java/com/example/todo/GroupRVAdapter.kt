@@ -1,9 +1,13 @@
 package com.example.todo
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.data.GroupEntity
 import com.example.todo.databinding.GroupRowBinding
@@ -29,6 +33,7 @@ class GroupRVAdapter():RecyclerView.Adapter<GroupRVAdapter.GroupViewHolder>() {
         val groupEntity: GroupEntity = DataList[position]
 
         binding.groupName.text = groupEntity.groupName
+        binding.groupColor.setColorFilter(Color.parseColor(groupEntity.accent_colour))
     }
 
     override fun getItemCount(): Int {
@@ -40,10 +45,7 @@ class GroupRVAdapter():RecyclerView.Adapter<GroupRVAdapter.GroupViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun NotifyGroupAdded(gropEntity: GroupEntity){
-        val datalist:MutableList<GroupEntity> = DataList.toMutableList()
-        datalist.add(gropEntity)
-        this.DataList = datalist
+    fun NotifyGroupAdded(position: Int){
         notifyItemInserted(0)
     }
 }

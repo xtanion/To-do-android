@@ -26,16 +26,16 @@
         <ImageView
             android:id="@+id/list_switcher"
             android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_height="30dp"
             android:src="@drawable/ic_lists"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_gravity="center_vertical|start"/>
+            android:layout_gravity="center_vertical|start" />
 
         <ImageView
             android:layout_width="26dp"
             android:layout_height="30dp"
-            android:layout_gravity="center_vertical|end"
+            android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
             android:src="@drawable/ic_round_more_horiz_24"
@@ -53,6 +53,7 @@
         android:layout_margin="16dp"
         android:backgroundTint="@color/ui_grey"
         app:tint="@color/deeper_blue"
+        app:borderWidth="0dp"
         tools:targetApi="lollipop"
         app:elevation="2dp"
         android:visibility="visible"/>

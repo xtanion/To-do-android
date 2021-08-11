@@ -87,6 +87,17 @@
         android:src="@drawable/ic_sync"
         app:tint="?attr/colorOnSecondary"
         android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/group_accent_color"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/repeat_icon_column"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_circle_filled"
+        app:tint="?attr/colorSecondary"
+        android:visibility="gone"/>
     <View
         android:layout_width="400dp"
         android:layout_height="1dp"

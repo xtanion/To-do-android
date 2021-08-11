@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo.GroupRVAdapter
 import com.example.todo.TodoViewModel
+import com.example.todo.data.GroupEntity
 import com.example.todo.databinding.FragmentAddGroupBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_group.*
@@ -41,6 +43,17 @@ class AddGroupFragment : BottomSheetDialogFragment() {
         mViewModel.listAllGroup().observe(viewLifecycleOwner, Observer {
             groupAdapter.NotifyGroupChanges(it)
         })
+
+
+
+        binding.addGroupLottie.setOnClickListener {
+            val groupName = binding.groupInput.text.toString()
+            val color = "#FFE761"
+            val gEntity = GroupEntity(0,groupName,color)
+            mViewModel.addGroup(gEntity)
+            dismiss()
+        }
+
     }
 
 }
