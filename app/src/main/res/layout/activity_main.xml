@@ -33,6 +33,7 @@
             android:layout_gravity="center_vertical|start" />
 
         <ImageView
+            android:id="@+id/menu_switcher"
             android:layout_width="26dp"
             android:layout_height="30dp"
             android:layout_gravity="end|center_vertical"

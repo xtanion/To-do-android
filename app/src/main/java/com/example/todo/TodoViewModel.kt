@@ -30,17 +30,16 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         repository.readAllGroup()
         repository.readData()
         repository.readCompletedData()
-        repository.readGroupWithTodos()
+        //repository.readGroupWithTodos()
     }
 
     fun listAllGroup():LiveData<List<GroupEntity>>{
         repository.readAllGroup()
-        Log.d("GROUPDATA",repository.readGroup.value.toString())
         return repository.readGroup
     }
     //TODO
-    fun listGroupWithTodos():LiveData<List<GroupWithTodos>>{
-        return repository.readGroupWithTodo
+    fun listGroupWithTodos(name:String):LiveData<List<GroupWithTodos>>{
+        return repository.readGroupWithTodos(name)
     }
 
     fun listData():LiveData<List<TodoEntity>>{
@@ -124,5 +123,7 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     fun fireDataReturn():List<TodoEntity>{
         return fireData
     }
+
+    //TODO : take a single Live data list<TodoEntity> & split it into completed and Incomplete
 
 }

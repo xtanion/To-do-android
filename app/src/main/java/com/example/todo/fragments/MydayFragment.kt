@@ -100,6 +100,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.VISIBLE
         activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)?.visibility = View.VISIBLE
         val listSwitcher:ImageView = activity?.findViewById(R.id.list_switcher)!!
+        val menuSwitcher:ImageView = activity?.findViewById(R.id.menu_switcher)!!
 
         //SWIPE GESTURE for rv1
         val swipeGesture = object :SwipeGesture(){
@@ -142,40 +143,85 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         recyclerViewComp.setHasFixedSize(false)
         ItemTouchHelper(swipeGestureTwo).attachToRecyclerView(recyclerViewComp)
 
-        mViewModel.listData().observe(viewLifecycleOwner, Observer {
+//        mViewModel.listData().observe(viewLifecycleOwner, Observer {
+//            binding.progressBar.isVisible = true
+//            adapter_incomp.NotifyChanges(it)
+//            binding.progressBar.visibility = View.GONE
+//
+//            if(it.isNotEmpty()) {
+//                val newEntity: TodoEntity = it[0]
+//                mViewModel.fireBaseAdd(newEntity)
+//            }
+//            if (it.size==0){
+//                binding.noResultLottie.isVisible = true
+//            }else{
+//                binding.noResultLottie.visibility = View.GONE
+//            }
+//
+//        })
+//
+//        mViewModel.listCompleted().observe(viewLifecycleOwner, Observer {
+//            adapter_comp.NotifyChanges(it)
+////            val size = mViewModel.listCompleted().value?.size
+//            val size = it.size
+//            binding.completedText.text = "Completed  ${size}"
+//
+//            if(it.isNotEmpty()) {
+//                val newEntity: TodoEntity = it[0]
+//                mViewModel.fireBaseAdd(newEntity)
+//            }
+//            if (it.size==0){
+//                binding.apply {
+//                    completedIcon.isVisible = false
+//                    completedText.isVisible = false
+//                }
+//            }else{
+//                binding.apply {
+//                    completedIcon.isVisible = true
+//                    completedText.isVisible = true
+//                }
+//            }
+//        })
+
+        //TODO: New method implementation using one-to-many relationship
+        mViewModel.listGroupWithTodos("all").observe(viewLifecycleOwner, Observer { it ->
+            //Log.d("SORTED_DATA",it.toString())
+            val data = it[0].todos
+            val incomplete = mutableListOf<TodoEntity>()
+            val complete = mutableListOf<TodoEntity>()
+
+            data.forEach {todo->
+                if (!todo.completed){
+                    incomplete.add(todo)
+                }else{
+                    complete.add(todo)
+                }
+            }
             binding.progressBar.isVisible = true
-            adapter_incomp.NotifyChanges(it)
+            adapter_incomp.NotifyChanges(incomplete.toList())
+            adapter_comp.NotifyChanges(complete.toList())
             binding.progressBar.visibility = View.GONE
 
-            if(it.isNotEmpty()) {
-                val newEntity: TodoEntity = it[0]
-                mViewModel.fireBaseAdd(newEntity)
-            }
-            if (it.size==0){
+            if (incomplete.size==0){
                 binding.noResultLottie.isVisible = true
             }else{
                 binding.noResultLottie.visibility = View.GONE
             }
 
-        })
-
-        mViewModel.listCompleted().observe(viewLifecycleOwner, Observer {
-            adapter_comp.NotifyChanges(it)
-//            val size = mViewModel.listCompleted().value?.size
-            val size = it.size
-            binding.completedText.text = "Completed  ${size}"
-
-            if(it.isNotEmpty()) {
-                val newEntity: TodoEntity = it[0]
-                mViewModel.fireBaseAdd(newEntity)
-            }
-            if (it.size==0){
-                binding.completedIcon.isVisible = false
-                binding.completedText.isVisible = false
+            if (complete.size==0){
+                binding.apply {
+                    completedIcon.isVisible = false
+                    completedText.isVisible = false
+                }
             }else{
-                binding.completedIcon.isVisible = true
-                binding.completedText.isVisible = true
+                binding.apply {
+                    completedIcon.isVisible = true
+                    completedText.isVisible = true
+                }
             }
+
+            //Log.d("SORTED_INCOMPLETE",incomplete.toString())
+            //Log.d("SORTED_COMPLETE",complete.toString())
         })
 
         binding.completedText.setOnClickListener{
@@ -189,12 +235,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                 completed_recycler.isVisible = true
             }
         }
-
-//        binding.floatingActionButton.setOnClickListener {
-//            binding.floatingActionButton.startAnimation(buttonPress)
-//            val action = MydayFragmentDirections.actionMydayFragmentToAddFragment()
-//            Navigation.findNavController(view).navigate(action)
-//        }
 
         val fab = activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)
         fab?.setOnClickListener {
@@ -233,6 +273,8 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             val action = MydayFragmentDirections.actionMydayFragmentToAddGroupFragment()
             Navigation.findNavController(view).navigate(action)
         }
+
+
     }
 
 

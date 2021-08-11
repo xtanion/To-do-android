@@ -8,7 +8,7 @@ import com.example.todo.data.relations.GroupWithTodos
 @Dao
 interface TodoDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addTodo(todo: TodoEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -18,8 +18,8 @@ interface TodoDao {
     fun readAllGroups():LiveData<List<GroupEntity>>
 
     @Transaction
-    @Query("SELECT * FROM GroupEntity")
-    fun getGroupWithTodos():LiveData<List<GroupWithTodos>>
+    @Query("SELECT * FROM GroupEntity WHERE groupName=:name ORDER BY groupId ASC")
+    fun getGroupWithTodos(name:String):LiveData<List<GroupWithTodos>>
 
     @Query("SELECT * FROM todo_table WHERE completed = 0 ORDER BY important DESC,id DESC")
     fun readAllData():LiveData<List<TodoEntity>>

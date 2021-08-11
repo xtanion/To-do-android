@@ -9,7 +9,7 @@ class TodoRepository(private val todoDao: TodoDao) {
     lateinit var readImportant: LiveData<List<TodoEntity>>
     lateinit var readCompleted: LiveData<List<TodoEntity>>
     lateinit var readGroup: LiveData<List<GroupEntity>>
-    lateinit var readGroupWithTodo: LiveData<List<GroupWithTodos>>
+    //lateinit var readGroupWithTodo: LiveData<List<GroupWithTodos>>
 
     // Add DATA
     suspend fun addGroup(group:GroupEntity){
@@ -33,8 +33,8 @@ class TodoRepository(private val todoDao: TodoDao) {
         Log.d("GROUPDATA_REPO",todoDao.readAllGroups().value.toString())
     }
 
-    fun readGroupWithTodos(){
-        readGroupWithTodo =  todoDao.getGroupWithTodos()
+    fun readGroupWithTodos(name:String):LiveData<List<GroupWithTodos>>{
+        return todoDao.getGroupWithTodos(name)
     }
 
     // Update & Delete DATA
