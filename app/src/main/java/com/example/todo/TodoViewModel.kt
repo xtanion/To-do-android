@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.todo.data.*
 import com.example.todo.data.relations.GroupWithTodos
@@ -20,7 +21,7 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     private var todoDao: TodoDao
     private lateinit var mAuth: FirebaseAuth
     private lateinit var fireData:List<TodoEntity>
-    //private var groupName:String? = null
+    private val groupName = MutableLiveData<String>()
     init {
         todoDao = TodoDatabase.getInstance(application).todoDao()
         repository = TodoRepository(todoDao)
@@ -33,14 +34,23 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         //repository.readGroupWithTodos()
     }
 
+    fun returnGroupName():LiveData<String>{
+        return groupName
+    }
+
+    fun groupLiveName(name:String) {
+        groupName.value = name
+    }
+
     fun listAllGroup():LiveData<List<GroupEntity>>{
         repository.readAllGroup()
         return repository.readGroup
     }
-    //TODO
+    //Done
     fun listGroupWithTodos(name:String):LiveData<List<GroupWithTodos>>{
         return repository.readGroupWithTodos(name)
     }
+
 
     fun listData():LiveData<List<TodoEntity>>{
         return repository.readAllData

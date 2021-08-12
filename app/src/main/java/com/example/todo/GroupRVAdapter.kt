@@ -1,7 +1,6 @@
 package com.example.todo
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
@@ -11,8 +10,9 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.data.GroupEntity
 import com.example.todo.databinding.GroupRowBinding
+import com.example.todo.fragments.AddGroupFragment
 
-class GroupRVAdapter():RecyclerView.Adapter<GroupRVAdapter.GroupViewHolder>() {
+class GroupRVAdapter(val rvInterface: groupRVInterface):RecyclerView.Adapter<GroupRVAdapter.GroupViewHolder>() {
 
     private var DataList = emptyList<GroupEntity>()
     var _binding : GroupRowBinding? = null
@@ -20,7 +20,13 @@ class GroupRVAdapter():RecyclerView.Adapter<GroupRVAdapter.GroupViewHolder>() {
     private lateinit var context: Context
 
     inner class GroupViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-
+        init {
+            itemView.setOnClickListener { 
+                val position = adapterPosition
+                val data = DataList[position]
+                rvInterface.onGroupClick(data)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
@@ -47,5 +53,9 @@ class GroupRVAdapter():RecyclerView.Adapter<GroupRVAdapter.GroupViewHolder>() {
 
     fun NotifyGroupAdded(position: Int){
         notifyItemInserted(0)
+    }
+    
+    interface groupRVInterface{
+        fun onGroupClick(data:GroupEntity)
     }
 }

@@ -36,7 +36,9 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:focusedByDefault="true"
+        android:focusable="true"/>
 
     <TextView
         android:id="@+id/set_alarm_icon"

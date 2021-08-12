@@ -1,22 +1,25 @@
 package com.example.todo.fragments
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo.GroupRVAdapter
 import com.example.todo.TodoViewModel
 import com.example.todo.data.GroupEntity
 import com.example.todo.databinding.FragmentAddGroupBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_add_group.*
 
-class AddGroupFragment : BottomSheetDialogFragment() {
+class AddGroupFragment : BottomSheetDialogFragment(), GroupRVAdapter.groupRVInterface {
 
     var _binding: FragmentAddGroupBinding? = null
     val binding get() = _binding!!
@@ -34,7 +37,7 @@ class AddGroupFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val group_rv = binding.groupRecyclerview
-        val groupAdapter = GroupRVAdapter()
+        val groupAdapter = GroupRVAdapter(this)
 
         group_rv.adapter = groupAdapter
         group_rv.layoutManager = LinearLayoutManager(context)
@@ -44,16 +47,45 @@ class AddGroupFragment : BottomSheetDialogFragment() {
             groupAdapter.NotifyGroupChanges(it)
         })
 
-
+        binding.groupInput.setOnFocusChangeListener{view,hasFocus->
+            if (hasFocus){
+                binding.addGroupLottie.visibility = View.VISIBLE
+            }else{
+                binding.addGroupLottie.visibility = View.GONE
+            }
+        }
 
         binding.addGroupLottie.setOnClickListener {
             val groupName = binding.groupInput.text.toString()
-            val color = "#FFE761"
+            val color = "#FFFFFF"
             val gEntity = GroupEntity(0,groupName,color)
             mViewModel.addGroup(gEntity)
             dismiss()
+            val action = AddGroupFragmentDirections.actionAddGroupFragmentToAddFragment()
+            Navigation.findNavController(view).navigate(action)
+            view.hideKeyboard()
         }
 
+    }
+
+    override fun onGroupClick(data: GroupEntity) {
+        val name = data.groupName
+        Log.d("SORTED_GROUP_NAME",name)
+        //TODO : use VIEWMODEL for this
+        mViewModel.groupLiveName(name)
+        view?.hideKeyboard()
+        dismiss()
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+    @SuppressLint("ServiceCast")
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
 }

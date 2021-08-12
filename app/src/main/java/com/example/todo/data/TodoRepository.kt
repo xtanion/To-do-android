@@ -33,7 +33,7 @@ class TodoRepository(private val todoDao: TodoDao) {
         Log.d("GROUPDATA_REPO",todoDao.readAllGroups().value.toString())
     }
 
-    fun readGroupWithTodos(name:String):LiveData<List<GroupWithTodos>>{
+    fun readGroupWithTodos(name: String): LiveData<List<GroupWithTodos>> {
         return todoDao.getGroupWithTodos(name)
     }
 

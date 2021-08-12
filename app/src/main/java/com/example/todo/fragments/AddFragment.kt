@@ -23,6 +23,7 @@ import androidx.core.app.NotificationCompat.getColor
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.R
 import com.example.todo.TodoViewModel
@@ -38,6 +39,7 @@ class AddFragment : BottomSheetDialogFragment() {
     private lateinit var mViewModel: TodoViewModel
     @RequiresApi(Build.VERSION_CODES.O)
     val dateToday = LocalDateTime.now()
+    val args:AddFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,11 +56,12 @@ class AddFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var starred:Boolean = false
         val star_button = binding?.starIcon
+        val group_name = args.groupName
         //view.showKeyboard()
 
         binding?.addToDbLottie?.setOnClickListener {
             val input_todo:String = binding!!.todoInput.text.toString()
-            val todo_arg = TodoEntity(0,input_todo,null,starred,false,"all",dateToday.toString(),null)
+            val todo_arg = TodoEntity(0,input_todo,null,starred,false,group_name,dateToday.toString(),null)
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)

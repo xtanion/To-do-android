@@ -27,6 +27,6 @@
     <style name="rounded_top_corners">
         <item name="android:topLeftRadius">20dp</item>
         <item name="android:topRightRadius">20dp</item>
-        <item name="background">?attr/cardBackgroundColor</item>
+        <item name="android:background">?attr/cardBackgroundColor</item>
     </style>
 </resources>
