@@ -4,8 +4,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -72,6 +74,8 @@ class DetailsFragment : Fragment() {
             ActivityResultContracts.GetContent(),
             ActivityResultCallback { uri->
                 binding.image1.setImageURI(uri)
+                val stream = activity?.contentResolver?.openInputStream(uri)
+                bmp = BitmapFactory.decodeStream(stream)
             }
         )
 
@@ -79,16 +83,21 @@ class DetailsFragment : Fragment() {
             if (bmp==null) {
                 requestPermission()
                 imageAction.launch("image/*")
-                bmp = binding.image1.drawable.toBitmap(250, 250)
+                //bmp = binding.image1.drawable.toBitmap(250, 250)
                 binding.imageCard.visibility = View.VISIBLE
+                //binding.image1.setImageBitmap(bmp)
             }else{
                 Toast.makeText(context,"Image already exist, Remove to add new one",Toast.LENGTH_SHORT).show()
             }
         }
 
         if (bmp!=null){
-            binding.image1.setImageBitmap(bmp)
-            binding.imageCard.visibility = View.VISIBLE
+            Log.d("BitmapDetails",bmp.toString())
+            binding.apply {
+                image1.setImageBitmap(bmp)
+                image1.invalidate()
+                imageCard.visibility = View.VISIBLE
+            }
         }
 
         binding.updateTickButton.setOnClickListener {
@@ -100,7 +109,8 @@ class DetailsFragment : Fragment() {
 
             val updatedUnit:TodoEntity = TodoEntity(entity.id,title,description,importance,check,entity.groupName,entity.dateTime,entity.nestedTodo,bmp)
             mViewModel.updateTodo(updatedUnit)
-            Toast.makeText(context,updatedUnit.toString(),Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context,updatedUnit.toString(),Toast.LENGTH_SHORT).show()
+            Log.d("BMP",updatedUnit.toString())
             val action = DetailsFragmentDirections.actionDetailsFragmentToMydayFragment()
             Navigation.findNavController(view).navigate(action)
         }
@@ -111,22 +121,10 @@ class DetailsFragment : Fragment() {
 
     }
 
-    companion object{
-        private val IMAGE_PICK_CODE = 200
-        private val PERMISSION_CODE = 201
-    }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        binding.image1.apply {
-//            setImageURI(data?.data)
-//            visibility = View.VISIBLE
-//        }
-//    }
     private fun hasStorageReadPermission() = ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED
     private fun hasStorageWritePermission() = ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED
     private fun requestPermission(){
-        var permissionList = mutableListOf<String>()
+        val permissionList = mutableListOf<String>()
         if(!hasStorageReadPermission()){
             permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }

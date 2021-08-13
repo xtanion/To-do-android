@@ -2,6 +2,7 @@ package com.example.todo.data
 
 import android.graphics.Bitmap
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -23,6 +24,7 @@ data class TodoEntity(
     val groupName: String,
     val dateTime: String,
     val nestedTodo: List<nestedTodo?>?,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     val bitmap: Bitmap?
 ):Parcelable
 {

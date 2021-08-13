@@ -27,15 +27,19 @@ class TodoConverter {
     @TypeConverter
     fun BitmapToByteArray(bitmap: Bitmap?):ByteArray?{
         val outputStream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.PNG,250,outputStream)
+        bitmap?.compress(Bitmap.CompressFormat.PNG,100,outputStream)
         val storedAs = outputStream.toByteArray()
-        Log.d("Compress",storedAs.toString())
+        Log.d("ChangeFromBitmap",storedAs.toString())
         return storedAs
     }
 
     @TypeConverter
     fun ByteArrayToBitmap(bArray:ByteArray?):Bitmap?{
-        Log.d("Compress",bArray.toString())
-        return BitmapFactory.decodeByteArray(bArray, 0, bArray?.size!!)
+        //Log.d("ChangeToBitmap",bArray.toString())
+        val bmp = BitmapFactory.decodeByteArray(bArray, 0, bArray!!.size)
+        if (bmp!=null){
+            Log.d("ChangedBitmap",bmp.toString())
+        }
+        return bmp
     }
 }
