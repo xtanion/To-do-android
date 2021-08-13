@@ -1,5 +1,6 @@
 package com.example.todo.data
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -21,7 +22,8 @@ data class TodoEntity(
     val completed: Boolean,
     val groupName: String,
     val dateTime: String,
-    val nestedTodo: List<nestedTodo?>?
+    val nestedTodo: List<nestedTodo?>?,
+    val bitmap: Bitmap?
 ):Parcelable
 {
     fun equals(other: TodoEntity?): Boolean {

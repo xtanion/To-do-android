@@ -1,6 +1,7 @@
 package com.example.todo
 
 import android.app.Application
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -31,7 +32,6 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         repository.readAllGroup()
         repository.readData()
         repository.readCompletedData()
-        //repository.readGroupWithTodos()
     }
 
     fun returnGroupName():LiveData<String>{
@@ -120,7 +120,8 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
 
                         val listType: Type = object : TypeToken<List<nestedTodo>?>() {}.type
                         val nestedTodo: List<nestedTodo>? = gson.fromJson(stringExtra, listType)
-                        val entity = TodoEntity(id!!, title!!, description, important!!, completed!!, groupName!!, dateTime!!, nestedTodo)
+                        val bitmap: Bitmap? = ds.child("bitmap").getValue(Bitmap::class.java)
+                        val entity = TodoEntity(id!!, title!!, description, important!!, completed!!, groupName!!, dateTime!!, nestedTodo,bitmap)
                         list.add(entity)
                     }
 

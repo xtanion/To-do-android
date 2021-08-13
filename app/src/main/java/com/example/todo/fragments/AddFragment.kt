@@ -61,11 +61,11 @@ class AddFragment : BottomSheetDialogFragment() {
 
         binding?.addToDbLottie?.setOnClickListener {
             val input_todo:String = binding!!.todoInput.text.toString()
-            val todo_arg = TodoEntity(0,input_todo,null,starred,false,group_name,dateToday.toString(),null)
+            val todo_arg = TodoEntity(0,input_todo,null,starred,false,group_name,dateToday.toString(),null,null)
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)
-                Toast.makeText(context,todo_arg.toString(),Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context,todo_arg.toString(),Toast.LENGTH_SHORT).show()
                 view.hideKeyboard()
                 dismiss()
             }

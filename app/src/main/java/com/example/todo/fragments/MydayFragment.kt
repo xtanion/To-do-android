@@ -89,7 +89,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         _binding = FragmentMydayBinding.inflate(layoutInflater,container,false)
         val view =  binding.root
         //mViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
-
+        Log.d("STARTED","started MyDayFragment")
         return view
     }
 
@@ -166,16 +166,23 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             // New method implementation using one-to-many relationship
         mViewModel.listGroupWithTodos(groupName).observe(viewLifecycleOwner, Observer { it ->
             Log.d("SORTED", it.toString())
-            val data = it[0].todos
-            val incomplete = mutableListOf<TodoEntity>()
-            val complete = mutableListOf<TodoEntity>()
 
-            data.forEach { todo ->
-                if (!todo.completed) {
-                    incomplete.add(todo)
-                } else {
-                    complete.add(todo)
+            var incomplete = mutableListOf<TodoEntity>()
+            var complete = mutableListOf<TodoEntity>()
+
+            if (it.isNotEmpty()) {
+                val data = it[0].todos
+                data.forEach { todo ->
+                    if (!todo.completed) {
+                        incomplete.add(todo)
+                    } else {
+                        complete.add(todo)
+                    }
                 }
+            }else{
+                mViewModel.addGroup(GroupEntity(0,"all","#FFFFFF"))
+                incomplete = emptyList<TodoEntity>().toMutableList()
+                complete = emptyList<TodoEntity>().toMutableList()
             }
             binding.progressBar.isVisible = true
             incomplete_list = incomplete.reversed().toList()
@@ -245,10 +252,10 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             binding.progressBar.visibility = View.GONE
         }
 
-        binding.gearIcon.setOnClickListener {
-            val data = mViewModel.fireDataReturn()
-            Toast.makeText(context,data.toString(),Toast.LENGTH_LONG).show()
-        }
+//        binding.gearIcon.setOnClickListener {
+//            val data = mViewModel.fireDataReturn()
+//            Toast.makeText(context,data.toString(),Toast.LENGTH_LONG).show()
+//        }
 
 
         listSwitcher.setOnClickListener {
@@ -269,23 +276,23 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
     override fun onCheckboxClick(data:TodoEntity) {
         //val columnData = mViewModel.listData().value?.get(position)
         if (!data.completed){
-            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupName,date_time,data.nestedTodo)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupName,date_time,data.nestedTodo,data.bitmap)
             mViewModel.updateTodo(newData)
 
         }
         else{
-            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupName,date_time,data.nestedTodo)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupName,date_time,data.nestedTodo,data.bitmap)
             mViewModel.updateTodo(newData)
         }
     }
 
     override fun onStarClick(data: TodoEntity) {
         if (data.important){
-            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupName,date_time,data.nestedTodo)
+            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupName,date_time,data.nestedTodo,data.bitmap)
             mViewModel.updateTodo(newData)
 
         }else{
-            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupName,date_time,data.nestedTodo)
+            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupName,date_time,data.nestedTodo,data.bitmap)
             mViewModel.updateTodo(newData)
         }
     }
