@@ -79,6 +79,7 @@ class DetailsFragment : Fragment() {
             }
         )
 
+        //Picks Image From Ext. Storage
         binding.galleryIcon.setOnClickListener {
             if (bmp==null) {
                 requestPermission()
@@ -98,6 +99,13 @@ class DetailsFragment : Fragment() {
                 image1.invalidate()
                 imageCard.visibility = View.VISIBLE
             }
+        }
+
+        //Picks Image From Camera
+        binding.cameraIcon.setOnClickListener {
+            requestPermission()
+            val action = DetailsFragmentDirections.actionDetailsFragmentToCameraFragment()
+            Navigation.findNavController(view).navigate(action)
         }
 
         binding.updateTickButton.setOnClickListener {
@@ -123,6 +131,7 @@ class DetailsFragment : Fragment() {
 
     private fun hasStorageReadPermission() = ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED
     private fun hasStorageWritePermission() = ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED
+    private fun hasCameraPermission() = ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED
     private fun requestPermission(){
         val permissionList = mutableListOf<String>()
         if(!hasStorageReadPermission()){
@@ -130,6 +139,9 @@ class DetailsFragment : Fragment() {
         }
         if (!hasStorageWritePermission()){
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+        if (!hasCameraPermission()){
+            permissionList.add(Manifest.permission.CAMERA)
         }
 
         if (permissionList.isNotEmpty()){
@@ -150,6 +162,11 @@ class DetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

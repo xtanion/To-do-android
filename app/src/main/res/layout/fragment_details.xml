@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@id/datetime_details"
         android:layout_marginLeft="20dp"
         android:textCursorDrawable="@color/deep_blue"
-        android:inputType="text"/>
+        android:inputType="textMultiLine"/>
     <ImageView
         android:id="@+id/important_sign"
         android:layout_width="30dp"
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/detailed_item_title"
         app:layout_constraintBottom_toBottomOf="@id/detailed_item_title"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp" />
     <EditText
         android:id="@+id/detailed_description"
         android:layout_width="match_parent"
@@ -110,7 +110,7 @@
         android:padding="20dp"
         android:maxLines="5"
         android:textCursorDrawable="@color/deep_blue"
-        android:inputType="text"/>
+        android:inputType="textMultiLine"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/image_card"
@@ -197,9 +197,9 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end|center_vertical"
                 app:lottie_autoPlay="true"
-                app:lottie_loop="true"
+                app:lottie_loop="false"
                 android:layout_marginEnd="10dp"
-                app:lottie_rawRes="@raw/checkmark"
+                app:lottie_rawRes="@raw/tick_lottie_anim"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
