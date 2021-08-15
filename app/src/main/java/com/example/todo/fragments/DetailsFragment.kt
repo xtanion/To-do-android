@@ -1,6 +1,7 @@
 package com.example.todo.fragments
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
@@ -106,10 +107,12 @@ class DetailsFragment : Fragment() {
         val getImageFromCamera = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback {
-                if (it.data!=null){
+                if (it.data!=null && it.resultCode==RESULT_OK){
                     val bundle = it.data!!.extras
                     val bitmap:Bitmap = bundle?.get("data") as Bitmap
                     binding.image1.setImageBitmap(bitmap)
+                    bmp = bitmap
+                    binding.imageCard.visibility = View.VISIBLE
                 }
             }
         )
