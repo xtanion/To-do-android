@@ -1,6 +1,7 @@
 package com.example.todo.fragments
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
@@ -70,6 +71,7 @@ class DetailsFragment : Fragment() {
             binding.checkbox.isChecked = true
         }
 
+        //Picks Image From Ext. Storage
         val imageAction = registerForActivityResult(
             ActivityResultContracts.GetContent(),
             ActivityResultCallback { uri->
@@ -79,7 +81,6 @@ class DetailsFragment : Fragment() {
             }
         )
 
-        //Picks Image From Ext. Storage
         binding.galleryIcon.setOnClickListener {
             if (bmp==null) {
                 requestPermission()
@@ -102,10 +103,25 @@ class DetailsFragment : Fragment() {
         }
 
         //Picks Image From Camera
+        val getImageFromCamera = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+            ActivityResultCallback {
+                if (it.data!=null){
+                    val bundle = it.data!!.extras
+                    val bitmap:Bitmap = bundle?.get("data") as Bitmap
+                    binding.image1.setImageBitmap(bitmap)
+                }
+            }
+        )
+
         binding.cameraIcon.setOnClickListener {
-            requestPermission()
-            val action = DetailsFragmentDirections.actionDetailsFragmentToCameraFragment()
-            Navigation.findNavController(view).navigate(action)
+            if(bmp==null) {
+                requestPermission()
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                getImageFromCamera.launch(intent)
+            }else{
+                Toast.makeText(context,"Image Already Exists",Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.updateTickButton.setOnClickListener {

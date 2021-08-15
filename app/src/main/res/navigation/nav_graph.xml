@@ -68,18 +68,5 @@
             app:argType="com.example.todo.data.TodoEntity"
             app:nullable="true"
             android:defaultValue="@null" />
-        <action
-            android:id="@+id/action_detailsFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/cameraFragment"
-        android:name="com.example.todo.CameraFragment"
-        android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" >
-        <action
-            android:id="@+id/action_cameraFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment"
-            app:popUpTo="@id/detailsFragment" />
     </fragment>
 </navigation>
