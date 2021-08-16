@@ -7,6 +7,8 @@ import android.graphics.Color
 import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +20,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
@@ -114,7 +117,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         val menuSwitcher:ImageView = activity?.findViewById(R.id.menu_switcher)!!
 
         //SWIPE GESTURE for rv1
-        val swipeGesture = object :SwipeGesture(){
+        val swipeGesture = object :SwipeGesture(requireContext()){
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when(direction){
@@ -133,7 +136,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         ItemTouchHelper(swipeGesture).attachToRecyclerView(recyclerViewIncomp)
 
         //SWIPE Gesture for rv2
-        val swipeGestureTwo = object :SwipeGesture(){
+        val swipeGestureTwo = object :SwipeGesture(requireContext()){
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when(direction){
@@ -144,7 +147,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                 }
             }
         }
-
 
         // Second RV
         val recyclerViewComp = binding.recyclerViewComplete
@@ -186,52 +188,7 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
             }
         })
 
-        // New method implementation using one-to-many relationship
-//        mViewModel.listGroupWithTodos(groupName).observe(viewLifecycleOwner, Observer { it ->
-//            Log.d("SORTED", it.toString())
-//            binding.progressBar.visibility = View.VISIBLE
-//
-//            var incomplete = mutableListOf<TodoEntity>()
-//            var complete = mutableListOf<TodoEntity>()
-//
-//            if (it.isNotEmpty()) {
-//                val data = it[0].todos
-//                data.forEach { todo ->
-//                    if (!todo.completed) {
-//                        incomplete.add(todo)
-//                    } else {
-//                        complete.add(todo)
-//                    }
-//                }
-//            }else{
-//                mViewModel.addGroup(GroupEntity(0,"all","#FFFFFF"))
-//                incomplete = emptyList<TodoEntity>().toMutableList()
-//                complete = emptyList<TodoEntity>().toMutableList()
-//            }
-//            incomplete_list = incomplete.reversed().toList()
-//            complete_list = complete.reversed().toList()
-//            adapter_incomp.NotifyChanges(incomplete_list)
-//            adapter_comp.NotifyChanges(complete_list)
-//
-//            if (incomplete.size == 0) {
-//                binding.noResultLottie.isVisible = true
-//            } else {
-//                binding.noResultLottie.visibility = View.GONE
-//            }
-//
-//            if (complete.size == 0) {
-//                binding.apply {
-//                    completedIcon.isVisible = false
-//                    completedText.isVisible = false
-//                }
-//            } else {
-//                binding.apply {
-//                    completedIcon.isVisible = true
-//                    completedText.isVisible = true
-//                }
-//            }
-//
-////            lifecycleScope.launchWhenResumed {
+//        lifecycleScope.launchWhenResumed {
 ////                for (items in incomplete_list) {
 ////                    mViewModel.fireBaseAdd(items)
 ////                    //Log.d("FIREBASE_ADD",items.toString())
@@ -241,8 +198,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
 ////                }
 ////                mViewModel.getFirebaseData()
 ////            }
-//            binding.progressBar.visibility = View.GONE
-//        })
 
 
         binding.completedText.setOnClickListener{
