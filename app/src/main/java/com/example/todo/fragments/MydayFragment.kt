@@ -154,50 +154,26 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
         recyclerViewComp.setHasFixedSize(false)
         ItemTouchHelper(swipeGestureTwo).attachToRecyclerView(recyclerViewComp)
 
-        //TODO
-        mViewModel.returnGroupName().observe(viewLifecycleOwner, Observer {
-            groupName = it
-            binding.apply {
-                expandableTopBar.title = groupName
-                expandableTopBar.setExpandedTitleColor(Color.parseColor("#FFFFFF"))
-            }
 
-        })
-            // New method implementation using one-to-many relationship
-        mViewModel.listGroupWithTodos(groupName).observe(viewLifecycleOwner, Observer { it ->
-            Log.d("SORTED", it.toString())
-
-            var incomplete = mutableListOf<TodoEntity>()
-            var complete = mutableListOf<TodoEntity>()
-
-            if (it.isNotEmpty()) {
-                val data = it[0].todos
-                data.forEach { todo ->
-                    if (!todo.completed) {
-                        incomplete.add(todo)
-                    } else {
-                        complete.add(todo)
-                    }
-                }
-            }else{
-                mViewModel.addGroup(GroupEntity(0,"all","#FFFFFF"))
-                incomplete = emptyList<TodoEntity>().toMutableList()
-                complete = emptyList<TodoEntity>().toMutableList()
-            }
-            binding.progressBar.isVisible = true
-            incomplete_list = incomplete.reversed().toList()
-            complete_list = complete.reversed().toList()
-            adapter_incomp.NotifyChanges(incomplete_list)
-            adapter_comp.NotifyChanges(complete_list)
+        mViewModel.listData().observe(viewLifecycleOwner,{
+            binding.progressBar.visibility = View.VISIBLE
+            incomplete_list = it
+            adapter_incomp.NotifyChanges(it)
             binding.progressBar.visibility = View.GONE
-
-            if (incomplete.size == 0) {
+            if (it.isEmpty()) {
                 binding.noResultLottie.isVisible = true
             } else {
                 binding.noResultLottie.visibility = View.GONE
             }
 
-            if (complete.size == 0) {
+        })
+        mViewModel.listCompleted().observe(viewLifecycleOwner,{
+            binding.progressBar.visibility = View.VISIBLE
+            complete_list = it
+            adapter_comp.NotifyChanges(it)
+            binding.progressBar.visibility = View.GONE
+
+            if (it.isEmpty()) {
                 binding.apply {
                     completedIcon.isVisible = false
                     completedText.isVisible = false
@@ -208,10 +184,65 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                     completedText.isVisible = true
                 }
             }
-
-            Log.d("SORTED_INCOMPLETE", incomplete.toString())
-            Log.d("SORTED_COMPLETE", complete.toString())
         })
+
+        // New method implementation using one-to-many relationship
+//        mViewModel.listGroupWithTodos(groupName).observe(viewLifecycleOwner, Observer { it ->
+//            Log.d("SORTED", it.toString())
+//            binding.progressBar.visibility = View.VISIBLE
+//
+//            var incomplete = mutableListOf<TodoEntity>()
+//            var complete = mutableListOf<TodoEntity>()
+//
+//            if (it.isNotEmpty()) {
+//                val data = it[0].todos
+//                data.forEach { todo ->
+//                    if (!todo.completed) {
+//                        incomplete.add(todo)
+//                    } else {
+//                        complete.add(todo)
+//                    }
+//                }
+//            }else{
+//                mViewModel.addGroup(GroupEntity(0,"all","#FFFFFF"))
+//                incomplete = emptyList<TodoEntity>().toMutableList()
+//                complete = emptyList<TodoEntity>().toMutableList()
+//            }
+//            incomplete_list = incomplete.reversed().toList()
+//            complete_list = complete.reversed().toList()
+//            adapter_incomp.NotifyChanges(incomplete_list)
+//            adapter_comp.NotifyChanges(complete_list)
+//
+//            if (incomplete.size == 0) {
+//                binding.noResultLottie.isVisible = true
+//            } else {
+//                binding.noResultLottie.visibility = View.GONE
+//            }
+//
+//            if (complete.size == 0) {
+//                binding.apply {
+//                    completedIcon.isVisible = false
+//                    completedText.isVisible = false
+//                }
+//            } else {
+//                binding.apply {
+//                    completedIcon.isVisible = true
+//                    completedText.isVisible = true
+//                }
+//            }
+//
+////            lifecycleScope.launchWhenResumed {
+////                for (items in incomplete_list) {
+////                    mViewModel.fireBaseAdd(items)
+////                    //Log.d("FIREBASE_ADD",items.toString())
+////                }
+////                for (items in complete_list){
+////                    mViewModel.fireBaseAdd(items)
+////                }
+////                mViewModel.getFirebaseData()
+////            }
+//            binding.progressBar.visibility = View.GONE
+//        })
 
 
         binding.completedText.setOnClickListener{
@@ -232,25 +263,6 @@ class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
                 val action = MydayFragmentDirections.actionMydayFragmentToAddFragment(groupName)
                 Navigation.findNavController(view).navigate(action)
             }
-        // Sync and Iterate through all items Asynchronously
-        lifecycleScope.launchWhenResumed {
-            binding.progressBar.visibility = View.VISIBLE
-            val dataIncomplete = mViewModel.listData().value
-            val dataComplete = mViewModel.listCompleted().value
-
-            if (dataComplete != null) {
-                for (items in dataComplete) {
-                    mViewModel.fireBaseAdd(items)
-                }
-            }
-            if (dataIncomplete != null) {
-                for (items in dataIncomplete){
-                    mViewModel.fireBaseAdd(items)
-                }
-            }
-            mViewModel.getFirebaseData()
-            binding.progressBar.visibility = View.GONE
-        }
 
 //        binding.gearIcon.setOnClickListener {
 //            val data = mViewModel.fireDataReturn()

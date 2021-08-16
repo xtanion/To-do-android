@@ -23,6 +23,7 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var fireData:List<TodoEntity>
     private val groupName = MutableLiveData<String>()
+    private var name:String = "all"
     init {
         todoDao = TodoDatabase.getInstance(application).todoDao()
         repository = TodoRepository(todoDao)
@@ -30,8 +31,8 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     }
     private fun initializer(){
         repository.readAllGroup()
-        repository.readData()
-        repository.readCompletedData()
+        //repository.readData()
+        //repository.readCompletedData()
     }
 
     fun returnGroupName():LiveData<String>{
@@ -53,11 +54,12 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
 
 
     fun listData():LiveData<List<TodoEntity>>{
-        return repository.readAllData
+//        return repository.readAllData
+        return repository.readData(name)
     }
 
     fun listCompleted():LiveData<List<TodoEntity>>{
-        return repository.readCompleted
+        return repository.readCompletedData(name)
     }
 
     fun addToDo(todo:TodoEntity){

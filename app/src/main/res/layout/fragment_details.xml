@@ -32,16 +32,17 @@
                 android:textSize="17sp"
                 android:fontFamily="@font/sf_pro_display"
                 android:textColor="?attr/colorOnPrimary"/>
-
-            <ImageView
-                android:id="@+id/gear_icon"
+            <TextView
+                android:id="@+id/update_tick_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Save"
+                android:padding="10dp"
+                android:textColor="?attr/colorPrimary"
                 android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/ic_cog"
-                app:tint="?attr/colorOnPrimary" />
+                android:fontFamily="@font/sf_pro_display"
+                android:layout_marginEnd="5dp"/>
+
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
     <TextView
@@ -88,14 +89,15 @@
         android:inputType="textMultiLine"/>
     <ImageView
         android:id="@+id/important_sign"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
         android:src="@drawable/ic_exclamation_mark"
         app:tint="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/detailed_item_title"
         app:layout_constraintBottom_toBottomOf="@id/detailed_item_title"
-        android:layout_margin="20dp" />
+        android:layout_margin="10dp" />
     <EditText
         android:id="@+id/detailed_description"
         android:layout_width="match_parent"
@@ -117,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detailed_description">
@@ -129,6 +131,16 @@
             android:cropToPadding="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background"/>
+        <ImageButton
+            android:id="@+id/remove_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_round_add_circle_outline_24"
+            android:background="@null"
+            android:layout_gravity="top|end"
+            android:layout_margin="10dp"
+            android:rotation="45"
+            app:tint="?attr/colorOnSecondary" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -164,21 +176,8 @@
                 app:tint="?attr/colorSecondaryVariant"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/link_icon"/>
-
-            <ImageView
-                android:id="@+id/link_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginStart="20dp"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/ic_paperclip"
-                app:tint="?attr/colorSecondaryVariant"
-                android:layout_marginLeft="50dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/con"/>
+
             <ImageView
                 android:id="@+id/con"
                 android:layout_width="24dp"
@@ -198,12 +197,12 @@
                 android:layout_gravity="end|center_vertical"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="false"
-                android:layout_marginEnd="10dp"
-                app:lottie_rawRes="@raw/tick_lottie_anim"
+                android:layout_marginEnd="15dp"
+                app:lottie_rawRes="@raw/send_lottie"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="15dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

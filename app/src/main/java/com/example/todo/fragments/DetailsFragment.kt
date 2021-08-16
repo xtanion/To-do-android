@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,6 +42,7 @@ class DetailsFragment : Fragment() {
     private val mViewModel: TodoViewModel by activityViewModels()
     val args:DetailsFragmentArgs by navArgs()
     var bmp: Bitmap? = null
+    private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +59,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val entity = args.dataEntity!!
         bmp = entity.bitmap
+        var imp = entity.important
 
         activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.GONE
         activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)?.visibility = View.GONE
@@ -83,6 +88,7 @@ class DetailsFragment : Fragment() {
         )
 
         binding.galleryIcon.setOnClickListener {
+            it.startAnimation(buttonPress)
             if (bmp==null) {
                 requestPermission()
                 imageAction.launch("image/*")
@@ -94,6 +100,7 @@ class DetailsFragment : Fragment() {
             }
         }
 
+        // checks for existing bitmap
         if (bmp!=null){
             Log.d("BitmapDetails",bmp.toString())
             binding.apply {
@@ -101,6 +108,8 @@ class DetailsFragment : Fragment() {
                 image1.invalidate()
                 imageCard.visibility = View.VISIBLE
             }
+        }else{
+            binding.imageCard.visibility = View.GONE
         }
 
         //Picks Image From Camera
@@ -118,6 +127,7 @@ class DetailsFragment : Fragment() {
         )
 
         binding.cameraIcon.setOnClickListener {
+            it.startAnimation(buttonPress)
             if(bmp==null) {
                 requestPermission()
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -127,14 +137,40 @@ class DetailsFragment : Fragment() {
             }
         }
 
+        binding.image1.setOnClickListener {
+            //TODO: Popup with large preview (Create a fragment if needed)
+        }
+
+        binding.removeImage.setOnClickListener {
+            it.startAnimation(buttonPress)
+            bmp = null
+            binding.imageCard.visibility = View.GONE
+        }
+        binding.importantSign.apply {
+            setOnClickListener {
+                it.startAnimation(buttonPress)
+                if (entity.important) {
+                    imp = false
+                    this.colorFilter = null
+                } else {
+                    imp = true
+                    this.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red))
+                }
+            }
+            if (imp){
+                this.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red))
+            }
+        }
+
         binding.updateTickButton.setOnClickListener {
+            it.startAnimation(buttonPress)
             val title:String = binding.detailedItemTitle.text.toString()
             val description:String = binding.detailedDescription.text.toString()
-            val importance:Boolean = args.dataEntity!!.important
+            //val importance:Boolean = args.dataEntity!!.important
             val check: Boolean = binding.checkbox.isChecked
             //Add more later on (links,images,importance,etc)
 
-            val updatedUnit:TodoEntity = TodoEntity(entity.id,title,description,importance,check,entity.groupName,entity.dateTime,entity.nestedTodo,bmp)
+            val updatedUnit:TodoEntity = TodoEntity(entity.id,title,description,imp,check,entity.groupName,entity.dateTime,entity.nestedTodo,bmp)
             mViewModel.updateTodo(updatedUnit)
             //Toast.makeText(context,updatedUnit.toString(),Toast.LENGTH_SHORT).show()
             Log.d("BMP",updatedUnit.toString())

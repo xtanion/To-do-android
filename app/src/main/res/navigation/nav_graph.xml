@@ -61,7 +61,7 @@
         <action
             android:id="@+id/action_detailsFragment_to_mydayFragment"
             app:destination="@id/mydayFragment"
-            app:popUpTo="@id/mydayFragment"
+            app:popUpTo="@id/detailsFragment"
             app:popUpToInclusive="true" />
         <argument
             android:name="dataEntity"

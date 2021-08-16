@@ -25,12 +25,13 @@
         android:visibility="visible">
         <ImageView
             android:id="@+id/list_switcher"
-            android:layout_width="22dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_lists"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_gravity="center_vertical|start" />
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_gravity="center_vertical|start"
+            android:padding="10dp"/>
 
         <ImageView
             android:id="@+id/menu_switcher"

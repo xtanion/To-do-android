@@ -20,17 +20,17 @@ class TodoRepository(private val todoDao: TodoDao) {
     }
 
     //Read DATA
-    fun readData(){
-         readAllData = todoDao.readAllData()
+    fun readData(name: String):LiveData<List<TodoEntity>>{
+         //readAllData = todoDao.readAllData()
+        return todoDao.readAllData(name)
     }
 
-    fun readCompletedData(){
-        readCompleted = todoDao.readCompleted()
+    fun readCompletedData(name:String):LiveData<List<TodoEntity>>{
+        return todoDao.readCompleted(name)
     }
 
     fun readAllGroup(){
         readGroup = todoDao.readAllGroups()
-        Log.d("GROUPDATA_REPO",todoDao.readAllGroups().value.toString())
     }
 
     fun readGroupWithTodos(name: String): LiveData<List<GroupWithTodos>> {
@@ -44,10 +44,6 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     suspend fun deleteTodo(todo: TodoEntity){
         todoDao.deleteEntity(todo)
-    }
-
-    fun readImportantData(){
-        readImportant = todoDao.readImportant()
     }
 
 }

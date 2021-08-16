@@ -32,30 +32,12 @@
         android:textFontWeight="700"
         android:textColor="?attr/colorPrimaryVariant"
         android:textAllCaps="false"
-        app:cornerRadius="10dp"
+        app:cornerRadius="0dp"
         app:icon="@drawable/ic_google_icon"
         app:iconTint="@null"
         app:iconGravity="textStart"
         app:backgroundTint="?attr/colorOnPrimary"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_in_email"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/sign_in_google"
-        android:text="@string/sign_in_with_email_id"
-        android:fontFamily="@font/sf_pro_text"
-        android:textFontWeight="700"
-        android:textColor="?attr/colorOnPrimary"
-        android:textAllCaps="false"
-        app:cornerRadius="10dp"
-        app:backgroundTint="?attr/colorSecondary"
-        tools:targetApi="p" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_tick"
@@ -91,8 +73,8 @@
         android:layout_marginEnd="30dp"
         android:text="@string/sign_in_to_sync_your_data_across_all_devices"
         android:fontFamily="@font/sf_pro_text"
-        app:layout_constraintBottom_toTopOf="@id/sign_in_email"
-        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@id/sign_in_google"
+        android:layout_marginBottom="50dp"
         android:gravity="center_horizontal" />
     <ImageView
         android:layout_width="wrap_content"

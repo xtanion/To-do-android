@@ -21,20 +21,17 @@ interface TodoDao {
     @Query("SELECT * FROM GroupEntity WHERE groupName=:name ORDER BY groupId ASC")
     fun getGroupWithTodos(name:String):LiveData<List<GroupWithTodos>>
 
-    @Query("SELECT * FROM todo_table WHERE completed = 0 ORDER BY important DESC,id DESC")
-    fun readAllData():LiveData<List<TodoEntity>>
+    @Query("SELECT * FROM todo_table WHERE groupName=:name AND completed = 0 ORDER BY important DESC,id DESC")
+    fun readAllData(name: String):LiveData<List<TodoEntity>>
 
-    @Query("SELECT * FROM todo_table WHERE completed = 1 ORDER BY important DESC,id DESC")
-    fun readCompleted():LiveData<List<TodoEntity>>
+    @Query("SELECT * FROM todo_table WHERE groupName=:name AND completed = 1 ORDER BY important DESC,id DESC")
+    fun readCompleted(name: String):LiveData<List<TodoEntity>>
 
     @Update
     suspend fun updateEntity(todo: TodoEntity)
 
     @Delete
     suspend fun deleteEntity(todo: TodoEntity)
-
-    @Query("SELECT * FROM todo_table WHERE important = 1 ORDER BY completed ASC,id DESC")
-    fun readImportant():LiveData<List<TodoEntity>>
 
     @Query("SELECT * FROM todo_table WHERE title LIKE :searchQuery and completed = 0")
     fun searchDatabase(searchQuery: String):LiveData<List<TodoEntity>>
