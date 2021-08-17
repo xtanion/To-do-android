@@ -66,16 +66,6 @@ class AddFragment : BottomSheetDialogFragment() {
         return view
     }
 
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            val channel = NotificationChannel("OpenTodo","Test Notification",NotificationManager.IMPORTANCE_DEFAULT)
-            channel.description = "Testing Alarm Manager"
-            val notificationManager = context?.getSystemService(NotificationManager::class.java)
-            notificationManager?.createNotificationChannel(channel)
-
-        }
-    }
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var starred:Boolean = false
@@ -120,11 +110,16 @@ class AddFragment : BottomSheetDialogFragment() {
 
     }
 
+
     private fun showTimePicker() {
+        val currentTime = Calendar.getInstance()
+        val hours = currentTime.get(Calendar.HOUR)
+        val minutes = currentTime.get(Calendar.MINUTE)
+
         val timePicker = MaterialTimePicker.Builder()
             .setTimeFormat(TimeFormat.CLOCK_12H)
-            .setHour(4)
-            .setMinute(20)
+            .setHour(hours)
+            .setMinute(minutes)
             .setTitleText("Select Time")
             .setTheme(R.style.Theme_App_Timepicker)
             .build()
@@ -171,6 +166,17 @@ class AddFragment : BottomSheetDialogFragment() {
             .build()
 
         datePicker.show(parentFragmentManager,"DatePicker")
+    }
+
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            val channel = NotificationChannel("OpenTodo","Test Notification 2",NotificationManager.IMPORTANCE_DEFAULT)
+            channel.description = "Testing Alarm Manager (service)"
+            val notificationManager = context?.getSystemService(NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(channel)
+
+        }
     }
 
     override fun onDestroyView() {
