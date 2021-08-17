@@ -1,32 +1,24 @@
-package com.example.todo
+package com.example.todo.adapters
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.Resources
-import android.graphics.Color
 import android.graphics.Paint
-import android.opengl.Visibility
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Adapter
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo.R
 import com.example.todo.data.TodoEntity
-import com.example.todo.databinding.FragmentMydayBinding
 import com.example.todo.databinding.SingleColumnBinding
-import com.example.todo.fragments.MydayFragment
 import kotlinx.android.synthetic.main.single_column.view.*
 
 class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>(){

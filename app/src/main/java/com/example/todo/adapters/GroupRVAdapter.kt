@@ -1,16 +1,13 @@
-package com.example.todo
+package com.example.todo.adapters
 
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.data.GroupEntity
 import com.example.todo.databinding.GroupRowBinding
-import com.example.todo.fragments.AddGroupFragment
 
 class GroupRVAdapter(val rvInterface: groupRVInterface):RecyclerView.Adapter<GroupRVAdapter.GroupViewHolder>() {
 

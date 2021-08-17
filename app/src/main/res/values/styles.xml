@@ -29,4 +29,37 @@
         <item name="android:topRightRadius">20dp</item>
         <item name="android:background">?attr/cardBackgroundColor</item>
     </style>
+
+<!--   DatePicker Styling-->
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.MaterialCalendar">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/deeper_blue</item>
+        <item name="colorOnPrimary">@color/muted_white</item>
+        <item name="colorOnSurface">?attr/colorOnPrimary</item>
+        <item name="colorSurface">?attr/colorPrimaryVariant</item>
+        <item name="fontFamily">@font/sf_pro_text</item>
+        <item name="android:calendarTextColor">?attr/colorOnPrimary</item>
+        <item name="backgroundColor">?attr/cardBackgroundColor</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+    </style>
+
+<!--    TimePicker Styling-->
+    <style name="Theme.App.Timepicker" parent="@style/ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="colorPrimary">@color/deeper_blue</item>
+        <item name="colorOnPrimary">@color/muted_white</item>
+        <item name="colorOnSurface">?attr/colorOnPrimary</item>
+        <item name="colorSurface">?attr/cardBackgroundColor</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+    </style>
 </resources>

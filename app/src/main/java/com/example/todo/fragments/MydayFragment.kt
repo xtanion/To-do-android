@@ -1,14 +1,7 @@
 package com.example.todo.fragments
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.graphics.Color
-import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,43 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.GeneratedAdapter
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.todo.*
-import com.example.todo.data.GroupEntity
-import com.example.todo.data.TodoConverter
+import com.example.todo.adapters.TodoRVAdapter
 import com.example.todo.data.TodoEntity
-import com.example.todo.data.nestedTodo
 import com.example.todo.databinding.FragmentMydayBinding
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.FirebaseDatabase
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_details.*
-import java.lang.reflect.Type
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -60,7 +30,7 @@ import java.time.format.TextStyle
 import java.util.*
 
 
-class MydayFragment : Fragment(),TodoRVAdapter.RVInterface {
+class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
 
     var _binding:FragmentMydayBinding? = null
     val binding get() = _binding!!

@@ -53,7 +53,7 @@ abstract class SwipeGesture(context:Context): ItemTouchHelper.SimpleCallback(0,I
         val itemHeight = itemView.bottom - itemView.top
 
         background.apply {
-            color = Color.parseColor("#F45E6D")
+            color = Color.parseColor("#E03737")
             setBounds(
                 itemView.right + dX.toInt(),
                 itemView.top,
