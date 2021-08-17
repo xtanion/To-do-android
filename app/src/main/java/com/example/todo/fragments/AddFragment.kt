@@ -1,9 +1,7 @@
 package com.example.todo.fragments
 
 import android.annotation.SuppressLint
-import android.app.AlarmManager
-import android.app.Application
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -24,6 +22,7 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.getColor
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -63,7 +62,18 @@ class AddFragment : BottomSheetDialogFragment() {
         _binding = FragmentAddBinding.inflate(layoutInflater,container,false)
         val view = binding?.root
         mViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
+        createNotificationChannel()
         return view
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            val channel = NotificationChannel("OpenTodo","Test Notification",NotificationManager.IMPORTANCE_DEFAULT)
+            channel.description = "Testing Alarm Manager"
+            val notificationManager = context?.getSystemService(NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(channel)
+
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -82,6 +92,7 @@ class AddFragment : BottomSheetDialogFragment() {
                 //Toast.makeText(context,todo_arg.toString(),Toast.LENGTH_SHORT).show()
                 view.hideKeyboard()
                 dismiss()
+                setAlarm()
             }
         }
 
@@ -135,7 +146,8 @@ class AddFragment : BottomSheetDialogFragment() {
             calendar[Calendar.SECOND] = 0
             calendar[Calendar.MILLISECOND] = 0
 
-            setAlarm()
+            binding.repeatIcon.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.deep_blue)))
+            binding.repeatIcon.compoundDrawables[0].setTint(resources.getColor(R.color.deep_blue))
         }
     }
 

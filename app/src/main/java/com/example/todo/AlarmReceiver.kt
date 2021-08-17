@@ -15,19 +15,19 @@ class AlarmReceiver:BroadcastReceiver() {
         Log.d("Alarm","Receiver ${Date().toString()}")
         //Notification
         val i = Intent(context,MainActivity::class.java)
-        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent = PendingIntent.getActivity(context,0,i,PendingIntent.FLAG_UPDATE_CURRENT)
+        intent?.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val pendingIntent:PendingIntent = PendingIntent.getActivity(context,0,i,0)
 
-        val builder = NotificationCompat.Builder(context!!,"Open Todo")
+        val builder = NotificationCompat.Builder(context!!,"OpenTodo")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("Test Notification")
             .setContentText("Testing the alarm manager")
             .setAutoCancel(true)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
 
         val notificationManager = NotificationManagerCompat.from(context)
-        notificationManager.notify(0,builder.build())
+        notificationManager.notify(123,builder.build())
 
     }
 }

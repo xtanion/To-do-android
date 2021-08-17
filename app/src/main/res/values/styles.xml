@@ -48,7 +48,6 @@
         <item name="colorSurface">?attr/colorPrimaryVariant</item>
         <item name="fontFamily">@font/sf_pro_text</item>
         <item name="android:calendarTextColor">?attr/colorOnPrimary</item>
-        <item name="backgroundColor">?attr/cardBackgroundColor</item>
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
     </style>
@@ -59,6 +58,7 @@
         <item name="colorOnPrimary">@color/muted_white</item>
         <item name="colorOnSurface">?attr/colorOnPrimary</item>
         <item name="colorSurface">?attr/cardBackgroundColor</item>
+        <item name="fontFamily">@font/sf_pro_text</item>
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
     </style>
