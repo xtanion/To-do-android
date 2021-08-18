@@ -5,31 +5,20 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationCompat.getColor
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
-import com.example.todo.AlarmReceiver
+import com.example.todo.alarms.AlarmReceiver
 import com.example.todo.R
 import com.example.todo.TodoViewModel
 import com.example.todo.data.TodoEntity
@@ -38,8 +27,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import kotlinx.android.synthetic.main.fragment_details.*
-import kotlinx.coroutines.processNextEventInCurrentThread
 import java.time.LocalDateTime
 import java.util.*
 
@@ -129,17 +116,19 @@ class AddFragment : BottomSheetDialogFragment() {
         timePicker.addOnPositiveButtonClickListener{
             var hrs = timePicker.hour
             val min = timePicker.minute
-            if (timePicker.hour>12){
-                hrs -= 12
-                binding.repeatIcon.text = "${hrs}:${min}AM"
-            }else{
-                binding.repeatIcon.text = "${timePicker.hour}:${timePicker.minute}PM"
-            }
+
             calendar = Calendar.getInstance()
             calendar[Calendar.HOUR_OF_DAY] = hrs
             calendar[Calendar.MINUTE] = min
             calendar[Calendar.SECOND] = 0
             calendar[Calendar.MILLISECOND] = 0
+
+            if (timePicker.hour>12){
+                hrs -= 12
+                binding.repeatIcon.text = "${hrs}:${min} PM"
+            }else{
+                binding.repeatIcon.text = "${timePicker.hour}:${timePicker.minute} AM"
+            }
 
             binding.repeatIcon.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.deep_blue)))
             binding.repeatIcon.compoundDrawables[0].setTint(resources.getColor(R.color.deep_blue))
@@ -149,11 +138,15 @@ class AddFragment : BottomSheetDialogFragment() {
     private fun setAlarm(){
 
         alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context,AlarmReceiver::class.java)
+        val intent = Intent(context, AlarmReceiver::class.java)
 
         val pendingIntent = PendingIntent.getBroadcast(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT)
-        Log.d("Alarm","Set At: ${Date().toString()}")
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,AlarmManager.INTERVAL_DAY,pendingIntent)
+        Log.d("Alarm","Set At: ${Date().toString()} after ${calendar.timeInMillis/1000}")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,pendingIntent)
+        }else{
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,pendingIntent)
+        }
 
 
     }

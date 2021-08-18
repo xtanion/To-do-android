@@ -1,6 +1,5 @@
-package com.example.todo
+package com.example.todo.alarms
 
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -8,13 +7,15 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.todo.MainActivity
+import com.example.todo.R
 import java.util.*
 
 class AlarmReceiver:BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d("Alarm","Receiver ${Date().toString()}")
         //Notification
-        val i = Intent(context,MainActivity::class.java)
+        val i = Intent(context, MainActivity::class.java)
         intent?.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         val pendingIntent:PendingIntent = PendingIntent.getActivity(context,0,i,0)
 
