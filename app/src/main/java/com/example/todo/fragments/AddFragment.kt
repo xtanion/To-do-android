@@ -41,20 +41,19 @@ class AddFragment : BottomSheetDialogFragment() {
     private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
     private lateinit var alarmManager:AlarmManager
     private lateinit var calendar:Calendar
+    private var dateToSet:String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAddBinding.inflate(layoutInflater,container,false)
-        val view = binding?.root
+        val view = binding.root
         mViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
-        createNotificationChannel()
         return view
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var starred:Boolean = false
         val star_button = binding.starIcon
@@ -136,21 +135,6 @@ class AddFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setAlarm(){
-
-        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, AlarmReceiver::class.java)
-
-        val pendingIntent = PendingIntent.getBroadcast(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT)
-        Log.d("Alarm","Set At: ${Date().toString()} after ${calendar.timeInMillis/1000}")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,pendingIntent)
-        }else{
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,pendingIntent)
-        }
-
-
-    }
 
     private fun showDatePicker() {
         val datePicker = MaterialDatePicker.Builder.datePicker()
@@ -160,18 +144,28 @@ class AddFragment : BottomSheetDialogFragment() {
             .build()
 
         datePicker.show(parentFragmentManager,"DatePicker")
-    }
 
-
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            val channel = NotificationChannel("OpenTodo","Test Notification 2",NotificationManager.IMPORTANCE_DEFAULT)
-            channel.description = "Testing Alarm Manager (service)"
-            val notificationManager = context?.getSystemService(NotificationManager::class.java)
-            notificationManager?.createNotificationChannel(channel)
-
+        datePicker.addOnPositiveButtonClickListener {
+            val privateCalendar = Calendar.getInstance()
+            privateCalendar.time = Date(it)
+            val day = "${privateCalendar.get(Calendar.DAY_OF_MONTH)}-${privateCalendar.get(Calendar.MONTH)}-${privateCalendar.get(Calendar.YEAR)}"
+            dateToSet = day
+            binding.setAlarmIcon.text = dateToSet
+            binding.setAlarmIcon.apply {
+                setTextColor(
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.deep_blue
+                        )
+                    )
+                )
+                compoundDrawables[0].setTint(resources.getColor(R.color.deep_blue))
+            }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

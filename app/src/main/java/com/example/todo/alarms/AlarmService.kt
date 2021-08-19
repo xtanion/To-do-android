@@ -13,7 +13,6 @@ class AlarmService(private val context: Context) {
     fun setExactAlarm(timeInMillis: Long,requestCode: Int){
         //TODO
         pendingIntent = PendingIntent.getBroadcast(context,requestCode,getIntent(),PendingIntent.FLAG_UPDATE_CURRENT)
-
         setAlarm(timeInMillis,pendingIntent)
     }
 
