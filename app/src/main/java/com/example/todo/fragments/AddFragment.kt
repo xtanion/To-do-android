@@ -21,6 +21,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.todo.alarms.AlarmReceiver
 import com.example.todo.R
 import com.example.todo.TodoViewModel
+import com.example.todo.alarms.AlarmService
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentAddBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -66,10 +67,10 @@ class AddFragment : BottomSheetDialogFragment() {
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)
-                //Toast.makeText(context,todo_arg.toString(),Toast.LENGTH_SHORT).show()
                 view.hideKeyboard()
                 dismiss()
-                setAlarm()
+                //New Method->
+                AlarmService(requireContext()).setExactAlarm(calendar.timeInMillis,0)
             }
         }
 
@@ -100,7 +101,7 @@ class AddFragment : BottomSheetDialogFragment() {
 
     private fun showTimePicker() {
         val currentTime = Calendar.getInstance()
-        val hours = currentTime.get(Calendar.HOUR)
+        val hours = currentTime.get(Calendar.HOUR_OF_DAY)
         val minutes = currentTime.get(Calendar.MINUTE)
 
         val timePicker = MaterialTimePicker.Builder()
@@ -125,9 +126,9 @@ class AddFragment : BottomSheetDialogFragment() {
 
             if (timePicker.hour>12){
                 hrs -= 12
-                binding.repeatIcon.text = "${hrs}:${min} PM"
+                binding.repeatIcon.text = String.format("%02d:%02d PM",hrs,min)
             }else{
-                binding.repeatIcon.text = "${timePicker.hour}:${timePicker.minute} AM"
+                binding.repeatIcon.text = String.format("%02d:%02d AM",hrs,min)
             }
 
             binding.repeatIcon.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.deep_blue)))

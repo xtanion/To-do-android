@@ -8,9 +8,13 @@ import android.os.Build
 
 class AlarmService(private val context: Context) {
     private val alarmManager:AlarmManager? = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+    private lateinit var pendingIntent:PendingIntent
 
-    fun setExactAlarm(){
+    fun setExactAlarm(timeInMillis: Long,requestCode: Int){
         //TODO
+        pendingIntent = PendingIntent.getBroadcast(context,requestCode,getIntent(),PendingIntent.FLAG_UPDATE_CURRENT)
+
+        setAlarm(timeInMillis,pendingIntent)
     }
 
     fun setRepetitiveAlarm(){
@@ -28,10 +32,4 @@ class AlarmService(private val context: Context) {
     }
 
     private fun getIntent():Intent = Intent(context,AlarmReceiver::class.java)
-
-    private fun getPrivateIntent(intent: Intent){
-        PendingIntent.getBroadcast(
-            context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT
-        )
-    }
 }

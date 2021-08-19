@@ -9,6 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.todo.MainActivity
 import com.example.todo.R
+import com.example.todo.data.TodoEntity
 import java.util.*
 
 class AlarmReceiver:BroadcastReceiver() {
