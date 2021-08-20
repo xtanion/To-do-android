@@ -40,7 +40,7 @@ class AddFragment : BottomSheetDialogFragment() {
     val dateToday = LocalDateTime.now()
     val args:AddFragmentArgs by navArgs()
     private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
-    private lateinit var alarmManager:AlarmManager
+    private var alarmTime:Int? = null
     private lateinit var calendar:Calendar
     private var dateToSet:String? = null
     private var timeRepeatSelected: Boolean = false
@@ -60,12 +60,12 @@ class AddFragment : BottomSheetDialogFragment() {
         var starred:Boolean = false
         val star_button = binding.starIcon
         val group_name = args.groupName
-        var requestCode:Int = 0
+        var requestCode: Int = 0
         //view.showKeyboard()
 
         binding.addToDbLottie.setOnClickListener {
             val input_todo:String = binding.todoInput.text.toString()
-            val todo_arg = TodoEntity(0,input_todo,null,starred,false,group_name,dateToday.toString(),null,null)
+            val todo_arg = TodoEntity(0,input_todo,null,starred,false,group_name,dateToday.toString(),null,null,requestCode,alarmTime)
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)
@@ -77,24 +77,27 @@ class AddFragment : BottomSheetDialogFragment() {
                 Log.d("Alarm REQUEST GOT",requestCode.toString())
 
                 if (timeRepeatSelected) {
+                    Log.d("Alarm REQUEST GOT",requestCode.toString())
+
                     AlarmService(requireContext()).setExactAlarm(
                         calendar.timeInMillis,
-                        requestCode,
+                        requestCode!!,
                         intent
                     )
                 }
             }
         }
 
-        mViewModel.listData().observe(viewLifecycleOwner,{
-            //TODO change to get the real data that has been updated
-            requestCode = it.reversed()[0].id
-            Log.d("Alarm REQUEST CODE",requestCode.toString())
+        mViewModel.getAllTodo().observe(viewLifecycleOwner,{
+            //TODO: Fix the nullable for the first time launch
+            if (it!=null) {
+                requestCode = it.reversed()[0].id
+            }
         })
 
         star_button.setOnCheckedChangeListener { button, b ->
             button.startAnimation(buttonPress)
-            starred = button.isChecked()
+            starred = button.isChecked
             if (button.isChecked){
                 button.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
                 button.buttonTintList = ContextCompat.getColorStateList(requireContext(),R.color.red)
@@ -135,6 +138,8 @@ class AddFragment : BottomSheetDialogFragment() {
         timePicker.addOnPositiveButtonClickListener{
             var hrs = timePicker.hour
             val min = timePicker.minute
+
+            alarmTime = hrs*100+min
 
             calendar = Calendar.getInstance()
             calendar[Calendar.HOUR_OF_DAY] = hrs

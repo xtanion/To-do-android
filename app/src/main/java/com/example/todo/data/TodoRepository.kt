@@ -37,6 +37,10 @@ class TodoRepository(private val todoDao: TodoDao) {
         return todoDao.getGroupWithTodos(name)
     }
 
+    fun getEverything(name:String):LiveData<List<TodoEntity>>{
+        return todoDao.everyTodo(name)
+    }
+
     // Update & Delete DATA
     suspend fun updateTodo(todo: TodoEntity){
         todoDao.updateEntity(todo)

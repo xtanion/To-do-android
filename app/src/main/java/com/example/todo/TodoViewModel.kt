@@ -54,12 +54,15 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
 
 
     fun listData():LiveData<List<TodoEntity>>{
-//        return repository.readAllData
         return repository.readData(name)
     }
 
     fun listCompleted():LiveData<List<TodoEntity>>{
         return repository.readCompletedData(name)
+    }
+
+    fun getAllTodo():LiveData<List<TodoEntity>>{
+        return repository.getEverything(name)
     }
 
     fun addToDo(todo:TodoEntity){
@@ -123,7 +126,9 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
                         val listType: Type = object : TypeToken<List<nestedTodo>?>() {}.type
                         val nestedTodo: List<nestedTodo>? = gson.fromJson(stringExtra, listType)
                         val bitmap: Bitmap? = ds.child("bitmap").getValue(Bitmap::class.java)
-                        val entity = TodoEntity(id!!, title!!, description, important!!, completed!!, groupName!!, dateTime!!, nestedTodo,bitmap)
+                        val requestCode:Int? = ds.child("requestCode").getValue(Int::class.java)
+                        val alarmTime:Int? = ds.child("alarmTime").getValue(Int::class.java)
+                        val entity = TodoEntity(id!!, title!!, description, important!!, completed!!, groupName!!, dateTime!!, nestedTodo,bitmap,requestCode!!,alarmTime)
                         list.add(entity)
                     }
 

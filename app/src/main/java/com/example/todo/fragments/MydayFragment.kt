@@ -213,23 +213,23 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
     override fun onCheckboxClick(data:TodoEntity) {
         //val columnData = mViewModel.listData().value?.get(position)
         if (!data.completed){
-            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupName,date_time,data.nestedTodo,data.bitmap)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,true,data.groupName,date_time,data.nestedTodo,data.bitmap,data.requestCode,data.alarmTime)
             mViewModel.updateTodo(newData)
 
         }
         else{
-            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupName,date_time,data.nestedTodo,data.bitmap)
+            val newData = TodoEntity(data.id,data.title,data.description,data.important,false,data.groupName,date_time,data.nestedTodo,data.bitmap,data.requestCode,data.alarmTime)
             mViewModel.updateTodo(newData)
         }
     }
 
     override fun onStarClick(data: TodoEntity) {
         if (data.important){
-            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupName,date_time,data.nestedTodo,data.bitmap)
+            val newData = TodoEntity(data.id,data.title,data.description,false,data.completed,data.groupName,date_time,data.nestedTodo,data.bitmap,data.requestCode,data.alarmTime)
             mViewModel.updateTodo(newData)
 
         }else{
-            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupName,date_time,data.nestedTodo,data.bitmap)
+            val newData = TodoEntity(data.id,data.title,data.description,true,data.completed,data.groupName,date_time,data.nestedTodo,data.bitmap,data.requestCode,data.alarmTime)
             mViewModel.updateTodo(newData)
         }
     }

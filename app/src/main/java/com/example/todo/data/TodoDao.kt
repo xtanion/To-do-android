@@ -27,6 +27,9 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table WHERE groupName=:name AND completed = 1 ORDER BY important DESC,id DESC")
     fun readCompleted(name: String):LiveData<List<TodoEntity>>
 
+    @Query("SELECT * FROM todo_table WHERE groupName=:name")
+    fun everyTodo(name:String):LiveData<List<TodoEntity>>
+
     @Update
     suspend fun updateEntity(todo: TodoEntity)
 

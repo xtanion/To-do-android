@@ -25,7 +25,9 @@ data class TodoEntity(
     val dateTime: String,
     val nestedTodo: List<nestedTodo?>?,
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    val bitmap: Bitmap?
+    val bitmap: Bitmap?,
+    val requestCode:Int?,
+    val alarmTime:Int?
 ):Parcelable
 {
     fun equals(other: TodoEntity?): Boolean {
