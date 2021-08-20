@@ -16,7 +16,6 @@ import java.util.*
 
 class AlarmReceiver():BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.d("Alarm","Receiver ${Date().toString()}")
         //Notification
         val i = Intent(context, MainActivity::class.java)
         val id = context!!.getString(R.string.CHANNEL_ONE)

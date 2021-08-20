@@ -43,6 +43,7 @@ class AddFragment : BottomSheetDialogFragment() {
     private lateinit var alarmManager:AlarmManager
     private lateinit var calendar:Calendar
     private var dateToSet:String? = null
+    private var timeRepeatSelected: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,15 +75,22 @@ class AddFragment : BottomSheetDialogFragment() {
                 val intent:Intent = Intent(context,AlarmReceiver::class.java)
                 intent.putExtra("title",input_todo)
                 Log.d("Alarm REQUEST GOT",requestCode.toString())
-                AlarmService(requireContext()).setExactAlarm(calendar.timeInMillis,requestCode,intent)
+
+                if (timeRepeatSelected) {
+                    AlarmService(requireContext()).setExactAlarm(
+                        calendar.timeInMillis,
+                        requestCode,
+                        intent
+                    )
+                }
             }
         }
 
-//        mViewModel.listData().observe(viewLifecycleOwner,{
-//            //TODO change to get the real data that has been updated
-//            requestCode = it.reversed()[0].id
-//            Log.d("Alarm REQUEST CODE",requestCode.toString())
-//        })
+        mViewModel.listData().observe(viewLifecycleOwner,{
+            //TODO change to get the real data that has been updated
+            requestCode = it.reversed()[0].id
+            Log.d("Alarm REQUEST CODE",requestCode.toString())
+        })
 
         star_button.setOnCheckedChangeListener { button, b ->
             button.startAnimation(buttonPress)
@@ -143,6 +151,8 @@ class AddFragment : BottomSheetDialogFragment() {
 
             binding.repeatIcon.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.deep_blue)))
             binding.repeatIcon.compoundDrawables[0].setTint(resources.getColor(R.color.deep_blue))
+
+            timeRepeatSelected = true
         }
     }
 
