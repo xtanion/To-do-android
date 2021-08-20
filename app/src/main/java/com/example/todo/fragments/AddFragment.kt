@@ -74,14 +74,13 @@ class AddFragment : BottomSheetDialogFragment() {
                 //New Method->
                 val intent:Intent = Intent(context,AlarmReceiver::class.java)
                 intent.putExtra("title",input_todo)
-                Log.d("Alarm REQUEST GOT",requestCode.toString())
 
                 if (timeRepeatSelected) {
                     Log.d("Alarm REQUEST GOT",requestCode.toString())
 
                     AlarmService(requireContext()).setExactAlarm(
                         calendar.timeInMillis,
-                        requestCode!!,
+                        requestCode,
                         intent
                     )
                 }
