@@ -20,11 +20,16 @@ class AlarmReceiver():BroadcastReceiver() {
         //Notification
         val i = Intent(context, MainActivity::class.java)
         val id = context!!.getString(R.string.CHANNEL_ONE)
+        val notificationTitle: String? = intent?.getStringExtra("title")
+
+        val title = notificationTitle ?: "Click to open"
+
+        Log.d("Alarm Entity Received",notificationTitle.toString())
         intent?.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent:PendingIntent = PendingIntent.getActivity(context,0,i,0)
+        val pendingIntent:PendingIntent = PendingIntent.getActivity(context, 0,i,0)
 
         val notificationManager = ContextCompat.getSystemService(context,NotificationManager::class.java) as NotificationManager
-        notificationManager.sendNotification(context,pendingIntent)
+        notificationManager.sendNotification(context,pendingIntent,title)
 
     }
 }

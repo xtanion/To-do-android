@@ -10,9 +10,9 @@ class AlarmService(private val context: Context) {
     private val alarmManager:AlarmManager? = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
     private lateinit var pendingIntent:PendingIntent
 
-    fun setExactAlarm(timeInMillis: Long,requestCode: Int){
+    fun setExactAlarm(timeInMillis: Long,requestCode: Int,intent: Intent){
         //TODO
-        pendingIntent = PendingIntent.getBroadcast(context,requestCode,getIntent(),PendingIntent.FLAG_UPDATE_CURRENT)
+        pendingIntent = PendingIntent.getBroadcast(context,requestCode,intent,PendingIntent.FLAG_UPDATE_CURRENT)
         setAlarm(timeInMillis,pendingIntent)
     }
 
@@ -30,5 +30,4 @@ class AlarmService(private val context: Context) {
         }
     }
 
-    private fun getIntent():Intent = Intent(context,AlarmReceiver::class.java)
 }

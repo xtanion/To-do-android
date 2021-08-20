@@ -18,6 +18,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.example.todo.MainActivity
 import com.example.todo.alarms.AlarmReceiver
 import com.example.todo.R
 import com.example.todo.TodoViewModel
@@ -58,6 +59,7 @@ class AddFragment : BottomSheetDialogFragment() {
         var starred:Boolean = false
         val star_button = binding.starIcon
         val group_name = args.groupName
+        var requestCode:Int = 0
         //view.showKeyboard()
 
         binding.addToDbLottie.setOnClickListener {
@@ -69,9 +71,18 @@ class AddFragment : BottomSheetDialogFragment() {
                 view.hideKeyboard()
                 dismiss()
                 //New Method->
-                AlarmService(requireContext()).setExactAlarm(calendar.timeInMillis,0)
+                val intent:Intent = Intent(context,AlarmReceiver::class.java)
+                intent.putExtra("title",input_todo)
+                Log.d("Alarm REQUEST GOT",requestCode.toString())
+                AlarmService(requireContext()).setExactAlarm(calendar.timeInMillis,requestCode,intent)
             }
         }
+
+//        mViewModel.listData().observe(viewLifecycleOwner,{
+//            //TODO change to get the real data that has been updated
+//            requestCode = it.reversed()[0].id
+//            Log.d("Alarm REQUEST CODE",requestCode.toString())
+//        })
 
         star_button.setOnCheckedChangeListener { button, b ->
             button.startAnimation(buttonPress)
@@ -152,14 +163,7 @@ class AddFragment : BottomSheetDialogFragment() {
             dateToSet = day
             binding.setAlarmIcon.text = dateToSet
             binding.setAlarmIcon.apply {
-                setTextColor(
-                    ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.deep_blue
-                        )
-                    )
-                )
+                setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.deep_blue)))
                 compoundDrawables[0].setTint(resources.getColor(R.color.deep_blue))
             }
         }

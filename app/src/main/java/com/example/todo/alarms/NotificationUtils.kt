@@ -9,14 +9,14 @@ import androidx.core.content.ContextCompat
 import com.example.todo.R
 import com.example.todo.data.TodoEntity
 
-fun NotificationManager.sendNotification(context: Context,pendingIntent: PendingIntent){
+fun NotificationManager.sendNotification(context: Context,pendingIntent: PendingIntent,title:String){
     val NOTIFICATION_ID = 123
     val id = context.getString(R.string.CHANNEL_ONE)
 
     val builder = NotificationCompat.Builder(context,id)
         .setSmallIcon(R.drawable.ic_launcher_foreground)
         .setContentTitle("Reminder")
-        .setContentText("Testing the alarm manager Entity")
+        .setContentText(title)
         .setColor(ContextCompat.getColor(context,R.color.deep_blue))
         .setAutoCancel(true)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
