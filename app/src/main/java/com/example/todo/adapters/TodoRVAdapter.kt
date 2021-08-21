@@ -86,7 +86,7 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
             val timeCombined = currentItem.alarmTime.toInt()
             val hrs:Int = timeCombined/100
             val min:Int = timeCombined%100
-            binding.checkboxAdditionalText.text = String.format("%2d:%2d",hrs,min)
+            binding.checkboxAdditionalText.text = String.format("%02d:%02d",hrs,min)
             binding.checkboxAdditionalText.visibility = View.VISIBLE
             binding.alarmIconColumn.visibility = View.VISIBLE
         }

@@ -34,6 +34,9 @@ import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentDetailsBinding
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import java.util.*
 
 class DetailsFragment : Fragment() {
 
@@ -66,7 +69,20 @@ class DetailsFragment : Fragment() {
             val hrs:Int = timeCombined/100
             val min:Int = timeCombined%100
 
-            binding.setAlarmIcon.text = String.format("%2d:%2d",hrs,min)
+            binding.setAlarmIcon.apply {
+                text = String.format("%02d:%02d",hrs,min)
+                setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.deep_blue)))
+                val drawables = compoundDrawables
+                drawables.forEach {
+                    it?.setTint(ContextCompat.getColor(requireContext(),R.color.deep_blue))
+                }
+            }
+        }
+
+        binding.setAlarmIcon.setOnClickListener {
+            it.startAnimation(buttonPress)
+
+            showClockPicker()
         }
 
         activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.GONE
@@ -190,6 +206,29 @@ class DetailsFragment : Fragment() {
             Navigation.findNavController(it).navigateUp()
         }
 
+    }
+
+    private fun showClockPicker() {
+        val entity = args.dataEntity
+        val alarmTime = entity?.alarmTime
+        val currentTime = Calendar.getInstance()
+        var hours = currentTime.get(Calendar.HOUR_OF_DAY)
+        var minutes = currentTime.get(Calendar.MINUTE)
+
+        if (alarmTime!=null){
+            hours =alarmTime.toInt()/100
+            minutes =alarmTime.toInt()%100
+        }
+
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_12H)
+            .setHour(hours)
+            .setMinute(minutes)
+            .setTitleText("Select Time")
+            .setTheme(R.style.Theme_App_Timepicker)
+            .build()
+
+        timePicker.show(parentFragmentManager,"TimePicker")
     }
 
     private fun hasStorageReadPermission() = ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED

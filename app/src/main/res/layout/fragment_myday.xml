@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="All Tasks"
+            app:title="My Tasks"
             app:expandedTitleMarginBottom="40dp"
             app:collapsedTitleTextAppearance="@style/collapsed_text"
             app:expandedTitleTextAppearance="@style/expanded_text">
