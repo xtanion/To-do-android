@@ -60,6 +60,14 @@ class DetailsFragment : Fragment() {
         val entity = args.dataEntity!!
         bmp = entity.bitmap
         var imp = entity.important
+        val timeCombined = entity.alarmTime
+
+        if (timeCombined!=null){
+            val hrs:Int = timeCombined/100
+            val min:Int = timeCombined%100
+
+            binding.setAlarmIcon.text = String.format("%2d:%2d",hrs,min)
+        }
 
         activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.GONE
         activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)?.visibility = View.GONE

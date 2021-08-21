@@ -61,25 +61,36 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
         val currentItem = DataList[position]
         val star_icon: ImageView = binding.starIconColumn
 
-        if (holder.adapterPosition>lastPosition) {
+        if (holder.adapterPosition > lastPosition) {
             val animation: Animation =
                 AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fall_down)
-            holder.itemView.startAnimation(animation)}
+            holder.itemView.startAnimation(animation)
+        }
 
-            binding.checkboxTextColumn.text = currentItem.title
+        binding.checkboxTextColumn.text = currentItem.title
 
-            if (currentItem.completed) {
-                binding.checkboxColumn.isChecked = true
-                binding.checkboxTextColumn.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            } else {
-                binding.checkboxColumn.isChecked = false
-            }
+        if (currentItem.completed) {
+            binding.checkboxColumn.isChecked = true
+            binding.checkboxTextColumn.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        } else {
+            binding.checkboxColumn.isChecked = false
+        }
 
-            if (currentItem.important == true) {
-                binding.starIconColumn.isVisible = true
-                binding.starIconColumn.imageTintList =
-                    (ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
-            }
+        if (currentItem.important == true) {
+            binding.starIconColumn.isVisible = true
+            binding.starIconColumn.imageTintList =
+                (ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
+        }
+
+        if (currentItem.alarmTime!=null){
+            val timeCombined = currentItem.alarmTime.toInt()
+            val hrs:Int = timeCombined/100
+            val min:Int = timeCombined%100
+            binding.checkboxAdditionalText.text = String.format("%2d:%2d",hrs,min)
+            binding.checkboxAdditionalText.visibility = View.VISIBLE
+            binding.alarmIconColumn.visibility = View.VISIBLE
+        }
+
     }
 
     override fun getItemCount(): Int {

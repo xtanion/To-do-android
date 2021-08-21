@@ -23,4 +23,10 @@
     <string name="create_new_group">Create New Group</string>
 
     <string name="CHANNEL_ONE">CHANNEL_ID_ONE</string>
+    <string name="remind_me">Remind me</string>
+    <string name="send_due_date">Set due date</string>
+    <string name="desc">Description</string>
+    <string name="save">Save</string>
+    <string name="all_tasks">All Tasks</string>
+    <string name="last_updated">Last Updated: 12:01:21 12/12/12 IST</string>
 </resources>
