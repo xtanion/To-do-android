@@ -32,16 +32,6 @@
                 android:textSize="17sp"
                 android:fontFamily="@font/sf_pro_display"
                 android:textColor="?attr/colorOnPrimary"/>
-<!--            <TextView-->
-<!--                android:id="@+id/update_tick_text"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/save"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="?attr/colorPrimary"-->
-<!--                android:layout_gravity="end"-->
-<!--                android:fontFamily="@font/sf_pro_display"-->
-<!--                android:layout_marginEnd="5dp"/>-->
 
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -129,7 +119,7 @@
         android:id="@+id/set_alarm_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/send_due_date"
+        android:text="@string/set_reminder"
         android:layout_gravity="center_vertical"
         android:drawablePadding="10dp"
         app:drawableStartCompat="@drawable/ic_alarm_modern"
@@ -154,7 +144,7 @@
         android:id="@+id/set_due_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/set_reminder"
+        android:text="@string/send_due_date"
         android:textColor="?attr/colorOnPrimary"
         android:layout_gravity="center_vertical"
         android:drawablePadding="10dp"

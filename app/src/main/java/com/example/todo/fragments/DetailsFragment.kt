@@ -201,8 +201,7 @@ class DetailsFragment : Fragment() {
 
             val updatedUnit:TodoEntity = TodoEntity(entity.id,title,description,imp,check,entity.groupName,entity.dateTime,entity.nestedTodo,bmp,requestCode,entity.alarmTime)
             mViewModel.updateTodo(updatedUnit)
-            //Toast.makeText(context,updatedUnit.toString(),Toast.LENGTH_SHORT).show()
-            Log.d("BMP",updatedUnit.toString())
+
             val action = DetailsFragmentDirections.actionDetailsFragmentToMydayFragment()
             Navigation.findNavController(view).navigate(action)
 
@@ -213,7 +212,6 @@ class DetailsFragment : Fragment() {
             if (alarmRepeatSelected) {
                 if (requestCode!=null) {
                     Log.d("Alarm REQUEST GOT", requestCode.toString())
-
                     AlarmService(requireContext()).setExactAlarm(
                         calendar.timeInMillis,
                         requestCode,
