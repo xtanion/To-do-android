@@ -30,6 +30,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.todo.R
 import com.example.todo.TodoViewModel
+import com.example.todo.alarms.AlarmReceiver
+import com.example.todo.alarms.AlarmService
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentDetailsBinding
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -47,6 +49,7 @@ class DetailsFragment : Fragment() {
     var bmp: Bitmap? = null
     private lateinit var calendar:Calendar
     private var alarmTime:Int? = null
+    private var alarmRepeatSelected:Boolean = false
     private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
 
     override fun onCreateView(
@@ -193,14 +196,39 @@ class DetailsFragment : Fragment() {
             val description:String = binding.detailedDescription.text.toString()
             //val importance:Boolean = args.dataEntity!!.important
             val check: Boolean = binding.checkbox.isChecked
+            var requestCode:Int? = entity.requestCode
             //Add more later on (links,images,importance,etc)
 
-            val updatedUnit:TodoEntity = TodoEntity(entity.id,title,description,imp,check,entity.groupName,entity.dateTime,entity.nestedTodo,bmp,entity.requestCode,entity.alarmTime)
+            val updatedUnit:TodoEntity = TodoEntity(entity.id,title,description,imp,check,entity.groupName,entity.dateTime,entity.nestedTodo,bmp,requestCode,entity.alarmTime)
             mViewModel.updateTodo(updatedUnit)
             //Toast.makeText(context,updatedUnit.toString(),Toast.LENGTH_SHORT).show()
             Log.d("BMP",updatedUnit.toString())
             val action = DetailsFragmentDirections.actionDetailsFragmentToMydayFragment()
             Navigation.findNavController(view).navigate(action)
+
+
+            val intent:Intent = Intent(context, AlarmReceiver::class.java)
+            intent.putExtra("title",entity.title)
+
+            if (alarmRepeatSelected) {
+                if (requestCode!=null) {
+                    Log.d("Alarm REQUEST GOT", requestCode.toString())
+
+                    AlarmService(requireContext()).setExactAlarm(
+                        calendar.timeInMillis,
+                        requestCode,
+                        intent
+                    )
+                }else{
+                    //Creating new requestCode
+                    requestCode = entity.id
+                    AlarmService(requireContext()).setExactAlarm(
+                        calendar.timeInMillis,
+                        requestCode,
+                        intent
+                    )
+                }
+            }
         }
 
         binding.navigateBack.setOnClickListener {
@@ -243,6 +271,7 @@ class DetailsFragment : Fragment() {
 
 
             binding.setAlarmIcon.text = String.format("%02d:%02d PM",hrs,min)
+            alarmRepeatSelected = true
 
         }
     }
