@@ -35,6 +35,7 @@ import com.example.todo.alarms.AlarmService
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentDetailsBinding
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -87,6 +88,11 @@ class DetailsFragment : Fragment() {
         binding.setAlarmIcon.setOnClickListener {
             it.startAnimation(buttonPress)
             showClockPicker()
+        }
+
+        binding.setDueIcon.setOnClickListener {
+            it.startAnimation(buttonPress)
+            showDatePicker()
         }
 
         activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.GONE
@@ -233,6 +239,28 @@ class DetailsFragment : Fragment() {
             Navigation.findNavController(it).navigateUp()
         }
 
+    }
+
+    private fun showDatePicker() {
+
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Select Date")
+            .setTheme(R.style.ThemeOverlay_App_DatePicker)
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+
+        datePicker.show(parentFragmentManager,"DatePicker")
+
+        datePicker.addOnPositiveButtonClickListener {
+            val privateCalendar = Calendar.getInstance()
+            privateCalendar.time = Date(it)
+            val day = "${privateCalendar.get(Calendar.DAY_OF_MONTH)}-${privateCalendar.get(Calendar.MONTH)}-${privateCalendar.get(Calendar.YEAR)}"
+            binding.setDueIcon.text = day
+            binding.setDueIcon.apply {
+                setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.deep_blue)))
+                compoundDrawables[0].setTint(resources.getColor(R.color.deep_blue))
+            }
+        }
     }
 
     private fun showClockPicker() {
