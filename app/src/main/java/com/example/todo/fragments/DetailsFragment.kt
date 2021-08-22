@@ -45,6 +45,8 @@ class DetailsFragment : Fragment() {
     private val mViewModel: TodoViewModel by activityViewModels()
     val args:DetailsFragmentArgs by navArgs()
     var bmp: Bitmap? = null
+    private lateinit var calendar:Calendar
+    private var alarmTime:Int? = null
     private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
 
     override fun onCreateView(
@@ -63,11 +65,11 @@ class DetailsFragment : Fragment() {
         val entity = args.dataEntity!!
         bmp = entity.bitmap
         var imp = entity.important
-        val timeCombined = entity.alarmTime
+        alarmTime = entity.alarmTime
 
-        if (timeCombined!=null){
-            val hrs:Int = timeCombined/100
-            val min:Int = timeCombined%100
+        if (alarmTime!=null){
+            val hrs:Int = alarmTime!!/100
+            val min:Int = alarmTime!!%100
 
             binding.setAlarmIcon.apply {
                 text = String.format("%02d:%02d",hrs,min)
@@ -81,7 +83,6 @@ class DetailsFragment : Fragment() {
 
         binding.setAlarmIcon.setOnClickListener {
             it.startAnimation(buttonPress)
-
             showClockPicker()
         }
 
@@ -229,6 +230,21 @@ class DetailsFragment : Fragment() {
             .build()
 
         timePicker.show(parentFragmentManager,"TimePicker")
+
+        timePicker.addOnPositiveButtonClickListener {
+            val hrs = timePicker.hour
+            val min = timePicker.minute
+
+            calendar = Calendar.getInstance()
+            calendar[Calendar.HOUR_OF_DAY] = hrs
+            calendar[Calendar.MINUTE] = min
+            calendar[Calendar.SECOND] = 0
+            calendar[Calendar.MILLISECOND] = 0
+
+
+            binding.setAlarmIcon.text = String.format("%02d:%02d PM",hrs,min)
+
+        }
     }
 
     private fun hasStorageReadPermission() = ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED
