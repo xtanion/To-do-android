@@ -27,6 +27,7 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     init {
         todoDao = TodoDatabase.getInstance(application).todoDao()
         repository = TodoRepository(todoDao)
+        groupLiveName("all")
         initializer()
     }
     private fun initializer(){

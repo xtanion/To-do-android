@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UserFragment"
+    android:background="?attr/cardBackgroundColor">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile_pic_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="40dp"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
+        android:elevation="0dp">
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_user"
+            android:contentDescription="@string/profile_picture" />
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kanna Kamui"
+        android:fontFamily="@font/sf_pro_display"
+        android:textSize="16sp"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintStart_toEndOf="@id/profile_pic_card"
+        app:layout_constraintTop_toTopOf="@id/profile_pic_card"
+        android:layout_marginStart="30dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="todo_user@gmail.com"
+        android:fontFamily="@font/sf_pro_text"
+        app:layout_constraintStart_toStartOf="@id/username"
+        app:layout_constraintTop_toBottomOf="@id/username"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/add_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Account"
+        android:textSize="16sp"
+        android:fontFamily="@font/sf_pro_text"
+        android:textColor="?attr/colorOnPrimary"
+        app:drawableStartCompat="@drawable/ic_add_icon"
+        android:drawablePadding="20dp"
+        app:layout_constraintStart_toStartOf="@id/profile_pic_card"
+        app:layout_constraintTop_toBottomOf="@id/profile_pic_card"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        app:drawableTint="?attr/colorOnPrimary" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Theme"
+        android:textSize="16sp"
+        android:fontFamily="@font/sf_pro_text"
+        android:drawableStart="@drawable/ic_cog"
+        android:drawablePadding="20dp"
+        app:layout_constraintStart_toStartOf="@id/profile_pic_card"
+        app:layout_constraintTop_toBottomOf="@id/add_account"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textColor="?attr/colorOnPrimary" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

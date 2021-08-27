@@ -54,6 +54,7 @@ class AddFragment : BottomSheetDialogFragment() {
         val view = binding.root
         mViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
         return view
+        Log.d("AddFragment","ViewCreated")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,6 +63,7 @@ class AddFragment : BottomSheetDialogFragment() {
         val group_name = args.groupName
         var requestCode: Int = 0
         //view.showKeyboard()
+
 
         binding.addToDbLottie.setOnClickListener {
             val input_todo:String = binding.todoInput.text.toString()
@@ -89,8 +91,10 @@ class AddFragment : BottomSheetDialogFragment() {
 
         mViewModel.getAllTodo().observe(viewLifecycleOwner,{
             //TODO: Fix the nullable for the first time launch
+
             if (it!=null) {
                 requestCode = it.reversed()[0].id
+                Log.d("RequestCode",requestCode.toString())
             }
         })
 

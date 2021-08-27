@@ -24,12 +24,9 @@ class MainActivity : AppCompatActivity() {
         val user = mAuth.currentUser
 
         if (user==null){
-            Toast.makeText(applicationContext,"Not signed in",Toast.LENGTH_SHORT).show()
             val LogInIntent = Intent(this,SigninActivity::class.java)
             startActivity(LogInIntent)
             finish()
-        }else{
-            Toast.makeText(applicationContext,"Signed in already",Toast.LENGTH_SHORT).show()
         }
 
     }

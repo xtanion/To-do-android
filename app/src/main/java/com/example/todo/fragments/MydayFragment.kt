@@ -38,7 +38,8 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
     private val rotateAnim: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty) }
     private val rotateAnimAnti: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty_anti) }
     private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
-    private var groupName:String = "all"
+//    private var groupName:String = "all"
+    private lateinit var groupName:String
 
     // Getting Date-Time
     @RequiresApi(Build.VERSION_CODES.O)
@@ -69,7 +70,6 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //Identify Group?
-        Log.d("SORTED_NAME",groupName)
         var incomplete_list = emptyList<TodoEntity>()
         var complete_list = emptyList<TodoEntity>()
 
@@ -77,8 +77,8 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
         val user = mViewModel.mAuthMethod()
 
         // First RV
-        val recyclerViewIncomp = binding.recyclerViewIncomplete
-        val adapter_incomp = TodoRVAdapter(this)
+        val recyclerViewIncomplete = binding.recyclerViewIncomplete
+        val adapterIncomp = TodoRVAdapter(this)
         binding.dateTimeExpanded.text = dayToShow
         activity?.findViewById<BottomAppBar>(R.id.bottom_appbar)?.visibility = View.VISIBLE
         val fab = activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)
@@ -100,10 +100,12 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
         }
 
         //First RV
-        recyclerViewIncomp.adapter = adapter_incomp
-        recyclerViewIncomp.layoutManager = LinearLayoutManager(context)
-        recyclerViewIncomp.setHasFixedSize(false)
-        ItemTouchHelper(swipeGesture).attachToRecyclerView(recyclerViewIncomp)
+        recyclerViewIncomplete.apply {
+            adapter = adapterIncomp
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(false)
+        }
+        ItemTouchHelper(swipeGesture).attachToRecyclerView(recyclerViewIncomplete)
 
         //SWIPE Gesture for rv2
         val swipeGestureTwo = object :SwipeGesture(requireContext()){
@@ -120,17 +122,19 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
 
         // Second RV
         val recyclerViewComp = binding.recyclerViewComplete
-        val adapter_comp = TodoRVAdapter(this)
-        recyclerViewComp.adapter = adapter_comp
+        val adapterComp = TodoRVAdapter(this)
+        recyclerViewComp.adapter = adapterComp
         recyclerViewComp.layoutManager = LinearLayoutManager(context)
         recyclerViewComp.setHasFixedSize(false)
         ItemTouchHelper(swipeGestureTwo).attachToRecyclerView(recyclerViewComp)
 
 
         mViewModel.listData().observe(viewLifecycleOwner,{
+            //Debug
+            Log.d("LiveData",it.toString())
             binding.progressBar.visibility = View.VISIBLE
             incomplete_list = it
-            adapter_incomp.NotifyChanges(it)
+            adapterIncomp.NotifyChanges(it)
             binding.progressBar.visibility = View.GONE
             if (it.isEmpty()) {
                 binding.noResultLottie.isVisible = true
@@ -140,9 +144,11 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
 
         })
         mViewModel.listCompleted().observe(viewLifecycleOwner,{
+
+            Log.d("LiveData Completed",it.toString())
             binding.progressBar.visibility = View.VISIBLE
             complete_list = it
-            adapter_comp.NotifyChanges(it)
+            adapterComp.NotifyChanges(it)
             binding.progressBar.visibility = View.GONE
 
             if (it.isEmpty()) {
@@ -156,6 +162,10 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
                     completedText.isVisible = true
                 }
             }
+        })
+        mViewModel.returnGroupName().observe(viewLifecycleOwner,{
+            groupName= it
+            Log.d("groupName",groupName)
         })
 
 //        lifecycleScope.launchWhenResumed {
@@ -183,11 +193,10 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
         }
 
         fab?.setOnClickListener {
-                Log.d("FAB_PRESSED",groupName)
                 it.startAnimation(buttonPress)
                 val action = MydayFragmentDirections.actionMydayFragmentToAddFragment(groupName)
                 Navigation.findNavController(view).navigate(action)
-            }
+        }
 
 //        binding.gearIcon.setOnClickListener {
 //            val data = mViewModel.fireDataReturn()
