@@ -210,6 +210,11 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
             Navigation.findNavController(view).navigate(action)
         }
 
+        menuSwitcher.setOnClickListener {
+            it.startAnimation(buttonPress)
+            val action = MydayFragmentDirections.actionMydayFragmentToUserFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
 
     }
 

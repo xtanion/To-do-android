@@ -33,8 +33,8 @@ import java.time.LocalDateTime
 import java.util.*
 
 class AddFragment : BottomSheetDialogFragment() {
-    var _binding:FragmentAddBinding? = null
-    val binding get() = _binding!!
+    private var _binding:FragmentAddBinding? = null
+    private val binding get() = _binding!!
     private lateinit var mViewModel: TodoViewModel
     @RequiresApi(Build.VERSION_CODES.O)
     val dateToday = LocalDateTime.now()
@@ -92,7 +92,7 @@ class AddFragment : BottomSheetDialogFragment() {
         mViewModel.getAllTodo().observe(viewLifecycleOwner,{
             //TODO: Fix the nullable for the first time launch
 
-            if (it!=null) {
+            if (it!=null && it.isNotEmpty() ) {
                 requestCode = it.reversed()[0].id
                 Log.d("RequestCode",requestCode.toString())
             }

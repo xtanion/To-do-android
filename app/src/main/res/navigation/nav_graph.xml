@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_mydayFragment_to_addGroupFragment"
             app:destination="@id/addGroupFragment" />
+        <action
+            android:id="@+id/action_mydayFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
     <dialog
         android:id="@+id/addFragment"
@@ -69,7 +72,7 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/userFragment"
         android:name="com.example.todo.UserFragment"
         android:label="fragment_user"
