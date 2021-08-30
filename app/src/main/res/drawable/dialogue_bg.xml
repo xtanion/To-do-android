@@ -4,4 +4,9 @@
         android:color="?attr/cardBackgroundColor"/>
     <corners
         android:radius="10dp" />
+    <padding
+        android:top="5dp"
+        android:left="3dp"
+        android:right="3dp"
+        android:bottom="5dp" />
 </shape>

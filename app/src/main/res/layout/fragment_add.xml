@@ -7,13 +7,14 @@
     android:background="@drawable/bottom_popup_bg"
     android:fitsSystemWindows="true"
     android:paddingBottom="10dp"
+    android:layout_marginBottom="10dp"
     tools:context=".fragments.AddFragment">
 
     <View
         android:layout_width="100dp"
         android:layout_height="2dp"
-        android:layout_marginTop="2dp"
         android:layout_marginBottom="5dp"
+        android:layout_marginTop="2dp"
         android:background="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,22 +25,22 @@
         android:id="@+id/todo_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="50dp"
         android:background="@null"
         android:hint="@string/what_todo"
         android:textColorHint="?attr/colorSecondaryVariant"
         android:fontFamily="@font/sf_pro_text"
         android:textSize="15sp"
         android:inputType="text"
-        android:keyboardNavigationCluster="true"
         android:maxLines="1"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:textColor="?attr/colorOnPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         android:focusedByDefault="true"
-        android:focusable="true"/>
+        android:focusable="true"
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/set_alarm_icon"

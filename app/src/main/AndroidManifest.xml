@@ -20,14 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDo">
         <activity
-            android:name=".CameraActivity"
-            android:exported="true" />
-        <activity
             android:name=".SigninActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateAlwaysVisible">
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

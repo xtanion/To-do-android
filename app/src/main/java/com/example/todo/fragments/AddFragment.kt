@@ -3,6 +3,7 @@ package com.example.todo.fragments
 import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -13,9 +14,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -55,8 +58,8 @@ class AddFragment : BottomSheetDialogFragment() {
         _binding = FragmentAddBinding.inflate(layoutInflater,container,false)
         val view = binding.root
         mViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
+        this.dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
         return view
-        Log.d("AddFragment","ViewCreated")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,8 +67,9 @@ class AddFragment : BottomSheetDialogFragment() {
         val star_button = binding.starIcon
         val group_name = args.groupName
         var requestCode: Int = 0
-        //view.showKeyboard()
 
+        //view.showKeyboard()
+        binding.todoInput.requestFocus()
 
         binding.addToDbLottie.setOnClickListener {
             val input_todo:String = binding.todoInput.text.toString()
@@ -190,6 +194,12 @@ class AddFragment : BottomSheetDialogFragment() {
     }
 
 
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
+        view?.hideKeyboard()
+        this.dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+        //Toast.makeText(context,"canceled",Toast.LENGTH_SHORT).show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
