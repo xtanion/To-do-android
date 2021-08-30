@@ -5,12 +5,16 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UserFragment"
-    android:background="?attr/cardBackgroundColor">
+    android:background="@drawable/dialogue_bg"
+    android:clipToPadding="true"
+    android:backgroundTint="@null">
     <TextView
         android:id="@+id/app_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="Open Todo"
         android:fontFamily="@font/sf_pro_text"
@@ -32,7 +36,7 @@
             android:id="@+id/profile_pic"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_user"
+            android:src="@drawable/ic_user_placeholder"
             android:contentDescription="@string/profile_picture" />
     </androidx.cardview.widget.CardView>
     <TextView
@@ -47,6 +51,7 @@
         app:layout_constraintTop_toTopOf="@id/profile_pic_card"
         android:layout_marginStart="30dp" />
     <TextView
+        android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="todo_user@gmail.com"
@@ -55,20 +60,69 @@
         app:layout_constraintTop_toBottomOf="@id/username"
         android:textSize="12sp"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sync_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="20dp"
+        android:drawableLeft="@drawable/ic_sync"
+        android:drawableTint="?attr/colorOnSecondary"
+        android:text="@string/sync_all_todos"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:fontFamily="@font/sf_pro_text"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:padding="0dp"
+        android:textColor="?attr/colorOnSecondary"
+        app:strokeColor="@color/deep_blue"
+        app:layout_constraintTop_toBottomOf="@id/profile_pic_card"
+        app:layout_constraintStart_toEndOf="@id/profile_pic_card"
+        android:layout_marginTop="5dp"/>
+
+    <View
+        android:id="@+id/line_separator_1"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="?attr/colorSecondaryVariant"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/sync_data"/>
+
+    <TextView
+        android:id="@+id/manage_acc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Account"
+        android:textFontWeight="700"
+        android:textSize="14sp"
+        android:fontFamily="@font/sf_pro_text"
+        android:textColor="?attr/colorOnPrimary"
+        app:drawableStartCompat="@drawable/ic_user"
+        android:drawablePadding="20dp"
+        app:layout_constraintStart_toStartOf="@id/profile_pic_card"
+        app:layout_constraintTop_toBottomOf="@id/add_account"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        app:drawableTint="?attr/colorOnPrimary"
+        tools:targetApi="p" />
+
     <TextView
         android:id="@+id/add_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Account"
         android:textFontWeight="700"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:fontFamily="@font/sf_pro_text"
         android:textColor="?attr/colorOnPrimary"
         app:drawableStartCompat="@drawable/ic_plus"
         android:drawablePadding="20dp"
         app:layout_constraintStart_toStartOf="@id/profile_pic_card"
-        app:layout_constraintTop_toBottomOf="@id/profile_pic_card"
-        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/line_separator_1"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:padding="10dp"
         app:drawableTint="?attr/colorOnPrimary"
         tools:targetApi="p" />
@@ -77,31 +131,26 @@
         android:id="@+id/set_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set Theme"
-        android:textSize="15sp"
+        android:text="Change Theme"
+        android:textSize="14sp"
         android:textFontWeight="700"
         android:fontFamily="@font/sf_pro_text"
         android:drawablePadding="20dp"
         app:layout_constraintStart_toStartOf="@id/profile_pic_card"
-        app:layout_constraintTop_toBottomOf="@id/add_account"
-        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/manage_acc"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:padding="10dp"
         android:textColor="?attr/colorOnPrimary"
         app:drawableTint="?attr/colorOnPrimary"
         app:drawableStartCompat="@drawable/ic_cog" />
-
     <View
+        android:id="@+id/line_separator_2"
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:background="?attr/colorOnSecondary"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/set_theme"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="?attr/colorOnSecondary"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/profile_pic_card"/>
+        android:background="?attr/colorSecondaryVariant"
+        app:layout_constraintTop_toBottomOf="@id/set_theme"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/rate_us"
@@ -110,27 +159,30 @@
         android:textSize="12sp"
         android:fontFamily="@font/sf_pro_text"
         android:text="Rate Us"
-        app:layout_constraintStart_toStartOf="@id/profile_pic_card"
-        app:layout_constraintTop_toBottomOf="@id/set_theme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/terms_and_cond"
+        app:layout_constraintTop_toBottomOf="@id/line_separator_2"
         android:layout_marginTop="5dp"
         android:padding="10dp" />
     <TextView
         android:id="@+id/terms_and_cond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="\u2022     Terms &amp; Conditions     \u2022"
+        android:text="\u2022     Terms &amp; Conditions    \u2022"
         android:padding="10dp"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/rate_us"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/rate_us"/>
     <TextView
         android:id="@+id/contribute_github"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Open Source Licences"
+        android:text="Open Source"
         android:padding="10dp"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/terms_and_cond"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/terms_and_cond"/>
 
 

@@ -187,11 +187,10 @@
             android:id="@+id/remove_image"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_round_add_circle_outline_24"
+            android:src="@drawable/ic_cross_circle"
             android:background="@null"
             android:layout_gravity="top|end"
             android:layout_margin="10dp"
-            android:rotation="45"
             app:tint="?attr/colorOnSecondary" />
     </com.google.android.material.card.MaterialCardView>
 
