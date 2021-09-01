@@ -24,7 +24,8 @@
         app:boxBackgroundColor="?attr/cardBackgroundColor"
         app:hintEnabled="false"
         app:hintAnimationEnabled="false"
-        app:endIconDrawable="@drawable/ic_cross_circle">
+        app:endIconDrawable="@drawable/ic_cross_circle"
+        app:startIconDrawable="@drawable/ic_arrow_left_alt">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_input"
             android:layout_width="match_parent"
@@ -45,12 +46,15 @@
         app:layout_constraintEnd_toEndOf="@id/search_layout"
         app:tint="?attr/colorOnSecondary"
         app:layout_constraintTop_toTopOf="@id/search_layout"
-        app:layout_constraintBottom_toBottomOf="@id/search_layout"/>
+        app:layout_constraintBottom_toBottomOf="@id/search_layout"
+        android:visibility="invisible"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:lottie_rawRes="@raw/no_results"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

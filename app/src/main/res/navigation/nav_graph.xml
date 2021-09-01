@@ -31,7 +31,9 @@
             app:destination="@id/userFragment" />
         <action
             android:id="@+id/action_mydayFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/fragment_slide_out_right"
+            app:exitAnim="@anim/fragment_slide_out_left" />
     </fragment>
     <dialog
         android:id="@+id/addFragment"
@@ -67,6 +69,8 @@
         <action
             android:id="@+id/action_detailsFragment_to_mydayFragment"
             app:destination="@id/mydayFragment"
+            app:enterAnim="@anim/fragment_slide_out_right"
+            app:exitAnim="@anim/fragment_slide_out_left"
             app:popUpTo="@id/detailsFragment"
             app:popUpToInclusive="true" />
         <argument
@@ -87,7 +91,10 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_mydayFragment"
-            app:destination="@id/mydayFragment" />
+            app:destination="@id/mydayFragment"
+            app:enterAnim="@anim/fragment_slide_in_left"
+            app:exitAnim="@anim/fragment_slide_in_right"
+            app:popUpTo="@id/mydayFragment" />
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />

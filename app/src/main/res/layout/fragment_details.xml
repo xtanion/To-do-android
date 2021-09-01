@@ -22,8 +22,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_gravity="start"
-                android:src="@drawable/ic_arrow_left"
-                app:tint="?attr/colorOnPrimary" />
+                android:src="@drawable/ic_arrow_left_alt"
+                app:tint="?attr/colorOnPrimary"
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
