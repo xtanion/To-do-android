@@ -15,7 +15,7 @@
         android:layout_margin="25dp"
         android:textColor="?attr/colorSecondaryVariant"
         android:fontFamily="@font/sf_pro_display_bold"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_in_google"
@@ -29,20 +29,19 @@
         app:layout_constraintBottom_toTopOf="@id/open_source_text"
         android:text="@string/sign_in_with_google"
         android:fontFamily="@font/sf_pro_text"
-        android:textFontWeight="700"
-        android:textColor="?attr/colorPrimaryVariant"
+        android:textColor="?attr/colorOnPrimary"
         android:textAllCaps="false"
-        app:cornerRadius="0dp"
+        app:cornerRadius="10dp"
         app:icon="@drawable/ic_google_icon"
         app:iconTint="@null"
         app:iconGravity="textStart"
-        app:backgroundTint="?attr/colorOnPrimary"/>
+        app:backgroundTint="?attr/cardBackgroundColor"/>
 
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_tick"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
         app:lottie_rawRes="@raw/tick_lottie_anim"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +62,8 @@
         app:layout_constraintBottom_toTopOf="@id/text_idk"
         android:layout_marginBottom="5dp"
         android:textColor="?attr/colorOnPrimary"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:maxLines="2"/>
     <TextView
         android:id="@+id/text_idk"
         android:layout_width="match_parent"
@@ -83,6 +83,7 @@
         android:rotation="45"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

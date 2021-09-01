@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_mydayFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_mydayFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <dialog
         android:id="@+id/addFragment"
@@ -77,4 +80,16 @@
         android:name="com.example.todo.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.todo.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_mydayFragment"
+            app:destination="@id/mydayFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>

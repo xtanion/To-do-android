@@ -34,11 +34,21 @@
                     android:id="@+id/gear_icon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="20dp"
                     app:lottie_rawRes="@raw/search_lottie"
                     android:layout_gravity="end"
                     app:lottie_autoPlay="true"
-                    app:lottie_loop="false"/>
+                    app:lottie_loop="false"
+                    android:visibility="gone"/>
+                <ImageView
+                    android:id="@+id/search_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_search_alt"
+                    app:tint="?attr/colorOnSecondary"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="0dp"/>
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -95,7 +105,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/ic_chevron_right"
-                app:tint="?attr/colorPrimary"
+                app:tint="@color/ui_green"
                 app:layout_constraintTop_toTopOf="@id/completed_text"
                 app:layout_constraintBottom_toBottomOf="@id/completed_text"
                 app:layout_constraintStart_toStartOf="parent"

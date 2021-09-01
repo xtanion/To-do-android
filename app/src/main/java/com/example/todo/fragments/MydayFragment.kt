@@ -204,10 +204,15 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
                 Navigation.findNavController(view).navigate(action)
         }
 
-//        binding.gearIcon.setOnClickListener {
-//            val data = mViewModel.fireDataReturn()
-//            Toast.makeText(context,data.toString(),Toast.LENGTH_LONG).show()
-//        }
+        binding.searchIcon.setOnClickListener {
+            //binding.gearIcon.playAnimation()
+            it.startAnimation(buttonPress)
+            val action = MydayFragmentDirections.actionMydayFragmentToSearchFragment()
+            Navigation.findNavController(view).navigate(action)
+            //val data = mViewModel.fireDataReturn()
+            //Toast.makeText(context,data.toString(),Toast.LENGTH_LONG).show()
+
+        }
 
 
         listSwitcher.setOnClickListener {

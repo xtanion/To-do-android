@@ -31,4 +31,5 @@
     <string name="last_updated">Last Updated: 12:01:21 12/12/12 IST</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="sync_all_todos">Sync All Todos</string>
+    <string name="search_todo">Search Todo</string>
 </resources>

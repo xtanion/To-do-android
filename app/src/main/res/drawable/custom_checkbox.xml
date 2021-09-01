@@ -3,6 +3,6 @@
     <item android:drawable="@drawable/ic_circle"
         android:state_checked="false"/>
     <item android:drawable="@drawable/ic_circle_checked"
-        android:state_checked="true"/>
+        android:state_checked="true" />
     <item android:drawable="@drawable/ic_circle"/>
 </selector>
