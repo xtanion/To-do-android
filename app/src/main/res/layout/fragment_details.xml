@@ -17,15 +17,15 @@
             android:layout_height="45dp"
             android:background="?attr/colorPrimaryVariant">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/navigate_back"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="6dp"
                 android:layout_gravity="start"
                 android:src="@drawable/ic_arrow_left_alt"
                 app:tint="?attr/colorOnPrimary"
-                android:paddingEnd="14dp"
-                android:paddingStart="14dp"/>
+                android:background="@drawable/button_click_background"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,7 +33,8 @@
                 android:text="@string/all_tasks"
                 android:textSize="17sp"
                 android:fontFamily="@font/sf_pro_display"
-                android:textColor="?attr/colorOnPrimary"/>
+                android:textColor="?attr/colorOnPrimary"
+                android:visibility="invisible"/>
 
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -99,7 +100,7 @@
         android:textSize="17sp"
         android:hint="@string/desc"
         android:fontFamily="@font/sf_pro_display"
-        android:textColor="?attr/colorSecondaryVariant"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detailed_item_title"
         android:padding="20dp"
@@ -176,7 +177,8 @@
         app:cardCornerRadius="10dp"
         android:elevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line3">
+        app:layout_constraintTop_toBottomOf="@id/line3"
+        android:background="?attr/colorPrimaryVariant">
 
         <ImageView
             android:id="@+id/image_1"
@@ -184,16 +186,17 @@
             android:layout_height="150dp"
             android:cropToPadding="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/image_background"/>
+            android:src="@drawable/image_background" />
         <ImageButton
             android:id="@+id/remove_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_cross_circle"
-            android:background="@null"
+            android:background="@drawable/button_click_background"
             android:layout_gravity="top|end"
-            android:layout_margin="10dp"
-            app:tint="?attr/colorOnSecondary" />
+            android:padding="10dp"
+            app:tint="?attr/colorOnSecondary"
+            android:contentDescription="@string/remove_image" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -207,41 +210,46 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
+            <ImageButton
                 android:id="@+id/camera_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_click_background"
                 android:src="@drawable/ic_camera_round"
-                app:tint="?attr/colorSecondaryVariant"
+                app:tint="?attr/colorOnSecondary"
                 app:layout_constraintStart_toEndOf="@id/gallery_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"/>
-            <ImageView
+                android:padding="7dp"
+                android:layout_marginStart="10dp" />
+            <ImageButton
                 android:id="@+id/gallery_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_click_background"
                 android:layout_gravity="center_vertical|start"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:padding="7dp"
+                android:layout_marginStart="10dp"
                 android:src="@drawable/ic_gallery"
-                app:tint="?attr/colorSecondaryVariant"
+                app:tint="?attr/colorOnSecondary"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/con"/>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/con"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/button_click_background"
                 android:layout_gravity="center_vertical|start"
-                android:layout_margin="20dp"
                 android:src="@drawable/ic_list"
-                app:tint="?attr/colorSecondaryVariant"
+                app:tint="?attr/colorOnSecondary"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/subtasks" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/update_tick_button"

@@ -32,4 +32,6 @@
     <string name="profile_picture">Profile Picture</string>
     <string name="sync_all_todos">Sync All Todos</string>
     <string name="search_todo">Search Todo</string>
+    <string name="subtasks">subtasks</string>
+    <string name="remove_image">Remove Image</string>
 </resources>

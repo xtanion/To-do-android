@@ -28,6 +28,7 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.todo.R
 import com.example.todo.TodoViewModel
 import com.example.todo.alarms.AlarmReceiver
@@ -43,11 +44,11 @@ import java.util.*
 
 class DetailsFragment : Fragment() {
 
-    var _binding: FragmentDetailsBinding? = null
-    val binding get() = _binding!!
+    private var _binding: FragmentDetailsBinding? = null
+    private val binding get() = _binding!!
     private val mViewModel: TodoViewModel by activityViewModels()
-    val args:DetailsFragmentArgs by navArgs()
-    var bmp: Bitmap? = null
+    private val args:DetailsFragmentArgs by navArgs()
+    private var bmp: Bitmap? = null
     private lateinit var calendar:Calendar
     private var alarmTime:Int? = null
     private var alarmRepeatSelected:Boolean = false

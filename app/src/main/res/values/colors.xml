@@ -3,6 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="transparent">#00000000</color>
+    <color name="twenty_white">#33FFFFFF</color>
+    <color name="twenty_black">#33000000</color>
+    <color name="fifty_white">#80FFFFFF</color>
+    <color name="fifty_black">#80000000</color>
+
+
     <color name="purple">#9fa8da</color>
     <color name="dark_purple">#6f79a8</color>
 

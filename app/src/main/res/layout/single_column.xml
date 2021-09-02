@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sun, 18 Jul"
-        android:textColor="?attr/colorSecondaryVariant"
+        android:textColor="?attr/colorOnSecondary"
         android:fontFamily="@font/sf_pro_text"
         android:textSize="10sp"
         android:layout_marginStart="5dp"
@@ -58,7 +58,6 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_text_column"
         app:layout_constraintBottom_toBottomOf="@id/checkbox_column"
         android:visibility="gone"
-        app:drawableTint="?attr/colorSecondaryVariant"
         tools:ignore="SmallSp"
         android:textAlignment="center" />
 

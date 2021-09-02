@@ -68,17 +68,16 @@
                 android:layout_height="wrap_content"
                 android:text="Monday, Aug 2"
                 android:fontFamily="@font/sf_pro_display"
-                android:textColor="?attr/colorSecondaryVariant"
+                android:textColor="?attr/colorOnSecondary"
                 android:textSize="16sp"
                 android:layout_gravity="bottom"
                 android:paddingBottom="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
                 app:layout_collapseMode="parallax"
-                android:drawableLeft="@drawable/ic_date"
-                android:drawableTint="?attr/colorSecondaryVariant"
-                android:drawablePadding="10dp"/>
+                android:drawablePadding="10dp"
+                app:drawableLeftCompat="@drawable/ic_date"
+                app:drawableTint="?attr/colorOnSecondary" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
