@@ -48,7 +48,7 @@
                     android:src="@drawable/ic_search_alt"
                     app:tint="?attr/colorOnSecondary"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="0dp"/>
+                    android:layout_marginEnd="20dp"/>
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -71,13 +71,13 @@
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="16sp"
                 android:layout_gravity="bottom"
-                android:paddingBottom="15dp"
-                android:layout_marginTop="10dp"
+                android:paddingBottom="13dp"
+                android:paddingTop="10dp"
                 android:layout_marginStart="30dp"
                 app:layout_collapseMode="parallax"
                 android:drawablePadding="10dp"
-                app:drawableLeftCompat="@drawable/ic_date"
-                app:drawableTint="?attr/colorOnSecondary" />
+                app:drawableLeftCompat="@drawable/ic_calender_figma"
+                android:drawableTint="?attr/colorOnPrimary"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

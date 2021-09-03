@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -40,6 +41,9 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import java.io.File
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 
 class DetailsFragment : Fragment() {
@@ -53,6 +57,8 @@ class DetailsFragment : Fragment() {
     private var alarmTime:Int? = null
     private var alarmRepeatSelected:Boolean = false
     private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
+
+    val timeNow = SimpleDateFormat("yyyyMMdd_HHmmss",Locale.getDefault()).format(System.currentTimeMillis())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -116,9 +122,11 @@ class DetailsFragment : Fragment() {
         val imageAction = registerForActivityResult(
             ActivityResultContracts.GetContent(),
             ActivityResultCallback { uri->
+
                 binding.image1.setImageURI(uri)
                 val stream = activity?.contentResolver?.openInputStream(uri)
                 bmp = BitmapFactory.decodeStream(stream)
+                saveImage(bmp)
             }
         )
 
@@ -240,6 +248,10 @@ class DetailsFragment : Fragment() {
             Navigation.findNavController(it).navigateUp()
         }
 
+    }
+
+    private fun saveImage(bmp:Bitmap?) {
+        val path:File = Environment.getStorageDirectory()
     }
 
     private fun showDatePicker() {

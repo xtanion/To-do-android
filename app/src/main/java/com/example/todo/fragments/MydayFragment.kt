@@ -166,6 +166,7 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
                 binding.apply {
                     completedIcon.isVisible = true
                     completedText.isVisible = true
+                    //completedText.text = "Completed  ${it.size}"
                 }
             }
         })
