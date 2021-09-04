@@ -53,18 +53,21 @@
 
     <TextView
         android:id="@+id/main_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/manage_your_schedule_with_open_todo"
         android:paddingEnd="30dp"
         android:paddingStart="30dp"
-        android:textAlignment="center"
         android:fontFamily="@font/sf_pro_display_bold"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@id/text_idk"
         android:layout_marginBottom="5dp"
         android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center_horizontal"
+        android:paddingLeft="45dp"
+        android:paddingRight="45dp"
         android:maxLines="2"/>
     <TextView
         android:id="@+id/text_idk"
@@ -79,16 +82,18 @@
         android:layout_marginBottom="50dp"
         android:gravity="center_horizontal" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/skipSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:rotation="45"
-        android:src="@drawable/ic_add_icon"
-        android:visibility="gone"
+        android:src="@drawable/ic_cross_circle"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorOnPrimary"
+        android:contentDescription="@string/skip_sign_in"
+        android:background="@drawable/button_click_background"/>
 
     <ProgressBar
         android:id="@+id/progressBar3"

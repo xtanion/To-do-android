@@ -1,6 +1,7 @@
 package com.example.todo
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -40,6 +41,22 @@ class SigninActivity : AppCompatActivity() {
             progressBar3.visibility = View.GONE
             //Toast.makeText(baseContext,"Signed IN successfully",Toast.LENGTH_SHORT).show()
         }
+
+        skipSignIn.setOnClickListener {
+            //Using Shared preferences
+            val preferences: SharedPreferences = getSharedPreferences("SkipAuth", MODE_PRIVATE)
+            val editor:SharedPreferences.Editor = preferences.edit()
+            editor.apply{
+                putBoolean("Skip",true)
+                apply()
+            }
+
+            Log.d("Skip SignIn","file created")
+
+            val mainActivityIntent = Intent(this,MainActivity::class.java)
+            startActivity(mainActivityIntent)
+            finish()
+        }
     }
 
     private fun signIn() {
@@ -72,8 +89,8 @@ class SigninActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     //val user = mAuth.currentUser
-                    val MainActivityIntent = Intent(this,MainActivity::class.java)
-                    startActivity(MainActivityIntent)
+                    val mainActivityIntent = Intent(this,MainActivity::class.java)
+                    startActivity(mainActivityIntent)
                     finish()
                 } else {
                     // If sign in fails, display a message to the user.

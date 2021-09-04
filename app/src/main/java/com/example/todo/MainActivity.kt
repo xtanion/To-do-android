@@ -3,9 +3,11 @@ package com.example.todo
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -20,12 +22,16 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel()
         setContentView(R.layout.activity_main)
 
+        val preferences:SharedPreferences = getSharedPreferences("SkipAuth", MODE_PRIVATE)
+        val clicked:Boolean = preferences.getBoolean("Skip",false)
+
         mAuth = FirebaseAuth.getInstance()
         val user = mAuth.currentUser
+        Log.d("Skip SignIn Main",clicked.toString())
 
-        if (user==null){
-            val LogInIntent = Intent(this,SigninActivity::class.java)
-            startActivity(LogInIntent)
+        if (!clicked && user==null) {
+            val logInIntent = Intent(this, SigninActivity::class.java)
+            startActivity(logInIntent)
             finish()
         }
 
