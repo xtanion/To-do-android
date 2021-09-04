@@ -8,6 +8,53 @@
     android:background="@drawable/dialogue_bg"
     android:clipToPadding="true"
     android:backgroundTint="@null">
+
+    <View
+        android:id="@+id/line_separator_0"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="?attr/colorSecondaryVariant"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/sync_data"/>
+
+    <TextView
+        android:id="@+id/sign_in_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        android:textFontWeight="700"
+        android:textSize="14sp"
+        android:fontFamily="@font/sf_pro_text"
+        android:textColor="?attr/colorOnPrimary"
+        app:drawableStartCompat="@drawable/ic_round_remove_circle_outline_24"
+        android:drawablePadding="20dp"
+        app:layout_constraintStart_toStartOf="@id/profile_pic_card"
+        app:layout_constraintTop_toBottomOf="@id/line_separator_0"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        app:drawableTint="?attr/colorOnPrimary"
+        tools:targetApi="p" />
+
+    <TextView
+        android:id="@+id/change_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/change_theme"
+        android:textFontWeight="700"
+        android:textSize="14sp"
+        android:fontFamily="@font/sf_pro_text"
+        android:textColor="?attr/colorOnPrimary"
+        app:drawableStartCompat="@drawable/ic_sun"
+        android:drawablePadding="20dp"
+        app:layout_constraintStart_toStartOf="@id/profile_pic_card"
+        app:layout_constraintTop_toBottomOf="@id/line_separator_1"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        app:drawableTint="?attr/colorOnPrimary"
+        tools:targetApi="p" />
+
     <TextView
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
@@ -43,12 +90,13 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kanna Kamui"
+        android:text="Not Logged in"
         android:fontFamily="@font/sf_pro_display"
         android:textSize="16sp"
         android:textColor="?attr/colorOnPrimary"
         app:layout_constraintStart_toEndOf="@id/profile_pic_card"
         app:layout_constraintTop_toTopOf="@id/profile_pic_card"
+        app:layout_constraintBottom_toTopOf="@id/user_email"
         android:layout_marginStart="30dp" />
     <TextView
         android:id="@+id/user_email"
@@ -58,7 +106,8 @@
         android:fontFamily="@font/sf_pro_text"
         app:layout_constraintStart_toStartOf="@id/username"
         app:layout_constraintTop_toBottomOf="@id/username"
-        android:textSize="12sp"/>
+        app:layout_constraintBottom_toBottomOf="@id/profile_pic_card"
+        android:textSize="12sp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sync_data"
@@ -87,7 +136,7 @@
         android:layout_height="0.1dp"
         android:background="?attr/colorSecondaryVariant"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/sync_data"/>
+        app:layout_constraintTop_toBottomOf="@id/manage_acc"/>
 
     <TextView
         android:id="@+id/manage_acc"
@@ -98,10 +147,29 @@
         android:textSize="14sp"
         android:fontFamily="@font/sf_pro_text"
         android:textColor="?attr/colorOnPrimary"
-        app:drawableStartCompat="@drawable/ic_user"
+        app:drawableStartCompat="@drawable/ic_round_settings_24"
         android:drawablePadding="20dp"
         app:layout_constraintStart_toStartOf="@id/profile_pic_card"
         app:layout_constraintTop_toBottomOf="@id/add_account"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        app:drawableTint="?attr/colorOnPrimary"
+        tools:targetApi="p" />
+
+    <TextView
+        android:id="@+id/help_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Help and Feedback"
+        android:textFontWeight="700"
+        android:textSize="14sp"
+        android:fontFamily="@font/sf_pro_text"
+        android:textColor="?attr/colorOnPrimary"
+        app:drawableStartCompat="@drawable/ic_round_help"
+        android:drawablePadding="20dp"
+        app:layout_constraintStart_toStartOf="@id/profile_pic_card"
+        app:layout_constraintTop_toBottomOf="@id/change_theme"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:padding="10dp"
@@ -117,39 +185,23 @@
         android:textSize="14sp"
         android:fontFamily="@font/sf_pro_text"
         android:textColor="?attr/colorOnPrimary"
-        app:drawableStartCompat="@drawable/ic_plus"
+        app:drawableStartCompat="@drawable/ic_twotone_person_add"
         android:drawablePadding="20dp"
         app:layout_constraintStart_toStartOf="@id/profile_pic_card"
-        app:layout_constraintTop_toBottomOf="@id/line_separator_1"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_out"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:padding="10dp"
         app:drawableTint="?attr/colorOnPrimary"
         tools:targetApi="p" />
 
-    <TextView
-        android:id="@+id/set_theme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Change Theme"
-        android:textSize="14sp"
-        android:textFontWeight="700"
-        android:fontFamily="@font/sf_pro_text"
-        android:drawablePadding="20dp"
-        app:layout_constraintStart_toStartOf="@id/profile_pic_card"
-        app:layout_constraintTop_toBottomOf="@id/manage_acc"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:padding="10dp"
-        android:textColor="?attr/colorOnPrimary"
-        app:drawableTint="?attr/colorOnPrimary"
-        app:drawableStartCompat="@drawable/ic_cog" />
+
     <View
         android:id="@+id/line_separator_2"
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="?attr/colorSecondaryVariant"
-        app:layout_constraintTop_toBottomOf="@id/set_theme"
+        app:layout_constraintTop_toBottomOf="@id/help_feedback"
         android:layout_marginTop="10dp"/>
 
     <TextView

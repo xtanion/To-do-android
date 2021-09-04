@@ -1,10 +1,18 @@
 package com.example.todo
 
+import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -16,6 +24,9 @@ class UserFragment : DialogFragment() {
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
     private val mViewModel: TodoViewModel by activityViewModels()
+    private val rotateAnim: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty) }
+    private val rotateAnimAnti: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_ninty_anti) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +44,7 @@ class UserFragment : DialogFragment() {
         val email = currentUser?.email
         val dpUrl = currentUser?.photoUrl
 
+
         val profilePicView = binding.profilePic
         if (dpUrl != null) {
             Glide.with(view)
@@ -40,11 +52,65 @@ class UserFragment : DialogFragment() {
                 .placeholder(R.drawable.ic_user_placeholder)
                 .fitCenter()
                 .into(profilePicView)
+        }else{
+            Glide.with(view)
+                .load("https://pbs.twimg.com/media/EwCSCthXYAAlkaY.png")
+                .placeholder(R.drawable.ic_user_placeholder)
+                .fitCenter()
+                .into(profilePicView)
+        }
+        if (currentUser!=null) {
+            binding.apply {
+                username.text = name
+                userEmail.text = email
+                signInOut.text = "Sign Out"
+            }
+        }else{
+            binding.apply {
+                signInOut.text = "Sign in with Google"
+                signInOut.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_twotone_person,0,0,0)
+                userEmail.visibility = View.GONE
+                manageAcc.visibility = View.GONE
+                addAccount.visibility = View.GONE
+                username.text = "Not Logged In"
+                syncData.text = "Sync Not Possible"
+            }
+        }
+        binding.helpFeedback.setOnClickListener {
+            openUrl("https://github.com/xtanion/To-do-android/blob/main/README.md")
+        }
+        binding.rateUs.setOnClickListener {
+            Toast.makeText(context,"Enjoying the App? Star the repository on Github",Toast.LENGTH_LONG).show()
+            openUrl("https://github.com/xtanion/To-do-android")
         }
 
-        binding.username.text = name
-        binding.userEmail.text = email
+        binding.changeTheme.setOnClickListener {
+            changeTheme()
+            var drawable = R.drawable.ic_sun
+            drawable = if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                R.drawable.ic_sun
+            } else{
+                R.drawable.ic_night
+            }
+            binding.changeTheme.setCompoundDrawablesRelativeWithIntrinsicBounds(drawable,0,0,0)
+        }
 
+    }
+
+    private fun openUrl(url: String) {
+        val uri:Uri = Uri.parse(url)
+        val intent:Intent = Intent(Intent.ACTION_VIEW,uri)
+        startActivity(intent)
+    }
+
+    private fun changeTheme(){
+
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
 }

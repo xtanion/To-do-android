@@ -35,4 +35,5 @@
     <string name="subtasks">subtasks</string>
     <string name="remove_image">Remove Image</string>
     <string name="skip_sign_in">Skip Sign In</string>
+    <string name="change_theme">Change Theme</string>
 </resources>
