@@ -61,5 +61,9 @@ Libraries Used
 Screenshots
 -----------
 
-![Homepage](screenshots/Screenshot_20210906-234815_ToDo.png "one completed")
-![Homepage Swipe Gesture](screenshots/swipe_to_delete.gif "Swipe Gestures in recyclerView")
+<img src="screenshots/swipe_to_delete.gif" width=30%>
+<img src="screenshots/Screenshot_20210906-234815_ToDo.png" width=30%>
+<img src="screenshots/Screenshot_20210906-234537_ToDo.png" width=30%>
+
+Upcoming features
+-----------------
