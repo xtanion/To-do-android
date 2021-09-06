@@ -57,3 +57,9 @@ Libraries Used
 [14]: https://bumptech.github.io/glide/
 [15]: https://github.com/lottiefiles
 [16]: https://kotlinlang.org/docs/reference/coroutines-overview.html
+
+Screenshots
+-----------
+
+![Homepage](screenshots/Screenshot_20210906-234815_ToDo.png "one completed")
+![Homepage Swipe Gesture](screenshots/swipe_to_delete.gif "Swipe Gestures in recyclerView")
