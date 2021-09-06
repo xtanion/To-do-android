@@ -29,6 +29,7 @@ import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_details.*
 import java.time.LocalDate
@@ -112,11 +113,19 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
                                 adapterIncomp.addItemChange(data,position)
                             }
                             .setActionTextColor(resources.getColor(R.color.deep_blue))
+                            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>(){
+                                override fun onDismissed(
+                                    transientBottomBar: Snackbar?,
+                                    event: Int
+                                ) {
+                                    super.onDismissed(transientBottomBar, event)
+                                    if (event != Snackbar.Callback.DISMISS_EVENT_ACTION) {
+                                        // When the SnackBar is closed and the button was not clicked.
+                                        mViewModel.removeTodo(data)
+                                    }
+                                }
+                            })
                             .show()
-
-                        Timer().schedule(5000){
-                            mViewModel.removeTodo(data)
-                        }
                     }
                 }
             }

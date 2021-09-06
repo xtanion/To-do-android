@@ -54,7 +54,7 @@ class UserFragment : DialogFragment() {
                 .into(profilePicView)
         }else{
             Glide.with(view)
-                .load("https://c.tenor.com/SHIsAKRfTrYAAAAC/why-are-you-why-are-you-gay.gif")
+                .load("https://static.wikia.nocookie.net/0da1c340-f9d1-4805-8ed7-d91d7e257cce/scale-to-width/755")
                 .placeholder(R.drawable.ic_user_placeholder)
                 .fitCenter()
                 .into(profilePicView)
