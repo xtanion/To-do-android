@@ -24,7 +24,8 @@ Libraries Used
 * [Lifecycles][3] - Create a UI that automatically responds to lifecycle events.
 * [LiveData][4] - Build data objects that notify views when the underlying database changes.
 * [Navigation][5] - Handle everything needed for in-app navigation.
-* [Room][6] - Access your app's SQLite database with in-app objects and compile-time checks.
+* [Safe Args][17] - Paasing arguments b/w Fragments.
+* [Room Database][6] - Access your app's SQLite database with in-app objects and compile-time checks.
 * [ViewModel][7] - Store UI-related data that isn't destroyed on app rotations. Easily schedule
      asynchronous tasks for optimal execution.
 * [WorkManager][8] - Manage your Android background jobs.
