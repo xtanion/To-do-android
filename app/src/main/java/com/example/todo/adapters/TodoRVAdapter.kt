@@ -14,6 +14,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
@@ -69,9 +70,10 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
         val star_icon: ImageView = binding.starIconColumn
         val due = currentItem.dueDate
         var formattedDate:String? = null
+        var dateObject:Date? = null
         if (due!=null) {
             val format = SimpleDateFormat("dd/MM/yyyy")
-            val dateObject = format.parse(due)
+            dateObject = format.parse(due)
             formattedDate = getFormattedDate(dateObject!!)
         }
 
@@ -101,7 +103,13 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
             val hrs:Int = timeCombined/100
             val min:Int = timeCombined%100
             if (due!=null){
-                binding.checkboxAdditionalText.text = String.format("%02d:%02d \u2022 Due %s",hrs,min,formattedDate)
+                binding.checkboxAdditionalText.apply{
+                    text = String.format("%02d:%02d \u2022 Due %s",hrs,min,formattedDate)
+                    if (Date().after(dateObject)){
+                        setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
+                        //binding.alarmIconColumn.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red))
+                    }
+                }
             }
             binding.checkboxAdditionalText.visibility = View.VISIBLE
             binding.alarmIconColumn.visibility = View.VISIBLE
@@ -109,6 +117,10 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
             if (due!=null){
                 binding.checkboxAdditionalText.apply {
                     text = String.format("Due %s",formattedDate)
+                    if (Date().after(dateObject)){
+                        setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
+                        //binding.alarmIconColumn.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red))
+                    }
                     visibility = View.VISIBLE
                 }
                 binding.alarmIconColumn.apply{
@@ -122,8 +134,8 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
 
     private fun getFormattedDate(d: Date): String {
         val today:Boolean = DateUtils.isToday(d.time)
-        val tomorrow:Boolean = DateUtils.isToday(d.time + DateUtils.DAY_IN_MILLIS)
-        val yesterday:Boolean = DateUtils.isToday(d.time - DateUtils.DAY_IN_MILLIS)
+        val tomorrow:Boolean = DateUtils.isToday(d.time - DateUtils.DAY_IN_MILLIS)
+        val yesterday:Boolean = DateUtils.isToday(d.time + DateUtils.DAY_IN_MILLIS)
 
         return when {
             today -> {
