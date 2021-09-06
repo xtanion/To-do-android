@@ -110,6 +110,9 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
                         //binding.alarmIconColumn.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red))
                     }
                 }
+            }else{
+                binding.checkboxAdditionalText.
+                    text = String.format("%02d:%02d",hrs,min)
             }
             binding.checkboxAdditionalText.visibility = View.VISIBLE
             binding.alarmIconColumn.visibility = View.VISIBLE
