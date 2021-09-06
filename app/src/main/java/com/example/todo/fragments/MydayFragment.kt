@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,12 +29,14 @@ import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_details.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.*
+import kotlin.concurrent.schedule
 
 
 class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
@@ -98,8 +101,22 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when(direction){
                     ItemTouchHelper.LEFT->{
-                        val data = incomplete_list[viewHolder.adapterPosition]
-                        mViewModel.removeTodo(data)
+                        val position = viewHolder.adapterPosition
+                        val data = incomplete_list[position]
+                        //mViewModel.removeTodo(data)
+                        adapterIncomp.removeItemChange(position)
+
+                        val bottomBarView:View = activity!!.findViewById(R.id.bottom_appbar)
+                        Snackbar.make(bottomBarView,String.format("%s Removed",data.title),5000)
+                            .setAction("Undo"){
+                                adapterIncomp.addItemChange(data,position)
+                            }
+                            .setActionTextColor(resources.getColor(R.color.deep_blue))
+                            .show()
+
+                        Timer().schedule(5000){
+                            mViewModel.removeTodo(data)
+                        }
                     }
                 }
             }

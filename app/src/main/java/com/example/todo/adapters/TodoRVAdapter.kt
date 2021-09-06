@@ -191,6 +191,31 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
         diffResult.dispatchUpdatesTo(this)
     }
 
+    fun removeItemChange(position:Int){
+        val oldList = this.DataList
+        val newList = oldList.toMutableList()
+        newList.removeAt(position)
+        newList.toList()
+        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
+            TodoDiffCallback(oldList,newList)
+        )
+        this.DataList = newList
+        //notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun addItemChange(entity: TodoEntity,position: Int){
+        val oldList = this.DataList
+        val newList = oldList.toMutableList()
+        newList.add(position,entity)
+        newList.toList()
+        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
+            TodoDiffCallback(oldList,newList)
+        )
+        this.DataList = newList
+        //notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     interface RVInterface{
         fun onCheckboxClick(data:TodoEntity)

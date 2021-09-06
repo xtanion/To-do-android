@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.format.DateUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -82,6 +83,13 @@ class DetailsFragment : Fragment() {
         var imp = entity.important
         alarmTime = entity.alarmTime
         dueDate = entity.dueDate
+        var formattedDate:String? = null
+        var dateObject:Date? = null
+        if (dueDate!=null) {
+            val format = SimpleDateFormat("dd/MM/yyyy")
+            dateObject = format.parse(dueDate!!)
+            formattedDate = getFormattedDate(dateObject!!)
+        }
 
         if (alarmTime!=null){
             val hrs:Int = alarmTime!!/100
@@ -98,10 +106,8 @@ class DetailsFragment : Fragment() {
         }
 
         if (dueDate!=null){
-            val formattedDate = Date(dueDate)
-
-            binding.setDueIcon.text = dueDate
-            if (Date().after(formattedDate)){
+            binding.setDueIcon.text = formattedDate
+            if (Date().after(dateObject)){
                 binding.setDueIcon.
                     setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red)))
             }
@@ -363,6 +369,28 @@ class DetailsFragment : Fragment() {
                 if (it==PackageManager.PERMISSION_GRANTED){
                     Log.d("PermissionsRequest","Permission Granted")
                 }
+            }
+        }
+    }
+
+    private fun getFormattedDate(d: Date): String {
+        val today:Boolean = DateUtils.isToday(d.time)
+        val tomorrow:Boolean = DateUtils.isToday(d.time - DateUtils.DAY_IN_MILLIS)
+        val yesterday:Boolean = DateUtils.isToday(d.time + DateUtils.DAY_IN_MILLIS)
+
+        return when {
+            today -> {
+                "Today"
+            }
+            tomorrow -> {
+                "Tomorrow"
+            }
+            yesterday -> {
+                "Yesterday"
+            }
+            else -> {
+                val formatter = SimpleDateFormat("dd/MM/YYYY")
+                formatter.format(d)
             }
         }
     }
