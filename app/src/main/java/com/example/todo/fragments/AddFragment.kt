@@ -73,7 +73,7 @@ class AddFragment : BottomSheetDialogFragment() {
 
         binding.addToDbLottie.setOnClickListener {
             val input_todo:String = binding.todoInput.text.toString()
-            val todo_arg = TodoEntity(0,input_todo,null,starred,false,group_name,dateToday.toString(),null,null,requestCode,alarmTime)
+            val todo_arg = TodoEntity(0,input_todo,null,starred,false,group_name,dateToday.toString(),null,null,requestCode,alarmTime,dateToSet)
 
             if (input_todo!=""){
                 mViewModel.addToDo(todo_arg)
@@ -183,7 +183,8 @@ class AddFragment : BottomSheetDialogFragment() {
         datePicker.addOnPositiveButtonClickListener {
             val privateCalendar = Calendar.getInstance()
             privateCalendar.time = Date(it)
-            val day = "${privateCalendar.get(Calendar.DAY_OF_MONTH)}-${privateCalendar.get(Calendar.MONTH)}-${privateCalendar.get(Calendar.YEAR)}"
+            val day = String.format("%02d/%02d/%d",privateCalendar.get(Calendar.DAY_OF_MONTH),privateCalendar.get(Calendar.MONTH)+1,privateCalendar.get(Calendar.YEAR))
+//            val day = "${privateCalendar.get(Calendar.DAY_OF_MONTH)}/${privateCalendar.get(Calendar.MONTH)}/${privateCalendar.get(Calendar.YEAR)}"
             dateToSet = day
             binding.setAlarmIcon.text = dateToSet
             binding.setAlarmIcon.apply {

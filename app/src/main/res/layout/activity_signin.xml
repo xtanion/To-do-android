@@ -82,20 +82,22 @@
         android:layout_marginBottom="50dp"
         android:gravity="center_horizontal" />
 
-    <ImageButton
+    <TextView
         android:id="@+id/skipSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_margin="10dp"
-        android:rotation="45"
-        android:src="@drawable/ic_round_add_circle_outline_24"
+        android:text="@string/skip"
+        android:fontFamily="@font/sf_pro_text"
+        android:textColor="?attr/colorOnSecondary"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="?attr/colorOnPrimary"
         android:contentDescription="@string/skip_sign_in"
-        android:background="@drawable/button_click_background"/>
+        android:background="@drawable/button_click_background"
+        app:drawableEndCompat="@drawable/ic_cross_circle"
+        app:drawableTint="?attr/colorOnSecondary" />
 
     <ProgressBar
         android:id="@+id/progressBar3"

@@ -19,7 +19,6 @@
     <string name="sign_in_to_sync_your_data_across_all_devices">Sign In to Sync Your Data across all devices</string>
     <string name="sign_in_with_email_id">Sign In With Email ID</string>
     <string name="sign_in_with_google">Sign In With Google</string>
-    <string name="skip">Skip</string>
     <string name="create_new_group">Create New Group</string>
 
     <string name="CHANNEL_ONE">CHANNEL_ID_ONE</string>
@@ -36,4 +35,5 @@
     <string name="remove_image">Remove Image</string>
     <string name="skip_sign_in">Skip Sign In</string>
     <string name="change_theme">Change Theme</string>
+    <string name="skip">Skip</string>
 </resources>

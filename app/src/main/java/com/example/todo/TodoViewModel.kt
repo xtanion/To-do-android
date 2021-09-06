@@ -129,7 +129,8 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
                         val bitmap: Bitmap? = ds.child("bitmap").getValue(Bitmap::class.java)
                         val requestCode:Int? = ds.child("requestCode").getValue(Int::class.java)
                         val alarmTime:Int? = ds.child("alarmTime").getValue(Int::class.java)
-                        val entity = TodoEntity(id!!, title!!, description, important!!, completed!!, groupName!!, dateTime!!, nestedTodo,bitmap,requestCode!!,alarmTime)
+                        val dueDate:String? = ds.child("dueDate").getValue(String::class.java)
+                        val entity = TodoEntity(id!!, title!!, description, important!!, completed!!, groupName!!, dateTime!!, nestedTodo,bitmap,requestCode!!,alarmTime,dueDate)
                         list.add(entity)
                     }
 

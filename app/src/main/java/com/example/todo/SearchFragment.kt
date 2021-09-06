@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
         activity?.findViewById<FloatingActionButton>(R.id.floatingActionButtonMain)?.visibility = View.GONE
 
         binding.searchLayout.setStartIconOnClickListener {
-            val action = SearchFragmentDirections.actionSearchFragmentToMydayFragment()
+            val action = SearchFragmentDirections.actionSearchFragmentToMydayFragment2()
             Navigation.findNavController(view).navigate(action)
         }
     }

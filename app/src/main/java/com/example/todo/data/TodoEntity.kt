@@ -27,7 +27,8 @@ data class TodoEntity(
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     val bitmap: Bitmap?,
     val requestCode:Int?,
-    val alarmTime:Int?
+    val alarmTime:Int?,
+    val dueDate:String?
 ):Parcelable
 {
     fun equals(other: TodoEntity?): Boolean {
@@ -37,9 +38,10 @@ data class TodoEntity(
         if (title != other.title){
             return false
         }
-        if (description!= other.description){
-            return false
-        }
+        //REMOVED FROM HERE
+        //if (description!= other.description){
+        //    return false
+        //}
         if (important != other.important){
             return false
         }

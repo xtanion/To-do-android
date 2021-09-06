@@ -1,6 +1,7 @@
 package com.example.todo.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -43,7 +44,9 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.io.File
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class DetailsFragment : Fragment() {
@@ -55,6 +58,7 @@ class DetailsFragment : Fragment() {
     private var bmp: Bitmap? = null
     private lateinit var calendar:Calendar
     private var alarmTime:Int? = null
+    private var dueDate:String? = null
     private var alarmRepeatSelected:Boolean = false
     private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
 
@@ -77,6 +81,7 @@ class DetailsFragment : Fragment() {
         bmp = entity.bitmap
         var imp = entity.important
         alarmTime = entity.alarmTime
+        dueDate = entity.dueDate
 
         if (alarmTime!=null){
             val hrs:Int = alarmTime!!/100
@@ -89,6 +94,16 @@ class DetailsFragment : Fragment() {
                 drawables.forEach {
                     it?.setTint(ContextCompat.getColor(requireContext(),R.color.deep_blue))
                 }
+            }
+        }
+
+        if (dueDate!=null){
+            val formattedDate = Date(dueDate)
+
+            binding.setDueIcon.text = dueDate
+            if (Date().after(formattedDate)){
+                binding.setDueIcon.
+                    setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red)))
             }
         }
 
@@ -126,7 +141,7 @@ class DetailsFragment : Fragment() {
                 binding.image1.setImageURI(uri)
                 val stream = activity?.contentResolver?.openInputStream(uri)
                 bmp = BitmapFactory.decodeStream(stream)
-                saveImage(bmp)
+                //saveImage(bmp)
             }
         )
 
@@ -214,7 +229,7 @@ class DetailsFragment : Fragment() {
             var requestCode:Int? = entity.requestCode
             //Add more later on (links,images,importance,etc)
 
-            val updatedUnit:TodoEntity = TodoEntity(entity.id,title,description,imp,check,entity.groupName,entity.dateTime,entity.nestedTodo,bmp,requestCode,entity.alarmTime)
+            val updatedUnit:TodoEntity = TodoEntity(entity.id,title,description,imp,check,entity.groupName,entity.dateTime,entity.nestedTodo,bmp,requestCode,alarmTime,entity.dueDate)
             mViewModel.updateTodo(updatedUnit)
 
             val action = DetailsFragmentDirections.actionDetailsFragmentToMydayFragment()
@@ -250,9 +265,9 @@ class DetailsFragment : Fragment() {
 
     }
 
-    private fun saveImage(bmp:Bitmap?) {
-        val path:File = Environment.getStorageDirectory()
-    }
+//    private fun saveImage(bmp:Bitmap?) {
+//        val path:File = Environment.getStorageDirectory()
+//    }
 
     private fun showDatePicker() {
 
@@ -267,25 +282,26 @@ class DetailsFragment : Fragment() {
         datePicker.addOnPositiveButtonClickListener {
             val privateCalendar = Calendar.getInstance()
             privateCalendar.time = Date(it)
-            val day = "${privateCalendar.get(Calendar.DAY_OF_MONTH)}-${privateCalendar.get(Calendar.MONTH)}-${privateCalendar.get(Calendar.YEAR)}"
-            binding.setDueIcon.text = day
+            val day = String.format("%02d/%02d/%d",privateCalendar.get(Calendar.DAY_OF_MONTH),privateCalendar.get(Calendar.MONTH),privateCalendar.get(Calendar.YEAR))
+            dueDate = day
             binding.setDueIcon.apply {
+                text = day
                 setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.deep_blue)))
-                compoundDrawables[0].setTint(resources.getColor(R.color.deep_blue))
+                //compoundDrawables[0].setTint(resources.getColor(R.color.deep_blue))
             }
         }
     }
 
     private fun showClockPicker() {
         val entity = args.dataEntity
-        val alarmTime = entity?.alarmTime
+        val alarmTimeInit = entity?.alarmTime
         val currentTime = Calendar.getInstance()
         var hours = currentTime.get(Calendar.HOUR_OF_DAY)
         var minutes = currentTime.get(Calendar.MINUTE)
 
-        if (alarmTime!=null){
-            hours =alarmTime.toInt()/100
-            minutes =alarmTime.toInt()%100
+        if (alarmTimeInit!=null){
+            hours =alarmTimeInit.toInt()/100
+            minutes =alarmTimeInit.toInt()%100
         }
 
         val timePicker = MaterialTimePicker.Builder()
@@ -311,6 +327,7 @@ class DetailsFragment : Fragment() {
 
             binding.setAlarmIcon.text = String.format("%02d:%02d PM",hrs,min)
             alarmRepeatSelected = true
+            alarmTime = hrs*100+min
 
         }
     }

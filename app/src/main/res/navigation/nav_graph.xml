@@ -91,14 +91,16 @@
         android:name="com.example.todo.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment_to_mydayFragment"
-            app:destination="@id/mydayFragment"
-            app:enterAnim="@anim/fragment_slide_in_left"
-            app:exitAnim="@anim/fragment_slide_in_right"
-            app:popUpTo="@id/mydayFragment" />
+
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_mydayFragment2"
+            app:destination="@id/mydayFragment"
+            app:enterAnim="@anim/fragment_slide_in_left"
+            app:exitAnim="@anim/fragment_slide_in_right"
+            app:popUpTo="@id/searchFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
 import android.os.Build
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +23,10 @@ import com.example.todo.R
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.SingleColumnBinding
 import kotlinx.android.synthetic.main.single_column.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAdapter.TodoViewHolder>(){
 
@@ -60,6 +67,13 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val currentItem = DataList[position]
         val star_icon: ImageView = binding.starIconColumn
+        val due = currentItem.dueDate
+        var formattedDate:String? = null
+        if (due!=null) {
+            val format = SimpleDateFormat("dd/MM/yyyy")
+            val dateObject = format.parse(due)
+            formattedDate = getFormattedDate(dateObject!!)
+        }
 
         if (holder.adapterPosition > lastPosition) {
             val animation: Animation =
@@ -86,11 +100,46 @@ class TodoRVAdapter(val rvInterface: RVInterface): RecyclerView.Adapter<TodoRVAd
             val timeCombined = currentItem.alarmTime.toInt()
             val hrs:Int = timeCombined/100
             val min:Int = timeCombined%100
-            binding.checkboxAdditionalText.text = String.format("%02d:%02d",hrs,min)
+            if (due!=null){
+                binding.checkboxAdditionalText.text = String.format("%02d:%02d \u2022 Due %s",hrs,min,formattedDate)
+            }
             binding.checkboxAdditionalText.visibility = View.VISIBLE
             binding.alarmIconColumn.visibility = View.VISIBLE
+        }else{
+            if (due!=null){
+                binding.checkboxAdditionalText.apply {
+                    text = String.format("Due %s",formattedDate)
+                    visibility = View.VISIBLE
+                }
+                binding.alarmIconColumn.apply{
+                    setImageResource(R.drawable.ic_calender_figma)
+                    visibility = View.VISIBLE
+                }
+            }
         }
 
+    }
+
+    private fun getFormattedDate(d: Date): String {
+        val today:Boolean = DateUtils.isToday(d.time)
+        val tomorrow:Boolean = DateUtils.isToday(d.time + DateUtils.DAY_IN_MILLIS)
+        val yesterday:Boolean = DateUtils.isToday(d.time - DateUtils.DAY_IN_MILLIS)
+
+        return when {
+            today -> {
+                "Today"
+            }
+            tomorrow -> {
+                "Tomorrow"
+            }
+            yesterday -> {
+                "Yesterday"
+            }
+            else -> {
+                val formatter = SimpleDateFormat("d MMM")
+                formatter.format(d)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
