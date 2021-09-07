@@ -76,6 +76,7 @@ Upcoming features
 - [ ] Implement Serach Fragment
 - [ ] Get Feedback on completion of a Task.
 - [ ] Nested Tasks under each Task.
+- [ ] Home screen Widgets
 
 Special Thanks to
 -----------------
