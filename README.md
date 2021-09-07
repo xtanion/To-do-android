@@ -8,7 +8,7 @@ It's based on Model-View-View-Model(MVVM) Architecture and uses modern android l
 Getting Started
 ---------------
 
-Try the signed apk on the Apk folder, install it manually and allow the run-time permissions.
+The signed apk will be updated to the newest versions, You can download it [here](https://github.com/xtanion/To-do-android/tree/main/release) & install it manually and allow the run-time permissions. ***Sign In with google may not work in Release Apk*** here's the [reason](https://stackoverflow.com/questions/40864684/firebase-authentication-not-working-in-signed-apk).
 
 This project uses the Gradle build system. To build this project, use the gradlew build command or use "Import Project" in Android Studio.
 
