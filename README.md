@@ -61,7 +61,7 @@ Libraries Used
 Screenshots
 -----------
 
-<img src="screenshots/swipe_to_delete.gif" width=30% hspace="10"><img src="https://j.gifs.com/Z8zkJ2.gif" width=30% hspace="10"><img src="screenshots/adding_files.gif" width=30% hspace="10">
+<img src="screenshots/swipe_to_delete.gif" width=30% hspace="10"><img src="https://j.gifs.com/vQ8WEM.gif" width=30% hspace="10"><img src="screenshots/adding_files.gif" width=30% hspace="10">
 
 
 Upcoming features
