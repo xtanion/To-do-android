@@ -12,6 +12,10 @@ The signed apk will be updated to the newest versions, You can download it [here
 > ***Sign In with google may not work in Release Apk for this*** [reason](https://stackoverflow.com/questions/40864684/firebase-authentication-not-working-in-signed-apk).
 
 This project uses the Gradle build system. To build this project, use the gradlew build command or use "Import Project" in Android Studio.
+```
+git clone https://github.com/xtanion/To-do-android
+```
+Setup `AndroidStudioIDE`, Unzip `To-do-android.zip`, Open in Android Studio.
 
 In order to test the Firebase Login and RealTime database you have to create <code>google-services.json</code> file and add it into <code>/ToDo/app</code>.
 
