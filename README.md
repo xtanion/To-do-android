@@ -61,9 +61,8 @@ Libraries Used
 Screenshots
 -----------
 
-<img src="screenshots/swipe_to_delete.gif" width=30%>
-<img src="screenshots/Screenshot_20210906-234815_ToDo.png" width=30%>
-<img src="screenshots/Screenshot_20210906-234537_ToDo.png" width=30%>
+<img align="left" src="screenshots/swipe_to_delete.gif" width=33%><img src="screenshots/Screenshot_20210906-234815_ToDo.png" width=30% >
+<img src="screenshots/Screenshot_20210906-234537_ToDo.png" width=30% hspace="20">
 
 Upcoming features
 -----------------
