@@ -67,3 +67,12 @@ Screenshots
 
 Upcoming features
 -----------------
+
+- [ ] Saving Files into App's internal storage insted Room Database.
+- [ ] Implement Serach Fragment
+- [ ] Get Feedback on completion of a Task.
+- [ ] Nested Tasks under each Task.
+
+Special Thanks to
+-----------------
+
