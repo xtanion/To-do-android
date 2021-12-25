@@ -45,4 +45,13 @@
     <color name="frost_mint">#8FBCBB</color>
     <color name="snow_white">#D0D1D4</color>
     <color name="snow_gray">#767779</color>
+
+<!--    status bar and nav bar colors-->
+    <color name="card_dark">#111418</color>
+    <color name="arsenic">#1A1E22</color>
+    <color name="background_element">#15181D</color>
+    <color name="alice_blue">#E3E7F0</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="arsenic_white">#E5E9F0</color>
 </resources>

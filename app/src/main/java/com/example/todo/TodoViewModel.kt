@@ -24,11 +24,13 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     private lateinit var fireData:List<TodoEntity>
     private val groupName = MutableLiveData<String>()
     private var name:String = "all"
+    private lateinit var rootNode: FirebaseDatabase
     init {
         todoDao = TodoDatabase.getInstance(application).todoDao()
         repository = TodoRepository(todoDao)
         groupLiveName("all")
         initializer()
+        rootNode = FirebaseDatabase.getInstance()
     }
     private fun initializer(){
         repository.readAllGroup()
@@ -69,6 +71,7 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
     fun addToDo(todo:TodoEntity){
         viewModelScope.launch(){
             repository.addTodo(todo)
+            fireBaseAdd(todo)
         }
     }
     fun addGroup(groupEntity: GroupEntity){
@@ -94,16 +97,14 @@ class TodoViewModel(application: Application):AndroidViewModel(application) {
         return mAuth
     }
 
-    fun fireBaseAdd(entity:TodoEntity){
-        val rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private fun fireBaseAdd(entity:TodoEntity){
         val uid = mAuthMethod().uid
         val reference = rootNode.getReference("posts/${uid}/")
-        reference.child("${entity.id}").setValue(entity)
+        reference.child(entity.title).setValue(entity)
     }
 
     fun getFirebaseData(){
         viewModelScope.launch {
-            val rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
             val uid = mAuthMethod().uid
             val gson: Gson = Gson()
             val reference = rootNode.getReference("posts/${uid}/")

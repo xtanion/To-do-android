@@ -6,13 +6,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.example.todo.MainActivity
+import com.example.todo.activities.MainActivity
 import com.example.todo.R
-import com.example.todo.data.TodoEntity
-import java.util.*
 
 class AlarmReceiver():BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {

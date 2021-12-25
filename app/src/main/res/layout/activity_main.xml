@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
@@ -21,7 +21,7 @@
         app:fabCradleMargin="8dp"
         app:fabCradleRoundedCornerRadius="20dp"
         app:fabCradleVerticalOffset="2dp"
-        android:backgroundTint="?attr/colorPrimaryVariant"
+        android:backgroundTint="?attr/colorSecondaryVariant"
         android:visibility="visible">
         <ImageView
             android:id="@+id/list_switcher"

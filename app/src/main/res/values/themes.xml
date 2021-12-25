@@ -7,12 +7,13 @@
         <item name="colorOnPrimary">@color/not_black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/deeper_blue</item>
-        <item name="colorSecondaryVariant">@color/twenty_black</item>
+        <item name="colorSecondaryVariant">@color/arsenic_white</item>
         <item name="colorOnSecondary">@color/fifty_black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">?attr/colorSecondaryVariant</item>
         <item name="cardBackgroundColor">@color/not_white</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>

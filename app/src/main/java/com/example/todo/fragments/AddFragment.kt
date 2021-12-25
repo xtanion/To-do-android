@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -18,12 +16,10 @@ import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.example.todo.MainActivity
 import com.example.todo.alarms.AlarmReceiver
 import com.example.todo.R
 import com.example.todo.TodoViewModel
@@ -42,8 +38,8 @@ class AddFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private lateinit var mViewModel: TodoViewModel
     @RequiresApi(Build.VERSION_CODES.O)
-    val dateToday = LocalDateTime.now()
-    val args:AddFragmentArgs by navArgs()
+    val dateToday: LocalDateTime? = LocalDateTime.now()
+    private val args:AddFragmentArgs by navArgs()
     private val buttonPress: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.button_press) }
     private var alarmTime:Int? = null
     private lateinit var calendar:Calendar

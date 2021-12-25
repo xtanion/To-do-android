@@ -2,13 +2,18 @@ package com.example.todo.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity.MODE_PRIVATE
 import android.app.Activity.RESULT_OK
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -29,6 +34,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
@@ -43,7 +49,10 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import java.io.File
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -147,7 +156,6 @@ class DetailsFragment : Fragment() {
                 binding.image1.setImageURI(uri)
                 val stream = activity?.contentResolver?.openInputStream(uri)
                 bmp = BitmapFactory.decodeStream(stream)
-                //saveImage(bmp)
             }
         )
 
@@ -171,6 +179,8 @@ class DetailsFragment : Fragment() {
                 image1.setImageBitmap(bmp)
                 image1.invalidate()
                 imageCard.visibility = View.VISIBLE
+                //saveImageToExt(bmp)
+
             }
         }else{
             binding.imageCard.visibility = View.GONE
@@ -211,18 +221,19 @@ class DetailsFragment : Fragment() {
             binding.imageCard.visibility = View.GONE
         }
         binding.importantSign.apply {
+            if (imp){
+                this.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red))
+            }
             setOnClickListener {
                 it.startAnimation(buttonPress)
-                if (entity.important) {
+                if (imp) {
                     imp = false
                     this.colorFilter = null
                 } else {
                     imp = true
-                    this.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red))
+                    this.setColorFilter(ContextCompat.getColor(context,R.color.red))
+                    //this.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red))
                 }
-            }
-            if (imp){
-                this.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red))
             }
         }
 
@@ -263,6 +274,13 @@ class DetailsFragment : Fragment() {
                     )
                 }
             }
+
+            if (bmp!=null){
+                mViewModel.viewModelScope.launch(Dispatchers.IO) {
+                    saveImgToInternal(bmp!!)
+                }
+
+            }
         }
 
         binding.navigateBack.setOnClickListener {
@@ -271,9 +289,64 @@ class DetailsFragment : Fragment() {
 
     }
 
-//    private fun saveImage(bmp:Bitmap?) {
-//        val path:File = Environment.getStorageDirectory()
+
+    private suspend fun saveImgToInternal(bmp: Bitmap){
+        withContext(Dispatchers.IO) {
+            try {
+                context?.openFileOutput("${timeNow}.jpg", MODE_PRIVATE).use {
+                    bmp.compress(Bitmap.CompressFormat.PNG, 80, it)
+                }
+                Log.d("SaveImage", "Saved to Internal")
+            } catch (e: IOException) {
+                Log.d("SaveImage", "Failed to save")
+            }
+        }
+    }
+
+    private suspend fun getImageFromInternal(imageFileName: String): Bitmap? {
+        return withContext(Dispatchers.IO) {
+            val directory = context?.filesDir
+            val file = File(directory, imageFileName)
+            BitmapFactory.decodeStream(FileInputStream(file))
+        }
+    }
+
+    private fun createDir(){
+        val dir = File(context?.getExternalFilesDir(""), "SavedImages")
+        if (!dir.mkdirs()) {
+            Log.d("SaveImage", "Directory not created")
+        }
+    }
+
+//    private fun saveImg(bmp: Bitmap){
+//        val imageCollection = if (Build.VERSION.SDK_INT>Build.VERSION_CODES.Q){
+//                MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+//            }else{
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+//            }
+//
+//        try{
+//            val contentResolver: ContentResolver = requireContext().contentResolver
+//            val contentValues = ContentValues().apply {
+//                put(MediaStore.Images.Media.DISPLAY_NAME,timeNow)
+//                put(MediaStore.Images.Media.MIME_TYPE,"image/jpeg")
+//                put(MediaStore.Images.Media.HEIGHT,bmp.height)
+//                put(MediaStore.Images.Media.WIDTH,bmp.width)
+//
+//            }
+//
+//            val uri: Uri? = contentResolver.insert(imageCollection,contentValues)
+//            val ops: OutputStream? = uri?.let { contentResolver.openOutputStream(it) }
+//
+//            bmp.compress(Bitmap.CompressFormat.JPEG,100,ops)
+//            Toast.makeText(requireContext(),"Loaded Successfully",Toast.LENGTH_SHORT).show()
+//            Log.d("SaveImage","successful")
+//        }catch (e:IOException){
+//            Toast.makeText(requireContext(),"Failed to save the image",Toast.LENGTH_SHORT).show()
+//            Log.d("SaveImage","failed")
+//        }
 //    }
+
 
     private fun showDatePicker() {
 
@@ -355,6 +428,8 @@ class DetailsFragment : Fragment() {
 
         if (permissionList.isNotEmpty()){
             ActivityCompat.requestPermissions(requireActivity(),permissionList.toTypedArray(),0)
+        }else{
+            Log.d("SaveImage","All permissions allowed")
         }
     }
 
@@ -373,6 +448,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun getFormattedDate(d: Date): String {
         val today:Boolean = DateUtils.isToday(d.time)
         val tomorrow:Boolean = DateUtils.isToday(d.time - DateUtils.DAY_IN_MILLIS)
@@ -389,7 +465,7 @@ class DetailsFragment : Fragment() {
                 "Yesterday"
             }
             else -> {
-                val formatter = SimpleDateFormat("dd/MM/YYYY")
+                val formatter = SimpleDateFormat("dd/MM/yyyy")
                 formatter.format(d)
             }
         }

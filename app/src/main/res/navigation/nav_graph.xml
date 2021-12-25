@@ -83,12 +83,12 @@
     </fragment>
     <dialog
         android:id="@+id/userFragment"
-        android:name="com.example.todo.UserFragment"
+        android:name="com.example.todo.fragments.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.todo.SearchFragment"
+        android:name="com.example.todo.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
 

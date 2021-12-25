@@ -207,7 +207,8 @@
         android:background="?attr/colorPrimaryVariant"
         android:paddingBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:backgroundTint="?attr/colorSecondaryVariant">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
