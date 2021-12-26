@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo.adapters.GroupRVAdapter
-import com.example.todo.TodoViewModel
+import com.example.todo.viewmodels.TodoViewModel
 import com.example.todo.data.GroupEntity
 import com.example.todo.databinding.FragmentAddGroupBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

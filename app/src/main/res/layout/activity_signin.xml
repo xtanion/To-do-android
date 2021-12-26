@@ -5,70 +5,133 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.SigninActivity"
-    android:background="?attr/colorPrimaryVariant">
-    <TextView
-        android:id="@+id/open_source_text"
+    android:background="?attr/colorPrimaryVariant"
+    android:animateLayoutChanges="true">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirm_password_tin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Open Source Project"
-        android:textAlignment="center"
-        android:layout_margin="25dp"
-        android:textColor="?attr/colorSecondaryVariant"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="20dp"
+        style="@style/CustomTextInputLayout"
+        app:layout_constraintBottom_toTopOf="@id/sign_in_up_button"
+        app:hintEnabled="false">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirm_pass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/password"
+            android:layout_gravity="bottom"
+            android:inputType="textPassword"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sign_in_up_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="0dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        app:cornerRadius="10dp"
+        android:text="@string/sign_in"
+        android:textAllCaps="false"
         android:fontFamily="@font/sf_pro_text"
-        android:textFontWeight="700"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:backgroundTint="?attr/colorSecondary"
+        app:layout_constraintBottom_toTopOf="@id/sign_in_google"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:icon="@drawable/ic_user"
+        app:iconGravity="textStart"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_password_tin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="20dp"
+        style="@style/CustomTextInputLayout"
+        app:layout_constraintBottom_toTopOf="@id/confirm_password_tin"
+        android:visibility="gone">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_pass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/new_password"
+            android:layout_gravity="bottom"
+            android:inputType="textPassword"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username_tin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="20dp"
+        style="@style/CustomTextInputLayout"
+        app:boxBackgroundColor="?attr/colorSecondaryVariant"
+        app:layout_constraintBottom_toTopOf="@id/new_password_tin">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/username"
+            android:layout_gravity="bottom"
+            android:inputType="textPersonName"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        tools:viewBindingIgnore="true"
+        android:background="?attr/colorSecondaryVariant"
+        app:layout_constraintBottom_toTopOf="@id/sign_in_google"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_up_button"/>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_in_google"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/open_source_text"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/sign_in_with_google"
         android:fontFamily="@font/sf_pro_text"
         android:textColor="?attr/colorOnPrimary"
         android:textAllCaps="false"
-        app:cornerRadius="10dp"
+        app:cornerRadius="15dp"
         app:icon="@drawable/ic_google_icon"
         app:iconTint="@null"
         app:iconGravity="textStart"
-        app:backgroundTint="?attr/cardBackgroundColor"/>
-
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_tick"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        app:layout_constraintBottom_toTopOf="@id/main_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="false"
-        app:lottie_rawRes="@raw/tick_lottie_anim" />
+        app:backgroundTint="?attr/colorSecondaryVariant"/>
 
     <TextView
         android:id="@+id/main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/manage_your_schedule_with_open_todo"
-        android:paddingEnd="30dp"
-        android:paddingStart="30dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/sf_pro_display_bold"
         android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/text_idk"
         android:layout_marginBottom="5dp"
         android:textColor="?attr/colorOnPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center_horizontal"
-        android:paddingLeft="45dp"
-        android:paddingRight="45dp"
-        android:maxLines="2"/>
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:maxLines="2"
+        tools:viewBindingIgnore="true"/>
     <TextView
         android:id="@+id/text_idk"
         android:layout_width="match_parent"
@@ -78,35 +141,51 @@
         android:layout_marginEnd="30dp"
         android:text="@string/sign_in_to_sync_your_data_across_all_devices"
         android:fontFamily="@font/sf_pro_text"
-        app:layout_constraintBottom_toTopOf="@id/sign_in_google"
+        app:layout_constraintTop_toBottomOf="@id/main_title"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="50dp"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        tools:viewBindingIgnore="true"/>
 
     <TextView
-        android:id="@+id/skipSignIn"
+        android:id="@+id/knowMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="5dp"
         android:layout_margin="10dp"
-        android:text="@string/skip"
+        android:text="@string/know_more_contribute"
         android:fontFamily="@font/sf_pro_text"
         android:textColor="?attr/colorOnSecondary"
         android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_idk"
         android:contentDescription="@string/skip_sign_in"
-        android:background="@drawable/button_click_background"
-        app:drawableEndCompat="@drawable/ic_cross_circle"
-        app:drawableTint="?attr/colorOnSecondary" />
+        android:drawablePadding="10dp"
+        app:drawableEndCompat="@drawable/ic_github"
+        app:drawableTint="?attr/colorOnPrimary" />
 
     <ProgressBar
         android:id="@+id/progressBar3"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/skipSignIn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
         android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/sign_up_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/new_user_sign_up"
+        android:fontFamily="@font/sf_pro_text"
+        android:textColor="?attr/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_google"
+        app:layout_constraintEnd_toEndOf="@id/sign_in_google" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.example.todo.fragments
 
 import android.annotation.SuppressLint
-import android.app.*
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -22,7 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.todo.alarms.AlarmReceiver
 import com.example.todo.R
-import com.example.todo.TodoViewModel
+import com.example.todo.viewmodels.TodoViewModel
 import com.example.todo.alarms.AlarmService
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentAddBinding

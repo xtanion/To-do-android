@@ -14,7 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.example.todo.R
-import com.example.todo.TodoViewModel
+import com.example.todo.viewmodels.TodoViewModel
 import com.example.todo.databinding.FragmentUserBinding
 
 class UserFragment : DialogFragment() {

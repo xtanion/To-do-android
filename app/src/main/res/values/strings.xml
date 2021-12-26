@@ -15,7 +15,7 @@
     <string name="description">An Android app that can create to-do and notifies the user when needed, Supports gnome applications as well</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="manage_your_schedule_with_open_todo">Manage Your Schedule With Open Todo</string>
+    <string name="manage_your_schedule_with_open_todo">Manage Your Tasks With Todo List</string>
     <string name="sign_in_to_sync_your_data_across_all_devices">Sign In to Sync Your Data across all devices</string>
     <string name="sign_in_with_email_id">Sign In With Email ID</string>
     <string name="sign_in_with_google">Sign In With Google</string>
@@ -36,4 +36,11 @@
     <string name="skip_sign_in">Skip Sign In</string>
     <string name="change_theme">Change Theme</string>
     <string name="skip">Skip</string>
+    <string name="not_logged_in">Not Logged in</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="know_more_contribute">Know More | Contribute</string>
+    <string name="new_user_sign_up">New User? Sign Up</string>
+    <string name="new_password">New Password</string>
+    <string name="sign_in">Sign In</string>
 </resources>

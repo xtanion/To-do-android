@@ -4,18 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -27,17 +24,17 @@ import com.example.todo.*
 import com.example.todo.adapters.TodoRVAdapter
 import com.example.todo.data.TodoEntity
 import com.example.todo.databinding.FragmentMydayBinding
+import com.example.todo.utils.SwipeGesture
+import com.example.todo.viewmodels.TodoViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_details.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.*
-import kotlin.concurrent.schedule
 
 
 class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
@@ -97,7 +94,7 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
         val menuSwitcher:ImageView = activity?.findViewById(R.id.menu_switcher)!!
 
         //SWIPE GESTURE for rv1
-        val swipeGesture = object :SwipeGesture(requireContext()){
+        val swipeGesture = object : SwipeGesture(requireContext()){
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when(direction){
@@ -140,7 +137,7 @@ class MydayFragment : Fragment(), TodoRVAdapter.RVInterface {
         ItemTouchHelper(swipeGesture).attachToRecyclerView(recyclerViewIncomplete)
 
         //SWIPE Gesture for rv2
-        val swipeGestureTwo = object :SwipeGesture(requireContext()){
+        val swipeGestureTwo = object : SwipeGesture(requireContext()){
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when(direction){

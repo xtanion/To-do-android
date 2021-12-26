@@ -73,5 +73,24 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_popup_bg</item>
     </style>
+    
+<!--    edittext layout -->
+    <style name="Theme.App" parent="Theme.MaterialComponents">
+        <item name="textInputStyle">@style/CustomTextInputLayout</item>
+    </style>
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxCornerRadiusTopStart">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeColor">?attr/colorSecondaryVariant</item>
+        <item name="boxStrokeErrorColor">@color/ui_red</item>
+        <item name="errorTextColor">@color/ui_red</item>
+        <item name="hintEnabled">false</item>
+        <item name="fontFamily">@font/sf_pro_text</item>
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="boxBackgroundColor">?attr/colorSecondaryVariant</item>
+    </style>
 
 </resources>

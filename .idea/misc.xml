@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/drawable/ic_exclamation_mark.xml" value="0.3236286919831224" />
         <entry key="app/src/main/res/drawable/ic_exclamation_mark_solid.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/drawable/ic_gallery.xml" value="0.3236286919831224" />
+        <entry key="app/src/main/res/drawable/ic_github.xml" value="0.32489451476793246" />
         <entry key="app/src/main/res/drawable/ic_iconmonstr_checkbox_checked_thin.xml" value="0.31561181434599156" />
         <entry key="app/src/main/res/drawable/ic_invention.xml" value="0.3236286919831224" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.31561181434599156" />
@@ -64,7 +65,7 @@
         <entry key="app/src/main/res/layout-v26/fragment_add_group.xml" value="0.38333333333333336" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3145299145299145" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_signin.xml" value="0.3145299145299145" />
+        <entry key="app/src/main/res/layout/activity_signin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.3145299145299145" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_add_group.xml" value="0.30641025641025643" />

@@ -4,19 +4,13 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.MODE_PRIVATE
 import android.app.Activity.RESULT_OK
-import android.content.ContentResolver
-import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.PorterDuff
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.text.format.DateUtils
 import android.util.Log
@@ -32,14 +26,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.AppBarConfiguration
 import com.example.todo.R
-import com.example.todo.TodoViewModel
+import com.example.todo.viewmodels.TodoViewModel
 import com.example.todo.alarms.AlarmReceiver
 import com.example.todo.alarms.AlarmService
 import com.example.todo.data.TodoEntity
@@ -54,9 +46,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class DetailsFragment : Fragment() {
