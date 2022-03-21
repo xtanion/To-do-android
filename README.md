@@ -19,7 +19,7 @@ Overview
 Getting Started
 ---------------
 
-The signed apk will be updated to the newest versions, You can download it [here](https://github.com/xtanion/To-do-android/tree/main/release) & install it manually and allow the run-time permissions. 
+The signed apk will be updated to the newest versions, You can download it from [here](https://github.com/xtanion/To-do-android/tree/main/release) & install it manually and allow the run-time permissions. 
 > ***Sign In with google may not work in Release Apk for this*** [reason](https://stackoverflow.com/questions/40864684/firebase-authentication-not-working-in-signed-apk).
 
 This project uses the Gradle build system. To build this project, use the gradlew build command or use "Import Project" in Android Studio.
