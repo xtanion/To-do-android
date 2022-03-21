@@ -1,7 +1,7 @@
 To-do-android
 =================
 
-It's a simple TODO list application on the Android OS.
+It's a simple TODO list android application.
 
 It's based on [Model-View-View-Model(MVVM)](https://medium.com/upday-devs/android-architecture-patterns-part-3-model-view-viewmodel-e7eeee76b73b) Architecture and uses modern android libraries such as [Jetpack](https://developer.android.com/jetpack/getting-started#take_advantage_of_jetpack), [Room](https://developer.android.com/training/data-storage/room) and [Co-routines](https://kotlinlang.org/docs/coroutines-guide.html).
 
